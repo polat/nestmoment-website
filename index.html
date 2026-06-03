@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Nest Moment — O ilk an, sonsuza dek.</title>
+<meta name="description" content="Bebeğinin ilk ultrason görüntüsünü, kristalin içinde sonsuza dek parlayan 3D bir esere dönüştürüyoruz." />
+<link rel="icon" type="image/svg+xml" href="images/favicon.svg" />
+<link rel="alternate icon" type="image/png" href="images/favicon.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Hanken+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0c0a09;
+    --bg-2:#13100d;
+    --panel:#15110e;
+    --gold:#d8b486;
+    --gold-soft:#e7cda6;
+    --gold-deep:#b48a5c;
+    --cream:#f2ebe0;
+    --muted:#9c8f7f;
+    --muted-2:#6f655a;
+    --line:rgba(216,180,134,.16);
+    --line-soft:rgba(216,180,134,.08);
+    --display:"Bricolage Grotesque", sans-serif;
+    --body:"Hanken Grotesk", sans-serif;
+    --maxw:1180px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--bg);
+    color:var(--cream);
+    font-family:var(--body);
+    font-weight:400;
+    line-height:1.7;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  /* atmospheric background */
+  body::before{
+    content:"";
+    position:fixed;inset:0;z-index:0;pointer-events:none;
+    background:
+      radial-gradient(900px 600px at 75% -5%, rgba(216,180,134,.10), transparent 60%),
+      radial-gradient(700px 700px at 8% 18%, rgba(180,138,92,.07), transparent 55%),
+      radial-gradient(1000px 800px at 50% 120%, rgba(231,205,166,.06), transparent 60%);
+  }
+  body::after{ /* subtle grain */
+    content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.035;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px;position:relative;z-index:2}
+  section{position:relative;z-index:2}
+
+  /* Typography */
+  h1,h2,h3{font-family:var(--display);font-weight:600;line-height:1.04;letter-spacing:-.5px}
+  .eyebrow{
+    font-family:var(--body);font-weight:600;font-size:.72rem;letter-spacing:.32em;
+    text-transform:uppercase;color:var(--gold);display:inline-flex;align-items:center;gap:.7em;
+  }
+  .eyebrow::before{content:"";width:26px;height:1px;background:linear-gradient(90deg,transparent,var(--gold))}
+  .section-title{font-size:clamp(2.1rem,5vw,3.5rem);color:var(--cream);margin:.5rem 0 0}
+  .lead{color:var(--muted);font-size:1.06rem;max-width:54ch}
+
+  /* Header */
+  header{
+    position:fixed;top:0;left:0;right:0;z-index:50;
+    transition:background .5s ease, border-color .5s ease, backdrop-filter .5s;
+    border-bottom:1px solid transparent;
+  }
+  header.scrolled{
+    background:rgba(12,10,9,.82);backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--line-soft);
+  }
+  .nav{display:flex;align-items:center;justify-content:space-between;height:92px}
+  .brand{font-family:var(--display);font-weight:700;font-size:1.55rem;letter-spacing:-.3px;color:var(--cream);text-decoration:none;display:flex;align-items:center;gap:.6rem;white-space:nowrap}
+  .brand .dot{width:7px;height:7px;border-radius:50%;background:var(--gold);box-shadow:0 0 12px var(--gold)}
+  .brand-emblem{width:24px;height:26px;flex:none;fill:var(--gold);filter:drop-shadow(0 0 5px rgba(216,180,134,.45))}
+  .nav-links{display:flex;align-items:center;gap:2.5rem;list-style:none}
+  .nav-links a{color:var(--cream);text-decoration:none;font-size:1rem;font-weight:500;letter-spacing:.01em;transition:color .3s;position:relative}
+  .nav-links a:hover{color:var(--gold-soft)}
+  .nav-links a::after{content:"";position:absolute;left:0;bottom:-6px;width:0;height:1px;background:var(--gold);transition:width .3s}
+  .nav-links a:hover::after{width:100%}
+  .nav-right{display:flex;align-items:center;gap:1.3rem}
+  .lang{background:none;border:1px solid var(--line);color:var(--cream);font-family:var(--body);font-weight:500;
+    font-size:.84rem;letter-spacing:.12em;padding:.55rem .9rem;border-radius:40px;cursor:pointer;transition:.3s}
+  .lang:hover{border-color:var(--gold);color:var(--gold)}
+  .nav-wa{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;
+    border:1px solid var(--line);color:var(--gold);transition:.3s}
+  .nav-wa:hover{border-color:var(--gold);background:rgba(216,180,134,.10);transform:translateY(-1px)}
+  .burger{display:none;background:none;border:none;cursor:pointer;width:30px;height:22px;position:relative}
+  .burger span{position:absolute;left:0;width:100%;height:1.5px;background:var(--cream);transition:.3s}
+  .burger span:nth-child(1){top:0}.burger span:nth-child(2){top:10px}.burger span:nth-child(3){top:20px}
+
+  /* Buttons */
+  .btn{
+    display:inline-flex;align-items:center;gap:.6rem;cursor:pointer;text-decoration:none;
+    font-family:var(--body);font-weight:500;font-size:.92rem;letter-spacing:.02em;
+    padding:1rem 2rem;border-radius:50px;transition:.35s ease;border:1px solid transparent;background:none;
+  }
+  .btn-gold{background:linear-gradient(135deg,var(--gold-soft),var(--gold-deep));color:#241a10;box-shadow:0 10px 34px rgba(216,180,134,.22)}
+  .btn-gold:hover{transform:translateY(-2px);box-shadow:0 16px 44px rgba(216,180,134,.34)}
+  .btn-ghost{border-color:var(--line);color:var(--cream)}
+  .btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
+  .btn .arrow{transition:transform .35s}
+  .btn:hover .arrow{transform:translateX(4px)}
+
+  /* HERO */
+  .hero{min-height:100vh;display:flex;align-items:center;padding:120px 0 80px;overflow:hidden}
+  .hero-bg{position:absolute;inset:0;z-index:1;pointer-events:none;overflow:hidden;
+    -webkit-mask-image:linear-gradient(to bottom,#000 78%,transparent 99%);
+    mask-image:linear-gradient(to bottom,#000 78%,transparent 99%)}
+  .hero-orb{position:absolute;border-radius:50%;will-change:transform}
+  .orb-a{width:560px;height:560px;left:-8%;top:0;filter:blur(55px);background:radial-gradient(circle,rgba(216,180,134,.46),transparent 66%)}
+  .orb-b{width:460px;height:460px;right:-6%;top:-10%;filter:blur(55px);background:radial-gradient(circle,rgba(231,205,166,.40),transparent 66%)}
+  .orb-c{width:640px;height:640px;left:32%;bottom:-32%;filter:blur(70px);background:radial-gradient(circle,rgba(196,150,96,.34),transparent 62%)}
+  .hero-emblem{position:absolute;left:50%;top:50%;width:min(500px,40vw);
+    margin-left:calc(-278px - min(250px,20vw));
+    margin-top:calc(min(500px,40vw) * -0.55);will-change:transform}
+  .hero-emblem svg{width:100%;display:block;fill:var(--gold-soft);filter:drop-shadow(0 0 55px rgba(231,205,166,.45));animation:emblemFloat 16s ease-in-out infinite}
+  @keyframes emblemFloat{0%,100%{transform:rotate(-3deg) scale(1);opacity:.06}50%{transform:rotate(2.5deg) scale(1.04);opacity:.12}}
+  .hero-embryo{position:absolute;left:4%;top:10%;width:min(660px,54vw);color:var(--gold-soft);will-change:transform}
+  .hero-embryo svg{width:100%;display:block;filter:drop-shadow(0 0 50px rgba(231,205,166,.6));animation:embryoSpin 16s ease-in-out infinite}
+  @keyframes embryoSpin{0%,100%{transform:rotate(-5deg) scale(1);opacity:.10}50%{transform:rotate(3deg) scale(1.05);opacity:.20}}
+  .site-canvas{position:fixed;inset:0;width:100%;height:100%;z-index:1;pointer-events:none}
+  @media (prefers-reduced-motion: reduce){.hero-embryo svg{animation:none}}
+  .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center;width:100%}
+  .hero-eyebrow{margin-bottom:1.6rem}
+  .hero h1{font-size:clamp(3rem,8vw,6rem);color:var(--cream);font-weight:700}
+  .hero h1 em{font-style:normal;font-weight:700;color:var(--gold-soft)}
+  .hero-sub{margin:1.8rem 0 2.4rem;color:var(--muted);font-size:1.15rem;max-width:46ch}
+  .hero-cta{display:flex;gap:1rem;flex-wrap:wrap;align-items:center}
+  .hero-fade>*{opacity:0;transform:translateY(26px);animation:rise .9s cubic-bezier(.2,.7,.2,1) forwards}
+  .hero-fade>*:nth-child(1){animation-delay:.15s}
+  .hero-fade>*:nth-child(2){animation-delay:.32s}
+  .hero-fade>*:nth-child(3){animation-delay:.49s}
+  .hero-fade>*:nth-child(4){animation-delay:.66s}
+  @keyframes rise{to{opacity:1;transform:none}}
+
+  /* Crystal */
+  .crystal-stage{position:relative;display:flex;justify-content:center;align-items:center;min-height:520px;perspective:1100px;opacity:0;animation:fadein 1.4s ease .5s forwards}
+  .crystal-3d{position:relative;z-index:2;transform-style:preserve-3d;will-change:transform}
+  .crystal-img{display:block;width:clamp(250px,30vw,370px);height:auto;filter:drop-shadow(0 34px 60px rgba(0,0,0,.6)) drop-shadow(0 0 54px rgba(216,180,134,.14))}
+  @keyframes fadein{to{opacity:1}}
+  .crystal-glow{position:absolute;width:420px;height:420px;border-radius:50%;
+    background:radial-gradient(circle,rgba(231,205,166,.22),rgba(216,180,134,.05) 45%,transparent 70%);
+    filter:blur(8px);animation:pulse 6s ease-in-out infinite}
+  @keyframes pulse{0%,100%{transform:scale(1);opacity:.85}50%{transform:scale(1.08);opacity:1}}
+  .crystal{position:relative;width:255px;height:360px;border-radius:18px 18px 14px 14px;
+    background:linear-gradient(135deg,rgba(255,255,255,.16),rgba(255,255,255,.03) 40%,rgba(216,180,134,.10));
+    border:1px solid rgba(255,255,255,.22);
+    box-shadow:0 30px 70px rgba(0,0,0,.6),inset 0 1px 1px rgba(255,255,255,.4),inset 0 -30px 60px rgba(216,180,134,.08);
+    backdrop-filter:blur(2px);
+    animation:float 7s ease-in-out infinite;overflow:hidden}
+  @keyframes float{0%,100%{transform:translateY(0) rotate(-.4deg)}50%{transform:translateY(-14px) rotate(.4deg)}}
+  .crystal::before{content:"";position:absolute;top:0;left:18%;width:22%;height:100%;
+    background:linear-gradient(90deg,transparent,rgba(255,255,255,.35),transparent);transform:skewX(-12deg)}
+  .crystal::after{content:"";position:absolute;top:0;right:10%;width:8%;height:100%;
+    background:linear-gradient(90deg,transparent,rgba(255,255,255,.18),transparent)}
+  .crystal svg{position:absolute;top:50%;left:50%;transform:translate(-46%,-50%);width:64%;
+    filter:drop-shadow(0 0 14px rgba(231,205,166,.7));opacity:.92}
+  .crystal-base{position:absolute;bottom:-18px;width:210px;height:34px;border-radius:50%;
+    background:radial-gradient(ellipse,rgba(216,180,134,.30),transparent 70%);filter:blur(3px)}
+  .crystal-caption{position:absolute;bottom:-66px;left:0;right:0;text-align:center;
+    font-family:var(--body);font-weight:500;color:var(--muted);font-size:.74rem;letter-spacing:.26em;text-transform:uppercase}
+
+  /* Generic section spacing */
+  .sec{padding:120px 0}
+  .sec-head{max-width:720px;margin-bottom:64px}
+  .sec-head.center{margin-left:auto;margin-right:auto;text-align:center}
+  .sec-head.center .eyebrow::before{display:none}
+  .sec-head.center .eyebrow{justify-content:center}
+
+  /* WHAT - split */
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center}
+  .what-visual{aspect-ratio:1;border-radius:20px;border:1px solid var(--line);
+    background:linear-gradient(160deg,rgba(216,180,134,.10),rgba(20,16,13,.4));
+    display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+  .what-visual .mini-crystal{width:120px;height:170px;border-radius:12px;
+    background:linear-gradient(135deg,rgba(255,255,255,.14),rgba(216,180,134,.08));
+    border:1px solid rgba(255,255,255,.18);box-shadow:inset 0 0 30px rgba(231,205,166,.15),0 20px 40px rgba(0,0,0,.4);
+    display:flex;align-items:center;justify-content:center}
+  .what-visual .mini-crystal svg{width:62%;filter:drop-shadow(0 0 10px rgba(231,205,166,.6));opacity:.9}
+  .what-img{width:100%;height:100%;object-fit:cover;display:block}
+  .what-body p{color:var(--muted);font-size:1.12rem;margin-top:1.4rem}
+
+  /* HOW - steps */
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;counter-reset:step}
+  .step{border:1px solid var(--line-soft);border-radius:18px;padding:24px 24px 32px;background:linear-gradient(180deg,rgba(21,17,14,.6),rgba(12,10,9,.2));position:relative;transition:.4s}
+  .step-img{aspect-ratio:3/4;border-radius:13px;overflow:hidden;margin-bottom:24px;border:1px solid var(--line-soft);background:#000}
+  .step-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s ease}
+  .step:hover .step-img img{transform:scale(1.04)}
+  .step:hover{border-color:var(--line);transform:translateY(-6px)}
+  .step .num{font-family:var(--display);font-size:3.4rem;color:var(--gold-deep);line-height:1;opacity:.55}
+  .step h3{font-size:1.7rem;color:var(--cream);margin:.7rem 0 .6rem}
+  .step p{color:var(--muted);font-size:.98rem}
+  .step .line{position:absolute;top:60px;right:-15px;width:30px;height:1px;background:var(--line);display:none}
+
+  /* WHY - features */
+  .features{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line-soft);border:1px solid var(--line-soft);border-radius:20px;overflow:hidden}
+  .features .feature{background:var(--bg);padding:48px 44px;transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1),background-color .5s ease}
+  .feature:hover{background:var(--bg-2)}
+  .feature .ico{width:42px;height:42px;color:var(--gold);margin-bottom:1.2rem}
+  .feature h3{font-size:1.65rem;color:var(--cream);margin-bottom:.5rem}
+  .feature p{color:var(--muted);font-size:.98rem}
+
+  /* PACKAGES */
+  .packages{display:grid;grid-template-columns:repeat(2,1fr);gap:30px}
+  .pack{display:flex;flex-direction:column;text-decoration:none;border:1px solid var(--line);border-radius:22px;overflow:hidden;position:relative;
+    background:linear-gradient(180deg,rgba(24,19,15,.9),rgba(13,11,9,.55));transition:transform .5s cubic-bezier(.2,.7,.2,1),border-color .5s,box-shadow .5s}
+  .pack::before{content:"";position:absolute;top:0;left:0;right:0;height:2px;z-index:3;opacity:0;transition:.5s;
+    background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+  .pack:hover{transform:translateY(-10px);border-color:var(--gold-deep);box-shadow:0 30px 70px rgba(0,0,0,.55),0 0 54px rgba(216,180,134,.10)}
+  .pack:hover::before{opacity:1}
+  .pack-img{position:relative;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;overflow:hidden;
+    background:radial-gradient(120% 120% at 50% 0,rgba(216,180,134,.20),rgba(13,11,9,.45) 62%);border-bottom:1px solid var(--line-soft)}
+  .pack-img::after{content:"";position:absolute;inset:0;opacity:.55;transition:.5s;
+    background:radial-gradient(60% 80% at 50% 42%,rgba(231,205,166,.18),transparent 70%)}
+  .pack:hover .pack-img::after{opacity:1}
+  .pack-mini{width:98px;height:138px;border-radius:12px;display:flex;align-items:center;justify-content:center;transition:transform .6s;
+    background:linear-gradient(135deg,rgba(255,255,255,.16),rgba(216,180,134,.08));border:1px solid rgba(255,255,255,.2);
+    box-shadow:inset 0 0 26px rgba(231,205,166,.16),0 18px 36px rgba(0,0,0,.45)}
+  .pack:hover .pack-mini{transform:translateY(-4px) scale(1.05)}
+  .pack-mini svg{width:60%;filter:drop-shadow(0 0 10px rgba(231,205,166,.65));opacity:.92}
+  .img-tag{position:absolute;top:14px;right:14px;z-index:2;font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;font-weight:600;
+    color:var(--gold);background:rgba(13,11,9,.72);border:1px solid var(--line);padding:.35rem .65rem;border-radius:40px}
+  .pack-photo{width:100%;height:100%;object-fit:cover;display:block}
+  .pack-body{padding:30px 30px 34px;display:flex;flex-direction:column;flex:1}
+  .pack-meta{display:flex;align-items:center;gap:.8rem;margin-bottom:1rem}
+  .pack .count{font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);font-weight:700}
+  .pack .who{font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted-2);font-weight:600;padding-left:.8rem;border-left:1px solid var(--line)}
+  .pack h3{font-size:2.1rem;color:var(--cream);margin:0 0 .7rem;line-height:1.04}
+  .pack .tagline{color:var(--gold-soft);font-family:var(--display);font-weight:600;font-size:1.16rem;margin-bottom:1rem;line-height:1.3}
+  .pack .desc{color:var(--muted);font-size:1rem;line-height:1.65;margin-bottom:1.6rem}
+  .pack .more{margin-top:auto;color:var(--gold);font-size:.9rem;font-weight:600;letter-spacing:.02em;display:inline-flex;align-items:center;gap:.5rem;transition:gap .35s}
+  .pack:hover .more{gap:.95rem}
+  .pack-note{text-align:center;color:var(--muted-2);font-size:.9rem;margin-top:40px;font-family:var(--body)}
+
+  /* TRUST */
+  .trust-wrap{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center}
+  .trust-points{list-style:none;display:grid;grid-template-columns:repeat(3,1fr);gap:1.8rem;margin-top:3rem}
+  .trust-points li{display:flex;gap:1rem;align-items:flex-start;color:var(--cream);font-size:1.08rem;
+    border:1px solid var(--line-soft);border-radius:16px;padding:28px 26px;background:linear-gradient(180deg,rgba(21,17,14,.5),rgba(12,10,9,.2))}
+  .trust-points .check{flex:none;width:26px;height:26px;border-radius:50%;border:1px solid var(--gold);color:var(--gold);display:flex;align-items:center;justify-content:center;font-size:.8rem;margin-top:3px}
+  .quote{border-left:2px solid var(--gold);padding:1.5rem 0 1.5rem 2rem}
+  .quote p{font-family:var(--display);font-weight:500;font-size:1.55rem;color:var(--cream);line-height:1.35}
+  .quote span{display:block;margin-top:1rem;color:var(--muted);font-size:.9rem;font-family:var(--body);font-style:normal;letter-spacing:.05em}
+
+  /* FAQ */
+  .faq{max-width:820px;margin:0 auto}
+  details{border-bottom:1px solid var(--line-soft);padding:8px 0}
+  summary{cursor:pointer;list-style:none;padding:24px 0;display:flex;justify-content:space-between;align-items:center;gap:1rem;
+    font-family:var(--display);font-weight:600;font-size:1.25rem;color:var(--cream);transition:color .3s}
+  summary::-webkit-details-marker{display:none}
+  summary:hover{color:var(--gold-soft)}
+  summary .pm{flex:none;width:24px;height:24px;position:relative;transition:.3s}
+  summary .pm::before,summary .pm::after{content:"";position:absolute;background:var(--gold);transition:.3s}
+  summary .pm::before{top:11px;left:2px;width:20px;height:1.5px}
+  summary .pm::after{top:2px;left:11px;width:1.5px;height:20px}
+  details[open] summary .pm::after{transform:rotate(90deg);opacity:0}
+  details[open] summary{color:var(--gold-soft)}
+  .faq-a{color:var(--muted);font-size:1.02rem;padding:0 0 24px;max-width:64ch}
+
+  /* DOCTORS band */
+  .doctors{padding:96px 0}
+  .doctors-inner{border:1px solid var(--line);border-radius:24px;padding:64px 56px;text-align:center;
+    background:linear-gradient(160deg,rgba(216,180,134,.08),rgba(12,10,9,.3));position:relative;overflow:hidden}
+  .doctors-inner::before{content:"";position:absolute;top:-40%;left:50%;transform:translateX(-50%);width:500px;height:500px;
+    background:radial-gradient(circle,rgba(231,205,166,.12),transparent 65%)}
+  .doc-icon{width:68px;height:68px;border-radius:50%;border:1px solid var(--gold);color:var(--gold);
+    display:flex;align-items:center;justify-content:center;margin:0 auto 1.7rem;position:relative;
+    background:radial-gradient(circle,rgba(216,180,134,.14),transparent 70%);box-shadow:0 0 34px rgba(216,180,134,.20)}
+  .doc-icon svg{width:32px;height:32px}
+  .doctors h2{font-size:clamp(1.9rem,4vw,2.8rem);color:var(--cream);position:relative}
+  .doctors p{color:var(--muted);max-width:52ch;margin:1.3rem auto 2rem;position:relative;font-size:1.1rem}
+
+  /* CONTACT */
+  .contact-grid{display:grid;grid-template-columns:.95fr 1.05fr;gap:64px;align-items:start}
+  .contact-left .lead{margin-top:1.4rem}
+  .contact-btns{display:flex;gap:1rem;flex-wrap:wrap;margin-top:2rem}
+  .wa{background:#1f3d33;border:1px solid #2f5c4c;color:#cfeede}
+  .wa:hover{background:#26493c;border-color:var(--gold)}
+  .btn-call{border:1px solid var(--gold-deep);color:var(--gold-soft)}
+  .btn-call:hover{background:rgba(216,180,134,.10);border-color:var(--gold);transform:translateY(-2px)}
+  .or{display:flex;align-items:center;gap:1rem;color:var(--muted-2);font-size:.8rem;letter-spacing:.2em;text-transform:uppercase;margin:2rem 0 0}
+  .or::before,.or::after{content:"";flex:1;height:1px;background:var(--line-soft)}
+  form{display:flex;flex-direction:column;gap:1.2rem;border:1px solid var(--line-soft);border-radius:20px;padding:40px;background:linear-gradient(180deg,rgba(21,17,14,.5),rgba(12,10,9,.2))}
+  label{font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:.5rem;display:block}
+  input,select,textarea{width:100%;background:rgba(255,255,255,.03);border:1px solid var(--line);border-radius:10px;
+    padding:.9rem 1rem;color:var(--cream);font-family:var(--body);font-size:.96rem;font-weight:300;transition:.3s}
+  input:focus,select:focus,textarea:focus{outline:none;border-color:var(--gold);background:rgba(216,180,134,.05)}
+  input::placeholder,textarea::placeholder{color:var(--muted-2)}
+  select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23d8b486' stroke-width='1.3'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 1rem center}
+  textarea{resize:vertical;min-height:110px}
+  .kvkk{display:flex;gap:.7rem;align-items:flex-start;text-transform:none;letter-spacing:0;font-size:.86rem;color:var(--muted);line-height:1.5}
+  .kvkk input{width:auto;margin-top:3px;accent-color:var(--gold)}
+  .form-success{display:none;color:var(--gold-soft);font-family:var(--display);font-size:1.3rem;font-style:italic;text-align:center;padding:1rem 0}
+  .form-success.show{display:block}
+
+  /* MODAL */
+  .modal-overlay{position:fixed;inset:0;z-index:100;background:rgba(6,5,4,.8);backdrop-filter:blur(7px);
+    display:flex;align-items:center;justify-content:center;padding:24px;opacity:0;visibility:hidden;transition:.35s}
+  .modal-overlay.open{opacity:1;visibility:visible}
+  .modal{position:relative;width:100%;max-width:520px;max-height:90vh;overflow:auto;padding:46px 44px;border-radius:24px;
+    background:linear-gradient(180deg,#1b1611,#100d0b);border:1px solid var(--line);
+    box-shadow:0 40px 90px rgba(0,0,0,.6);transform:translateY(22px) scale(.98);transition:.4s cubic-bezier(.2,.7,.2,1)}
+  .modal-overlay.open .modal{transform:none}
+  .modal-close{position:absolute;top:16px;right:20px;background:none;border:none;color:var(--muted);font-size:1.7rem;line-height:1;cursor:pointer;transition:.3s}
+  .modal-close:hover{color:var(--gold)}
+  .modal .doc-icon{margin:0 auto 1.3rem}
+  .modal h3{font-family:var(--display);font-weight:600;font-size:1.7rem;color:var(--cream);text-align:center;margin-bottom:.6rem}
+  .modal-sub{color:var(--muted);text-align:center;font-size:.96rem;margin-bottom:2rem;line-height:1.55}
+  .modal form{border:none;padding:0;background:none;gap:1.1rem}
+
+  /* FOOTER */
+  footer{border-top:1px solid var(--line-soft);padding:72px 0 40px;margin-top:40px;position:relative;z-index:2}
+  .foot-grid{display:flex;justify-content:space-between;gap:40px;flex-wrap:wrap;align-items:flex-start}
+  .foot-brand .brand{margin-bottom:1rem}
+  .foot-brand p{color:var(--muted);max-width:30ch;font-size:.95rem}
+  .foot-cols{display:flex;gap:72px;flex-wrap:wrap}
+  .foot-col h4{font-size:.74rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:1.1rem;font-weight:600;font-family:var(--body)}
+  .foot-col a{display:block;color:var(--muted);text-decoration:none;font-size:.92rem;margin-bottom:.7rem;transition:.3s}
+  .foot-col a:hover{color:var(--cream)}
+  .foot-bottom{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-top:56px;padding-top:28px;border-top:1px solid var(--line-soft);color:var(--muted-2);font-size:.82rem}
+
+  .reveal{opacity:0;transform:translateY(34px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1)}
+  .reveal.visible{opacity:1;transform:none}
+
+  /* Mobile */
+  @media(max-width:980px){
+    .hero-grid{grid-template-columns:1fr;gap:10px}
+    .hero-emblem{display:none}
+    .crystal-stage{min-height:420px;order:-1;margin-bottom:20px}
+    .split,.trust-wrap,.contact-grid{grid-template-columns:1fr;gap:44px}
+    .trust-points{grid-template-columns:1fr}
+    .steps{grid-template-columns:1fr}
+    .features{grid-template-columns:1fr}
+    .packages{grid-template-columns:1fr 1fr}
+  }
+  @media(max-width:680px){
+    .wrap{padding:0 20px}
+    .nav{height:72px}
+    .brand{font-size:1.2rem;gap:.45rem}
+    .brand-emblem{width:20px;height:22px}
+    .nav-right{gap:.7rem}
+    .nav-wa{width:36px;height:36px}
+    .lang{font-size:.78rem;padding:.45rem .7rem}
+    input,select,textarea{font-size:16px}
+    .nav-links{position:fixed;inset:72px 0 auto 0;background:rgba(12,10,9,.97);backdrop-filter:blur(14px);
+      flex-direction:column;gap:0;padding:10px 0;transform:translateY(-130%);transition:transform .4s ease;border-bottom:1px solid var(--line)}
+    .nav-links.open{transform:none}
+    .nav-links li{width:100%;text-align:center}
+    .nav-links a{display:block;padding:18px}
+    .nav-links a::after{display:none}
+    .burger{display:block}
+    .sec{padding:88px 0}
+    .packages{grid-template-columns:1fr}
+    .doctors-inner{padding:44px 26px}
+    form{padding:28px}
+    .hero h1{font-size:clamp(2.6rem,13vw,4rem)}
+  }
+</style>
+</head>
+<body>
+<canvas id="siteCanvas" class="site-canvas"></canvas>
+
+<!-- baby profile silhouette reused via <use> -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="babyface" viewBox="0 0 200 240">
+    <path d="M78 28 C50 36 36 64 38 96 C39 118 50 134 66 144 C68 158 68 172 76 184
+      C80 192 92 196 104 196 C116 196 122 188 120 178 C130 176 138 168 136 158
+      C135 150 128 150 128 144 C128 138 136 137 138 130 C146 124 156 122 156 110
+      C156 100 146 99 144 92 C145 74 154 64 152 50 C149 32 116 20 92 24
+      C87 25 82 26 78 28 Z" fill="url(#frost)"/>
+  </symbol>
+  <linearGradient id="frost" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#fdfaf4"/>
+    <stop offset="1" stop-color="#e7cda6"/>
+  </linearGradient>
+</svg>
+
+<header id="header">
+  <div class="wrap nav">
+    <a href="#" class="brand"><svg class="brand-emblem" viewBox="0 0 86 92" aria-hidden="true"><circle cx="48" cy="24" r="15"/><path d="M37 35 C20 42 16 64 31 74 C44 83 65 78 69 61 C72 49 64 41 53 43 C60 48 60 57 53 61 C44 66 36 59 37 49 Z"/></svg>Nest Moment</a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#how" data-i18n="nav.how">Nasıl Çalışır</a></li>
+      <li><a href="#packages" data-i18n="nav.packages">Paketler</a></li>
+      <li><a href="#contact" data-i18n="nav.contact">İletişim</a></li>
+      <li><a href="#doctors" data-i18n="nav.doctors">Kadın Doğum Uzmanları İçin</a></li>
+    </ul>
+    <div class="nav-right">
+      <a href="https://wa.me/905317941915" target="_blank" rel="noopener" class="nav-wa" aria-label="WhatsApp'tan yaz">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20" aria-hidden="true"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.945C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 018.413 3.488 11.824 11.824 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 001.51 5.26l-.999 3.648 3.978-1.039zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+      </a>
+      <button class="lang" id="langBtn">EN</button>
+      <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg">
+    <div class="hero-orb orb-a" data-depth="24" data-amp="40" data-phase="0"></div>
+    <div class="hero-orb orb-b" data-depth="34" data-amp="34" data-phase="2"></div>
+    <div class="hero-orb orb-c" data-depth="16" data-amp="46" data-phase="4"></div>
+    <div class="hero-emblem" data-depth="42" data-amp="16" data-phase="1">
+      <svg viewBox="0 0 86 92" aria-hidden="true"><circle cx="48" cy="24" r="15"/><path d="M37 35 C20 42 16 64 31 74 C44 83 65 78 69 61 C72 49 64 41 53 43 C60 48 60 57 53 61 C44 66 36 59 37 49 Z"/></svg>
+    </div>
+  </div>
+  <div class="wrap hero-grid">
+    <div class="hero-fade">
+      <span class="eyebrow hero-eyebrow" data-i18n="hero.eyebrow">Kristal cam içinde 3D ultrason anısı</span>
+      <h1 data-i18n-html="hero.title">O ilk an,<br><em>sonsuza dek.</em></h1>
+      <p class="hero-sub" data-i18n="hero.sub">Bebeğinin ilk görüntüsünü, kristalin içinde sonsuza dek parlayan bir esere dönüştürüyoruz.</p>
+      <div class="hero-cta">
+        <a href="#what" class="btn btn-gold" data-i18n="hero.scroll">Hikayeyi keşfet</a>
+      </div>
+    </div>
+    <div class="crystal-stage">
+      <div class="crystal-glow"></div>
+      <div class="crystal-3d" id="crystal3d">
+        <img class="crystal-img" src="images/hero-crystal-cut.png" alt="Kristal cam içinde 3D bebek kazıması">
+      </div>
+      <div class="crystal-base"></div>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT -->
+<section class="sec" id="what">
+  <div class="wrap split">
+    <div class="what-visual reveal">
+      <img src="images/ilk-tanisma.png" alt="Ellerde tutulan kristal anı" class="what-img">
+    </div>
+    <div class="what-body reveal">
+      <span class="eyebrow" data-i18n="what.eyebrow">Kristal Anı</span>
+      <h2 class="section-title" data-i18n="what.title">Onunla ilk tanışmanı, ölümsüzleştirdik.</h2>
+      <p data-i18n="what.body">Ultrason görüntün, üç boyutlu bir esere dönüşüp kristal camın içine lazerle kazınır. Elinde tutabileceğin, ışıkta parlayan, her açıdan bakılabilen gerçek bir anı.</p>
+    </div>
+  </div>
+</section>
+
+<!-- HOW -->
+<section class="sec" id="how">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow" data-i18n="how.eyebrow">Süreç</span>
+      <h2 class="section-title" data-i18n="how.title">Üç adımda, o an elinde.</h2>
+    </div>
+    <div class="steps">
+      <div class="step reveal">
+        <div class="step-img"><img src="images/step-1.jpeg" alt="Ultrason görüntüsü paylaşımı"></div>
+        <div class="num">01</div>
+        <h3 data-i18n="how.s1t">Ultrason görüntünü paylaş</h3>
+      </div>
+      <div class="step reveal">
+        <div class="step-img"><img src="images/step-2.jpeg" alt="Görüntünün 3D'ye dönüştürülmesi"></div>
+        <div class="num">02</div>
+        <h3 data-i18n="how.s2t">3D'ye dönüştürelim</h3>
+      </div>
+      <div class="step reveal">
+        <div class="step-img"><img src="images/step-3.jpeg" alt="Kutusunda kristal anı"></div>
+        <div class="num">03</div>
+        <h3 data-i18n="how.s3t">Kristale kazıyıp, adresine ulaştıralım</h3>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY -->
+<section class="sec" id="why">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow" data-i18n="why.eyebrow">Değer</span>
+      <h2 class="section-title" data-i18n="why.title">Fotoğraf solar. Bu an kalır.</h2>
+    </div>
+    <div class="features">
+      <div class="feature reveal">
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M12 2v20M2 12h20" stroke-linecap="round"/><circle cx="12" cy="12" r="9"/></svg>
+        <h3 data-i18n="why.f1t">Kalıcı</h3>
+        <p data-i18n="why.f1d">Yıllar geçse de ilk günkü netlik.</p>
+      </div>
+      <div class="feature reveal">
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"><path d="M6 3h12l4 6-10 13L2 9z"/><path d="M11 3 8 9l4 13 4-13-3-6M2 9h20"/></svg>
+        <h3 data-i18n="why.f2t">Estetik</h3>
+        <p data-i18n="why.f2d">Evinin en özel köşesinde gururla sergileyebileceğin bir tasarım.</p>
+      </div>
+      <div class="feature reveal">
+        <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M12 3l2.5 5 5.5.8-4 3.9.9 5.5L12 21l-4.9 2.6.9-5.5-4-3.9 5.5-.8z" stroke-linejoin="round"/></svg>
+        <h3 data-i18n="why.f3t">El işçiliği</h3>
+        <p data-i18n="why.f3d">Her parça özenle, tek tek hazırlanır.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PACKAGES -->
+<section class="sec" id="packages">
+  <div class="wrap">
+    <div class="sec-head center reveal">
+      <span class="eyebrow" data-i18n="pack.eyebrow">Paketler</span>
+      <h2 class="section-title" data-i18n="pack.title">Peki sen bu anı kiminle paylaşacaksın?</h2>
+    </div>
+    <div class="packages">
+      <a href="#contact" class="pack reveal">
+        <div class="pack-img">
+          <img class="pack-photo" src="images/paket-1.jpeg" alt="Anneye Özel paketi">
+        </div>
+        <div class="pack-body">
+          <div class="pack-meta">
+            <span class="count" data-i18n="pack.c1c">tek parça</span>
+            <span class="who" data-i18n="pack.c1who">Anne için</span>
+          </div>
+          <h3 data-i18n="pack.c1n">Anneye Özel</h3>
+          <p class="tagline" data-i18n="pack.c1d">Bu an, önce senin.</p>
+          <p class="desc" data-i18n="pack.c1long">Hamileliğinin o en özel anını, yalnızca senin için hazırladığımız imza parçasıyla ölümsüzleştir. En gösterişli kristal, özenli sunumuyla.</p>
+          <span class="more" data-i18n="pack.more">Paket detaylarını incele →</span>
+        </div>
+      </a>
+      <a href="#contact" class="pack reveal">
+        <div class="pack-img">
+          <img class="pack-photo" src="images/paket2.jpeg" alt="Büyük Aile paketi">
+        </div>
+        <div class="pack-body">
+          <div class="pack-meta">
+            <span class="count" data-i18n="pack.c2c">~5 parça</span>
+            <span class="who" data-i18n="pack.c2who">Aile için</span>
+          </div>
+          <h3 data-i18n="pack.c2n">Büyük Aile</h3>
+          <p class="tagline" data-i18n="pack.c2d">Bütün aile bebeğinizle ilk kez tanışıyor.</p>
+          <p class="desc" data-i18n="pack.c2long">Anneanne, babaanne, dedeler... İlk torun heyecanını tüm aileye aynı anda yaşatın. Her biri ayrı kutusunda, isteğe bağlı isim ve tarih kazımasıyla.</p>
+          <span class="more" data-i18n="pack.more">Paket detaylarını incele →</span>
+        </div>
+      </a>
+      <a href="#contact" class="pack reveal">
+        <div class="pack-img">
+          <img class="pack-photo" src="images/paket3.jpeg" alt="Sürpriz Parti paketi">
+        </div>
+        <div class="pack-body">
+          <div class="pack-meta">
+            <span class="count" data-i18n="pack.c3c">mini · ~20–50</span>
+            <span class="who" data-i18n="pack.c3who">Misafirler için</span>
+          </div>
+          <h3 data-i18n="pack.c3n">Sürpriz Parti</h3>
+          <p class="tagline" data-i18n="pack.c3d">Herkes o anın bir parçasıyla evine dönsün.</p>
+          <p class="desc" data-i18n="pack.c3long">Cinsiyet partisi ya da baby shower'da dağıtmak için zarif mini kristaller. Kutlamanın anısı, her davetlinin elinde kalsın.</p>
+          <span class="more" data-i18n="pack.more">Paket detaylarını incele →</span>
+        </div>
+      </a>
+      <a href="#contact" class="pack reveal">
+        <div class="pack-img">
+          <img class="pack-photo" src="images/paket-4.jpeg" alt="Kendi Anını Tasarla paketi">
+        </div>
+        <div class="pack-body">
+          <div class="pack-meta">
+            <span class="count" data-i18n="pack.c4c">sana özel</span>
+            <span class="who" data-i18n="pack.c4who">Esnek</span>
+          </div>
+          <h3 data-i18n="pack.c4n">Kendi Anını Tasarla</h3>
+          <p class="tagline" data-i18n="pack.c4d">Senin anın, senin kuralların.</p>
+          <p class="desc" data-i18n="pack.c4long">Aklında farklı bir fikir mi var? Adet, boyut ve sunumu birlikte planlayıp sana ve anına özel bir paket oluşturalım.</p>
+          <span class="more" data-i18n="pack.more">Paket detaylarını incele →</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="sec" id="faq">
+  <div class="wrap">
+    <div class="sec-head center reveal">
+      <span class="eyebrow" data-i18n="faq.eyebrow">Sık sorulanlar</span>
+      <h2 class="section-title" data-i18n="faq.title">Aklındakileri yanıtlayalım.</h2>
+    </div>
+    <div class="faq reveal">
+      <details>
+        <summary><span data-i18n="faq.q1">Nasıl bir ultrason görüntüsü göndermeliyim?</span><span class="pm"></span></summary>
+        <div class="faq-a" data-i18n="faq.a1">Hem 2D hem 3D/4D ultrason görüntüleri kullanılabilir. En iyi sonuç, bebeğin yüz hatlarının ya da profilinin net göründüğü görüntülerden çıkar. Elindeki çıktının telefonla çekilmiş net bir fotoğrafını ya da dijital dosyasını gönderebilirsin. Hangisinin en uygun olduğundan emin değilsen birkaç tane gönder; senin için en iyisini birlikte seçelim.</div>
+      </details>
+      <details>
+        <summary><span data-i18n="faq.q2">Gebeliğin hangi haftası en uygun?</span><span class="pm"></span></summary>
+        <div class="faq-a" data-i18n="faq.a2">Genellikle 24.–32. haftalar arasında çekilen görüntülerde yüz hatları en belirgin olur ve en güzel sonucu verir. Ancak farklı haftalardaki görüntüler de değerlendirilebilir; emin değilsen bize danış, görüntüne bakıp dürüstçe yönlendirelim.</div>
+      </details>
+      <details>
+        <summary><span data-i18n="faq.q4">Kristale isim, tarih ya da özel bir not ekleyebilir miyim?</span><span class="pm"></span></summary>
+        <div class="faq-a" data-i18n="faq.a4">Elbette. Bebeğin adı, doğum ya da ultrason tarihi veya sana özel kısa bir not kristale ya da kaideye işlenebilir. Ayrıca farklı boyut ve sunum seçenekleri de mevcut; detayları iletişimde birlikte belirliyoruz.</div>
+      </details>
+      <details>
+        <summary><span data-i18n="faq.q6">Teslim süresi ne kadar ve kargo nasıl?</span><span class="pm"></span></summary>
+        <div class="faq-a" data-i18n="faq.a6">Üretim süresi sipariş yoğunluğuna ve seçtiğin pakete göre değişir; onay aşamasında sana net bir tarih veriyoruz. Türkiye'nin her yerine, kristali koruyan özel ve sağlam bir paketlemeyle gönderim yapıyoruz.</div>
+      </details>
+      <details>
+        <summary><span data-i18n="faq.q7">Görüntülerim gizli kalıyor mu?</span><span class="pm"></span></summary>
+        <div class="faq-a" data-i18n="faq.a7">Kesinlikle. Gönderdiğin ultrason görüntüleri yalnızca senin siparişin için kullanılır, üçüncü kişilerle paylaşılmaz. Siparişin tamamlandıktan sonra görüntülerin sistemimizden kalıcı olarak silinir.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- DOCTORS -->
+<section class="doctors" id="doctors">
+  <div class="wrap">
+    <div class="doctors-inner reveal">
+      <div class="doc-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M4.8 2.3A.3.3 0 1 0 5 2H4a2 2 0 0 0-2 2v5a6 6 0 0 0 6 6 6 6 0 0 0 6-6V4a2 2 0 0 0-2-2h-1a.3.3 0 1 0 .3.3"/>
+          <path d="M8 15v1a6 6 0 0 0 6 6 6 6 0 0 0 6-6v-4"/>
+          <circle cx="20" cy="10" r="2"/>
+        </svg>
+      </div>
+      <h2 data-i18n="doc.title">Kadın Doğum Uzmanları İçin</h2>
+      <p data-i18n="doc.text">Siz de danışanlarınıza hamileliklerinin bu eşsiz anısını armağan etmek isterseniz, size özel paketler hakkında bilgi almak için bize ulaşabilirsiniz.</p>
+      <a href="tel:+905317941915" class="btn btn-call">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        <span data-i18n="doc.cta">Bizi Arayın</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="sec" id="contact">
+  <div class="wrap contact-grid">
+    <div class="contact-left reveal">
+      <span class="eyebrow" data-i18n="contact.eyebrow">İletişim</span>
+      <h2 class="section-title" data-i18n="contact.title">Ultrason görüntünü gönder, o anı ölümsüzleştirelim.</h2>
+      <p class="lead" data-i18n="contact.text">Hangi paketi düşündüğünü yaz, birlikte planlayalım. Sana en kısa sürede dönüş yapıyoruz.</p>
+      <div class="contact-btns">
+        <a href="https://wa.me/905317941915" target="_blank" rel="noopener" class="btn wa">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.945C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 018.413 3.488 11.824 11.824 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 001.51 5.26l-.999 3.648 3.978-1.039zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+          <span data-i18n="contact.wa">WhatsApp'tan yaz</span>
+        </a>
+        <a href="tel:+905317941915" class="btn btn-call">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          <span data-i18n="contact.call">Bizi Arayın</span>
+        </a>
+      </div>
+      <div class="or" data-i18n="contact.or">veya formu doldur</div>
+    </div>
+    <form class="reveal" id="contactForm">
+      <div>
+        <label data-i18n="form.name">Adın</label>
+        <input type="text" data-i18n-ph="form.namePh" placeholder="Adın soyadın" required>
+      </div>
+      <div>
+        <label data-i18n="form.contact">İletişim</label>
+        <input type="text" data-i18n-ph="form.contactPh" placeholder="E-posta veya telefon" required>
+      </div>
+      <div>
+        <label data-i18n="form.package">İlgilendiğin paket</label>
+        <select>
+          <option data-i18n="form.pkg0">Henüz emin değilim</option>
+          <option data-i18n="pack.c1n">Anneye Özel</option>
+          <option data-i18n="pack.c2n">Büyük Aile</option>
+          <option data-i18n="pack.c3n">Sürpriz Parti</option>
+          <option data-i18n="pack.c4n">Kendi Anını Tasarla</option>
+        </select>
+      </div>
+      <div>
+        <label data-i18n="form.message">Mesajın</label>
+        <textarea data-i18n-ph="form.messagePh" placeholder="Anını bizimle paylaş..."></textarea>
+      </div>
+      <label class="kvkk"><input type="checkbox" required><span data-i18n="form.kvkk">Kişisel verilerimin ve görselimin sipariş sürecinde işlenmesini kabul ediyorum.</span></label>
+      <button type="submit" class="btn btn-gold" style="justify-content:center" data-i18n="form.submit">Gönder</button>
+      <div class="form-success" id="formSuccess" data-i18n="form.success">Teşekkürler! En kısa sürede sana dönüş yapacağız. 🤍</div>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a href="#" class="brand"><svg class="brand-emblem" viewBox="0 0 86 92" aria-hidden="true"><circle cx="48" cy="24" r="15"/><path d="M37 35 C20 42 16 64 31 74 C44 83 65 78 69 61 C72 49 64 41 53 43 C60 48 60 57 53 61 C44 66 36 59 37 49 Z"/></svg>Nest Moment</a>
+        <p data-i18n="footer.tagline">O ilk an, sonsuza dek.</p>
+      </div>
+      <div class="foot-cols">
+        <div class="foot-col">
+          <h4 data-i18n="footer.explore">Keşfet</h4>
+          <a href="#how" data-i18n="nav.how">Nasıl Çalışır</a>
+          <a href="#packages" data-i18n="nav.packages">Paketler</a>
+          <a href="#contact" data-i18n="nav.contact">İletişim</a>
+        </div>
+        <div class="foot-col">
+          <h4 data-i18n="footer.more">Daha fazla</h4>
+          <a href="#doctors" data-i18n="nav.doctors">Kadın Doğum Uzmanları İçin</a>
+          <a href="kvkk.html" data-i18n="footer.privacy">Gizlilik / KVKK</a>
+        </div>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span data-i18n="footer.rights">© 2026 Nest Moment. Tüm hakları saklıdır.</span>
+      <span data-i18n="footer.made">Sevgiyle hazırlandı.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+const i18n = {
+  tr:{
+    "nav.how":"Hikayemiz","nav.packages":"Paketler","nav.contact":"İletişim","nav.doctors":"Kadın Doğum Uzmanları İçin",
+    "hero.eyebrow":"Kristal cam içinde 3D ultrason anısı","hero.title":"O ilk an,<br><em>sonsuza dek.</em>",
+    "hero.sub":"Bebeğinin ilk görüntüsünü, kristalin içinde sonsuza dek parlayan bir esere dönüştürüyoruz.",
+    "hero.cta":"İletişime geç","hero.scroll":"Hikayeyi keşfet","hero.caption":"el yapımı kristal anı",
+    "what.eyebrow":"Kristal Anı","what.title":"Onunla ilk tanışmanı, ölümsüzleştirdik.",
+    "what.body":"Ultrason görüntün, üç boyutlu bir esere dönüşüp kristal camın içine lazerle kazınır. Elinde tutabileceğin, ışıkta parlayan, her açıdan bakılabilen gerçek bir anı.",
+    "how.eyebrow":"Süreç","how.title":"Üç adımda, o an elinde.",
+    "how.s1t":"Ultrason görüntünü paylaş","how.s1d":"Görüntünü bize ilet, gerisini biz düşünelim.",
+    "how.s2t":"3D'ye dönüştürelim","how.s2d":"Görüntünü uzman dokunuşuyla üç boyutlu hâle getiriyoruz.",
+    "how.s3t":"Kristale kazıyıp, adresine ulaştıralım","how.s3d":"Lazerle kristal cama işliyor, özenle paketleyip sana gönderiyoruz.",
+    "why.eyebrow":"Değer","why.title":"Fotoğraf solar. Bu an kalır.",
+    "why.f1t":"Kalıcı","why.f1d":"Yıllar geçse de ilk günkü netlik.",
+    "why.f2t":"Estetik","why.f2d":"Evinin en özel köşesinde gururla sergileyebileceğin bir tasarım.",
+    "why.f3t":"El işçiliği","why.f3d":"Her parça özenle, tek tek hazırlanır.",
+    "pack.eyebrow":"Paketler","pack.title":"Peki sen bu anı kiminle paylaşacaksın?","pack.imgsoon":"Görsel yakında",
+    "pack.c1c":"tek parça","pack.c1who":"Anne için","pack.c1n":"Anneye Özel","pack.c1d":"Bu an, önce senin.","pack.c1long":"Hamileliğinin o en özel anını, yalnızca senin için hazırladığımız imza parçasıyla ölümsüzleştir. En gösterişli kristal, özenli sunumuyla.",
+    "pack.c2c":"~5 parça","pack.c2who":"Aile için","pack.c2n":"Büyük Aile","pack.c2d":"Bütün aile bebeğinizle ilk kez tanışıyor.","pack.c2long":"Anneanne, babaanne, dedeler... İlk torun heyecanını tüm aileye aynı anda yaşatın. Her biri ayrı kutusunda, isteğe bağlı isim ve tarih kazımasıyla.",
+    "pack.c3c":"mini · ~20–50","pack.c3who":"Misafirler için","pack.c3n":"Sürpriz Parti","pack.c3d":"Herkes o anın bir parçasıyla evine dönsün.","pack.c3long":"Cinsiyet partisi ya da baby shower'da dağıtmak için zarif mini kristaller. Kutlamanın anısı, her davetlinin elinde kalsın.",
+    "pack.c4c":"sana özel","pack.c4who":"Esnek","pack.c4n":"Kendi Anını Tasarla","pack.c4d":"Senin anın, senin kuralların.","pack.c4long":"Aklında farklı bir fikir mi var? Adet, boyut ve sunumu birlikte planlayıp sana ve anına özel bir paket oluşturalım.",
+    "pack.more":"Paket detaylarını incele →","pack.note":"Her paketin detaylı anlatımı yakında.",
+    "trust.eyebrow":"Güven","trust.title":"Her detay, ilk günkü kadar net.",
+    "trust.p1":"Gerçek kristal cam, ağırlığı ve berraklığıyla.","trust.p2":"Hassas lazer kazıma, en ince ayrıntıya kadar.",
+    "trust.p3":"Görüntülerin güvende ve gizli kalır.",
+    "trust.quote":"\"Onu ilk elime aldığımda ağladım. Tam da o günkü gibiydi.\"","trust.quoteAuthor":"— Yakında: gerçek anne yorumları",
+    "faq.eyebrow":"Sık sorulanlar","faq.title":"Aklındakileri yanıtlayalım.",
+    "faq.q1":"Nasıl bir ultrason görüntüsü göndermeliyim?","faq.a1":"Hem 2D hem 3D/4D ultrason görüntüleri kullanılabilir. En iyi sonuç, bebeğin yüz hatlarının ya da profilinin net göründüğü görüntülerden çıkar. Elindeki çıktının telefonla çekilmiş net bir fotoğrafını ya da dijital dosyasını gönderebilirsin. Hangisinin en uygun olduğundan emin değilsen birkaç tane gönder; senin için en iyisini birlikte seçelim.",
+    "faq.q2":"Gebeliğin hangi haftası en uygun?","faq.a2":"Genellikle 24.–32. haftalar arasında çekilen görüntülerde yüz hatları en belirgin olur ve en güzel sonucu verir. Ancak farklı haftalardaki görüntüler de değerlendirilebilir; emin değilsen bize danış, görüntüne bakıp dürüstçe yönlendirelim.",
+    "faq.q3":"Görüntüm çok net değil, yine de olur mu?","faq.a3":"Çoğu zaman evet. Görüntünü uzman ekibimiz tek tek işleyip 3D'ye hazırlıyor; bu süreçte birçok detay belirginleşiyor. Yalnızca çok düşük kaliteli görüntülerde önce bir değerlendirme yapıp sana açık bir geri bildirim veriyoruz — beğenmeyeceğin bir sonuçla seni baş başa bırakmayız.",
+    "faq.q4":"Kristale isim, tarih ya da özel bir not ekleyebilir miyim?","faq.a4":"Elbette. Bebeğin adı, doğum ya da ultrason tarihi veya sana özel kısa bir not kristale ya da kaideye işlenebilir. Ayrıca farklı boyut ve sunum seçenekleri de mevcut; detayları iletişimde birlikte belirliyoruz.",
+    "faq.q5":"Sipariş süreci nasıl işliyor?","faq.a5":"Çok basit: Bize ulaşıp ultrason görüntünü paylaşıyorsun. Görüntünü değerlendirip sana uygun seçenekleri ve net fiyatı sunuyoruz. Onayından sonra görüntün 3D'ye dönüştürülüp kristale kazınıyor, ardından özenle paketlenip sana gönderiliyor.",
+    "faq.q6":"Teslim süresi ne kadar ve kargo nasıl?","faq.a6":"Üretim süresi sipariş yoğunluğuna ve seçtiğin pakete göre değişir; onay aşamasında sana net bir tarih veriyoruz. Türkiye'nin her yerine, kristali koruyan özel ve sağlam bir paketlemeyle gönderim yapıyoruz.",
+    "faq.q7":"Görüntülerim gizli kalıyor mu?","faq.a7":"Kesinlikle. Gönderdiğin ultrason görüntüleri yalnızca senin siparişin için kullanılır, üçüncü kişilerle paylaşılmaz. Siparişin tamamlandıktan sonra görüntülerin sistemimizden kalıcı olarak silinir.",
+    "faq.q8":"Fiyatları neden sitede göremiyorum?","faq.a8":"Çünkü her sipariş kişiye özel: seçtiğin paket, adet, boyut ve eklemek istediğin dokunuşlara göre değişiyor. Bu yüzden sana en doğru fiyatı, ihtiyacını dinledikten sonra birebir veriyoruz. Bize ulaşman yeterli.",
+    "doc.title":"Kadın Doğum Uzmanları İçin","doc.text":"Siz de danışanlarınıza hamileliklerinin bu eşsiz anısını armağan etmek isterseniz, size özel paketler hakkında bilgi almak için bize ulaşabilirsiniz.","doc.cta":"Bizi Arayın",
+    "docform.title":"Kadın Doğum Uzmanları İçin","docform.sub":"Bilgilerinizi bırakın, en kısa sürede sizinle iletişime geçelim.",
+    "docform.name":"Ad Soyad","docform.namePh":"Adınız soyadınız","docform.clinic":"Klinik / Hastane","docform.clinicPh":"Çalıştığınız kurum",
+    "docform.city":"Şehir","docform.cityPh":"Şehir","docform.contact":"İletişim","docform.contactPh":"Telefon veya e-posta",
+    "docform.message":"Mesajınız (opsiyonel)","docform.messagePh":"Eklemek istedikleriniz...","docform.kvkk":"Kişisel verilerimin işlenmesini kabul ediyorum.",
+    "docform.submit":"Gönder","docform.success":"Teşekkürler! En kısa sürede sizinle iletişime geçeceğiz. 🤍",
+    "contact.eyebrow":"İletişim","contact.title":"Ultrason görüntünü gönder, o anı ölümsüzleştirelim.",
+    "contact.text":"Hangi paketi düşündüğünü yaz, birlikte planlayalım. Sana en kısa sürede dönüş yapıyoruz.",
+    "contact.wa":"WhatsApp'tan yaz","contact.call":"Bizi Arayın","contact.or":"veya formu doldur",
+    "form.name":"Adın","form.namePh":"Adın soyadın","form.contact":"İletişim","form.contactPh":"E-posta veya telefon",
+    "form.package":"İlgilendiğin paket","form.pkg0":"Henüz emin değilim","form.message":"Mesajın","form.messagePh":"Anını bizimle paylaş...",
+    "form.kvkk":"Kişisel verilerimin ve görselimin sipariş sürecinde işlenmesini kabul ediyorum.","form.submit":"Gönder",
+    "form.success":"Teşekkürler! En kısa sürede sana dönüş yapacağız. 🤍",
+    "footer.tagline":"O ilk an, sonsuza dek.","footer.explore":"Keşfet","footer.more":"Daha fazla","footer.privacy":"Gizlilik / KVKK",
+    "footer.rights":"© 2026 Nest Moment. Tüm hakları saklıdır.","footer.made":"Sevgiyle hazırlandı."
+  },
+  en:{
+    "nav.how":"Our Story","nav.packages":"Packages","nav.contact":"Contact","nav.doctors":"For OB-GYNs",
+    "hero.eyebrow":"3D ultrasound keepsake in crystal glass","hero.title":"Your first moment,<br><em>forever.</em>",
+    "hero.sub":"We turn your baby's first image into a work of art that glows forever inside crystal.",
+    "hero.cta":"Get in touch","hero.scroll":"Discover the story","hero.caption":"handcrafted crystal keepsake",
+    "what.eyebrow":"Crystal Keepsake","what.title":"We immortalized your first meeting.",
+    "what.body":"Your ultrasound image becomes a three-dimensional form, laser-engraved inside crystal glass. A real keepsake you can hold, that glows in the light and can be viewed from every angle.",
+    "how.eyebrow":"The Process","how.title":"Three steps to hold the moment.",
+    "how.s1t":"Share your ultrasound image","how.s1d":"Send us your image and leave the rest to us.",
+    "how.s2t":"We craft it in 3D","how.s2d":"We turn your image into a three-dimensional form with an expert touch.",
+    "how.s3t":"Engraved & delivered to your door","how.s3d":"We laser-engrave it into crystal, then carefully package and ship it to you.",
+    "why.eyebrow":"The Value","why.title":"Photos fade. This moment stays.",
+    "why.f1t":"Lasting","why.f1d":"The same clarity, year after year.",
+    "why.f2t":"Aesthetic","why.f2d":"A design you'll proudly display in the finest corner of your home.",
+    "why.f3t":"Handcrafted","why.f3d":"Each piece is crafted, one by one, with care.",
+    "pack.eyebrow":"Packages","pack.title":"So, who will you share this moment with?","pack.imgsoon":"Image coming soon",
+    "pack.c1c":"single piece","pack.c1who":"For Mom","pack.c1n":"Just for Mom","pack.c1d":"This moment is yours first.","pack.c1long":"Immortalize the most special moment of your pregnancy with a signature piece made just for you — our most striking crystal, beautifully presented.",
+    "pack.c2c":"~5 pieces","pack.c2who":"For the family","pack.c2n":"The Whole Family","pack.c2d":"The whole family meets your baby at once.","pack.c2long":"Grandmothers, grandfathers... let the whole family share the joy of the first grandchild all at once. Each in its own box, with optional name and date engraving.",
+    "pack.c3c":"mini · ~20–50","pack.c3who":"For guests","pack.c3n":"The Party","pack.c3d":"Every guest goes home with a piece of the moment.","pack.c3long":"Elegant mini crystals to hand out at your gender reveal or baby shower. Let everyone keep a piece of the celebration.",
+    "pack.c4c":"tailored to you","pack.c4who":"Flexible","pack.c4n":"Design Your Own","pack.c4d":"Your moment, your rules.","pack.c4long":"Have something different in mind? Let's plan the count, size and presentation together and craft a package made just for you and your moment.",
+    "pack.more":"View package details →","pack.note":"Detailed package pages coming soon.",
+    "trust.eyebrow":"Trust","trust.title":"Every detail, as clear as day one.",
+    "trust.p1":"Genuine crystal glass, with real weight and clarity.","trust.p2":"Precise laser engraving, down to the finest detail.",
+    "trust.p3":"Your images stay private and secure.",
+    "trust.quote":"\"I cried the first time I held it. It looked just like that day.\"","trust.quoteAuthor":"— Coming soon: real reviews from moms",
+    "faq.eyebrow":"FAQ","faq.title":"Let's answer your questions.",
+    "faq.q1":"What kind of ultrasound image should I send?","faq.a1":"Both 2D and 3D/4D ultrasound images work. The best results come from images where your baby's facial features or profile are clearly visible. You can send a clear phone photo of your printout or a digital file. If you're not sure which works best, send a few and we'll choose the best one together.",
+    "faq.q2":"Which week of pregnancy is best?","faq.a2":"Images taken between weeks 24 and 32 usually show facial features most clearly and give the most beautiful results. Images from other weeks can also work — if you're unsure, just ask and we'll review yours and guide you honestly.",
+    "faq.q3":"My image isn't very clear — can it still work?","faq.a3":"Most of the time, yes. Our expert team processes each image and prepares it for 3D, and many details become clearer in the process. Only for very low-quality images do we review first and give you honest feedback — we won't leave you with a result you won't love.",
+    "faq.q4":"Can I add a name, date or special note to the crystal?","faq.a4":"Of course. Your baby's name, the birth or ultrasound date, or a short personal note can be engraved on the crystal or its base. Different sizes and presentation options are also available; we'll decide the details together when we talk.",
+    "faq.q5":"How does the ordering process work?","faq.a5":"It's simple: you reach out and share your ultrasound image. We review it and offer you suitable options and a clear price. Once you approve, your image is turned into 3D and engraved into crystal, then carefully packaged and shipped to you.",
+    "faq.q6":"How long does delivery take and how is it shipped?","faq.a6":"Production time varies with demand and the package you choose; we give you a clear date at the approval stage. We ship anywhere in Türkiye with special, sturdy packaging that protects the crystal.",
+    "faq.q7":"Are my images kept private?","faq.a7":"Absolutely. The ultrasound images you send are used only for your order and are never shared with third parties. Once your order is complete, your images are permanently deleted from our system.",
+    "faq.q8":"Why can't I see prices on the site?","faq.a8":"Because every order is personal: it depends on the package, quantity, size and the touches you'd like to add. That's why we give you the most accurate price one-to-one, after listening to your needs. Just reach out.",
+    "doc.title":"For OB-GYN Specialists","doc.text":"If you'd like to offer your patients this unique keepsake of their pregnancy, reach out to us for information about tailored packages.","doc.cta":"Call us",
+    "docform.title":"For OB-GYN Specialists","docform.sub":"Leave your details and we'll get in touch with you shortly.",
+    "docform.name":"Full name","docform.namePh":"Your full name","docform.clinic":"Clinic / Hospital","docform.clinicPh":"Where you practice",
+    "docform.city":"City","docform.cityPh":"City","docform.contact":"Contact","docform.contactPh":"Phone or email",
+    "docform.message":"Your message (optional)","docform.messagePh":"Anything you'd like to add...","docform.kvkk":"I consent to the processing of my personal data.",
+    "docform.submit":"Send","docform.success":"Thank you! We'll get in touch with you shortly. 🤍",
+    "contact.eyebrow":"Contact","contact.title":"Send your ultrasound, let's immortalize the moment.",
+    "contact.text":"Tell us which package you have in mind and we'll plan it together. We'll get back to you shortly.",
+    "contact.wa":"Message on WhatsApp","contact.call":"Call us","contact.or":"or fill the form",
+    "form.name":"Your name","form.namePh":"Your full name","form.contact":"Contact","form.contactPh":"Email or phone",
+    "form.package":"Package you're interested in","form.pkg0":"Not sure yet","form.message":"Your message","form.messagePh":"Share your moment with us...",
+    "form.kvkk":"I consent to my personal data and image being processed during the order.","form.submit":"Send",
+    "form.success":"Thank you! We'll get back to you very soon. 🤍",
+    "footer.tagline":"Your first moment. Forever.","footer.explore":"Explore","footer.more":"More","footer.privacy":"Privacy",
+    "footer.rights":"© 2026 Nest Moment. All rights reserved.","footer.made":"Made with love."
+  }
+};
+
+let lang = "tr";
+function applyLang(l){
+  lang = l;
+  document.documentElement.lang = l;
+  document.querySelectorAll("[data-i18n]").forEach(el=>{
+    const k = el.getAttribute("data-i18n");
+    if(i18n[l][k]!==undefined) el.textContent = i18n[l][k];
+  });
+  document.querySelectorAll("[data-i18n-html]").forEach(el=>{
+    const k = el.getAttribute("data-i18n-html");
+    if(i18n[l][k]!==undefined) el.innerHTML = i18n[l][k];
+  });
+  document.querySelectorAll("[data-i18n-ph]").forEach(el=>{
+    const k = el.getAttribute("data-i18n-ph");
+    if(i18n[l][k]!==undefined) el.setAttribute("placeholder", i18n[l][k]);
+  });
+  document.getElementById("langBtn").textContent = l==="tr" ? "EN" : "TR";
+}
+document.getElementById("langBtn").addEventListener("click",()=>applyLang(lang==="tr"?"en":"tr"));
+applyLang("tr");
+
+// header scroll
+const header = document.getElementById("header");
+window.addEventListener("scroll",()=>{header.classList.toggle("scrolled", window.scrollY>40)});
+
+// mobile menu
+const burger = document.getElementById("burger");
+const navLinks = document.getElementById("navLinks");
+burger.addEventListener("click",()=>navLinks.classList.toggle("open"));
+navLinks.querySelectorAll("a").forEach(a=>a.addEventListener("click",()=>navLinks.classList.remove("open")));
+
+// reveal on scroll
+const io = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add("visible");io.unobserve(e.target)}});
+},{threshold:.16});
+document.querySelectorAll(".reveal").forEach(el=>io.observe(el));
+
+// form
+document.getElementById("contactForm").addEventListener("submit",(e)=>{
+  e.preventDefault();
+  document.getElementById("formSuccess").classList.add("show");
+  e.target.querySelectorAll("input,select,textarea,button").forEach(el=>{if(el.type!=="submit")el.disabled=true});
+  e.target.querySelector("button[type=submit]").style.display="none";
+});
+
+// hero interactive background (idle drift + mouse parallax)
+(function(){
+  const hero = document.querySelector(".hero");
+  if(!hero) return;
+  const layers = hero.querySelectorAll(".hero-bg [data-depth]");
+  let tx=0,ty=0,cx=0,cy=0;
+  hero.addEventListener("mousemove",(e)=>{
+    const r = hero.getBoundingClientRect();
+    tx = (e.clientX-r.left)/r.width - .5;
+    ty = (e.clientY-r.top)/r.height - .5;
+  });
+  hero.addEventListener("mouseleave",()=>{tx=0;ty=0});
+  function loop(now){
+    const t = now/1000;
+    cx += (tx-cx)*0.06; cy += (ty-cy)*0.06;
+    layers.forEach(l=>{
+      const d=+l.dataset.depth||0, a=+l.dataset.amp||0, p=+l.dataset.phase||0;
+      const dx = Math.sin(t*0.30+p)*a + cx*d;
+      const dy = Math.cos(t*0.24+p)*a + cy*d;
+      l.style.transform = `translate(${dx.toFixed(2)}px,${dy.toFixed(2)}px)`;
+    });
+    requestAnimationFrame(loop);
+  }
+  requestAnimationFrame(loop);
+})();
+
+// hero crystal mouse-tilt (pseudo-3D) + idle float
+(function(){
+  const el=document.getElementById("crystal3d");
+  const hero=document.querySelector(".hero");
+  if(!el||!hero) return;
+  let mx=0,my=0,cx=0,cy=0,active=0,ca=0;
+  hero.addEventListener("mousemove",e=>{
+    const r=hero.getBoundingClientRect();
+    mx=(e.clientX-r.left)/r.width-0.5;
+    my=(e.clientY-r.top)/r.height-0.5;
+    active=1;
+  });
+  hero.addEventListener("mouseleave",()=>{active=0;});
+  function loop(now){
+    const t=(now||0)/1000;
+    cx+=(mx-cx)*0.07; cy+=(my-cy)*0.07; ca+=(active-ca)*0.05;
+    const ry=cx*22*ca, rx=-cy*15*ca;
+    const fy=Math.sin(t*0.8)*7;
+    const rz=Math.sin(t*0.5)*0.6;
+    el.style.transform=`rotateX(${rx.toFixed(2)}deg) rotateY(${ry.toFixed(2)}deg) rotateZ(${rz.toFixed(2)}deg) translateY(${fy.toFixed(2)}px)`;
+    requestAnimationFrame(loop);
+  }
+  requestAnimationFrame(loop);
+})();
+
+// site-wide light-dust particles (mouse-reactive, full viewport)
+(function(){
+  const canvas=document.getElementById("siteCanvas");
+  if(!canvas) return;
+  const ctx=canvas.getContext("2d");
+  const COLORS=["#f6efe4","#e7cda6","#d8b486","#c49660"];
+  let w=0,h=0,dpr=1,ps=[];
+  const mouse={x:-9999,y:-9999};
+  function init(){
+    const n=Math.round(Math.min(95,Math.max(48,(w*h)/23000)));
+    ps=[];
+    for(let i=0;i<n;i++){
+      const big=Math.random()<0.30;
+      const tw=!big && Math.random()<0.14;
+      ps.push({
+        x:Math.random()*w, y:Math.random()*h,
+        r: big ? (Math.random()*3.5+4) : (Math.random()*2.2+1.8),
+        a: big ? (Math.random()*0.16+0.12) : (Math.random()*0.38+0.42),
+        blur: big ? 22 : 11,
+        vx:(Math.random()-.5)*0.22,
+        vy:-(Math.random()*0.18+0.04),
+        c:COLORS[(Math.random()*COLORS.length)|0],
+        tw, tws:Math.random()*0.22+0.14, twp:Math.random()*6.283
+      });
+    }
+  }
+  function resize(){
+    dpr=Math.min(window.devicePixelRatio||1,2);
+    w=window.innerWidth; h=window.innerHeight;
+    canvas.width=w*dpr; canvas.height=h*dpr;
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+    init();
+  }
+  window.addEventListener("mousemove",e=>{mouse.x=e.clientX;mouse.y=e.clientY;});
+  window.addEventListener("mouseout",()=>{mouse.x=-9999;mouse.y=-9999;});
+  function frame(now){
+    const t=(now||0)/1000;
+    ctx.clearRect(0,0,w,h);
+    for(const p of ps){
+      const dx=p.x-mouse.x, dy=p.y-mouse.y, d2=dx*dx+dy*dy, R=170;
+      if(d2<R*R){const d=Math.sqrt(d2)||1, f=(R-d)/R; p.x+=dx/d*f*3.4; p.y+=dy/d*f*3.4;}
+      p.x+=p.vx; p.y+=p.vy;
+      if(p.y<-14)p.y=h+14; if(p.x<-14)p.x=w+14; if(p.x>w+14)p.x=-14;
+      let a=p.a, r=p.r, blur=p.blur;
+      if(p.tw){
+        const spike=Math.pow(Math.max(0,Math.sin(t*p.tws+p.twp)),12);
+        a=p.a+spike*(0.8-p.a);
+        r=p.r*(1+spike*0.35);
+        blur=p.blur+spike*12;
+      }
+      ctx.globalAlpha=a; ctx.fillStyle=p.c; ctx.shadowColor=p.c; ctx.shadowBlur=blur;
+      ctx.beginPath(); ctx.arc(p.x,p.y,r,0,6.2832); ctx.fill();
+    }
+    ctx.globalAlpha=1; ctx.shadowBlur=0;
+    requestAnimationFrame(frame);
+  }
+  window.addEventListener("resize",resize);
+  resize();
+  requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1150 190" width="1150" height="190">
+  <g fill="#d8b486">
+    <g transform="translate(-21,16) scale(1.7)">
+      <circle cx="48" cy="24" r="15"/>
+      <path d="M37 35 C20 42 16 64 31 74 C44 83 65 78 69 61 C72 49 64 41 53 43 C60 48 60 57 53 61 C44 66 36 59 37 49 Z"/>
+    </g>
+    <text x="118" y="140" font-family="Bricolage Grotesque" font-weight="700" font-size="150" letter-spacing="-2">Nest Moment</text>
+  </g>
+</svg>
