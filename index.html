@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="en">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -62,6 +62,7 @@
   }
   .eyebrow::before{content:"";width:26px;height:1px;background:linear-gradient(90deg,transparent,var(--gold))}
   .section-title{font-size:clamp(2.1rem,5vw,3.5rem);color:var(--cream);margin:.5rem 0 0}
+  .section-title .an{color:var(--gold-deep)}
   .lead{color:var(--muted);font-size:1.06rem;max-width:54ch}
 
   /* Header */
@@ -196,6 +197,8 @@
   .step .num{font-family:var(--display);font-size:3.4rem;color:var(--gold-deep);line-height:1;opacity:.55}
   .step h3{font-size:1.7rem;color:var(--cream);margin:.7rem 0 .6rem}
   .step p{color:var(--muted);font-size:.98rem}
+  .step-note{color:var(--muted-2);font-size:.82rem;line-height:1.55;margin-top:-.1rem}
+  .step-note b{color:var(--gold-soft);font-weight:600;font-variant-numeric:tabular-nums}
   .step .line{position:absolute;top:60px;right:-15px;width:30px;height:1px;background:var(--line);display:none}
 
   /* WHY - features */
@@ -394,7 +397,7 @@
       <a href="https://wa.me/905317941915" target="_blank" rel="noopener" class="nav-wa" aria-label="WhatsApp'tan yaz">
         <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20" aria-hidden="true"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.945C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 018.413 3.488 11.824 11.824 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 001.51 5.26l-.999 3.648 3.978-1.039zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
       </a>
-      <button class="lang" id="langBtn">EN</button>
+      <button class="lang" id="langBtn">TR</button>
       <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
     </div>
   </div>
@@ -437,8 +440,8 @@
     </div>
     <div class="what-body reveal">
       <span class="eyebrow" data-i18n="what.eyebrow">Kristal Anı</span>
-      <h2 class="section-title" data-i18n="what.title">Onunla ilk tanışmanı, ölümsüzleştirdik.</h2>
-      <p data-i18n="what.body">Ultrason görüntün, üç boyutlu bir esere dönüşüp kristal camın içine lazerle kazınır. Elinde tutabileceğin, ışıkta parlayan, her açıdan bakılabilen gerçek bir anı.</p>
+      <h2 class="section-title" data-i18n-html="what.title">Onunla ilk tanışm<span class="an">anı</span>, ölümsüzleştirdik.</h2>
+      <p data-i18n="what.body">Ultrason görüntün, üç boyutlu olarak kristal camın içine lazerle kazınır. Elinde tutabileceğin, ışıkta parlayan, her açıdan bakılabilen gerçek bir anı.</p>
     </div>
   </div>
 </section>
@@ -448,23 +451,24 @@
   <div class="wrap">
     <div class="sec-head reveal">
       <span class="eyebrow" data-i18n="how.eyebrow">Süreç</span>
-      <h2 class="section-title" data-i18n="how.title">Üç adımda, o an elinde.</h2>
+      <h2 class="section-title" data-i18n-html="how.title">Üç adımda, o <span class="an">an</span> elinde.</h2>
     </div>
     <div class="steps">
       <div class="step reveal">
         <div class="step-img"><img src="images/step-1.jpeg" alt="Ultrason görüntüsü paylaşımı"></div>
         <div class="num">01</div>
-        <h3 data-i18n="how.s1t">Ultrason görüntünü paylaş</h3>
+        <h3 data-i18n="how.s1t">Ultrason görüntünü paylaş.</h3>
+        <p class="step-note" data-i18n-html="how.s1n">Hekiminizden <b>.dcm</b> ya da <b>.stl</b> formatında görüntünüzü talep etmelisiniz.</p>
       </div>
       <div class="step reveal">
         <div class="step-img"><img src="images/step-2.jpeg" alt="Görüntünün 3D'ye dönüştürülmesi"></div>
         <div class="num">02</div>
-        <h3 data-i18n="how.s2t">3D'ye dönüştürelim</h3>
+        <h3 data-i18n="how.s2t">3D bir model haline getirelim.</h3>
       </div>
       <div class="step reveal">
         <div class="step-img"><img src="images/step-3.jpeg" alt="Kutusunda kristal anı"></div>
         <div class="num">03</div>
-        <h3 data-i18n="how.s3t">Kristale kazıyıp, adresine ulaştıralım</h3>
+        <h3 data-i18n="how.s3t">Kristalin içine kazıyıp, adresine ulaştıralım.</h3>
       </div>
     </div>
   </div>
@@ -475,7 +479,7 @@
   <div class="wrap">
     <div class="sec-head reveal">
       <span class="eyebrow" data-i18n="why.eyebrow">Değer</span>
-      <h2 class="section-title" data-i18n="why.title">Fotoğraf solar. Bu an kalır.</h2>
+      <h2 class="section-title" data-i18n-html="why.title">Fotoğraf solar. Bu <span class="an">an</span> kalır.</h2>
     </div>
     <div class="features">
       <div class="feature reveal">
@@ -502,7 +506,7 @@
   <div class="wrap">
     <div class="sec-head center reveal">
       <span class="eyebrow" data-i18n="pack.eyebrow">Paketler</span>
-      <h2 class="section-title" data-i18n="pack.title">Peki sen bu anı kiminle paylaşacaksın?</h2>
+      <h2 class="section-title" data-i18n-html="pack.title">Peki sen bu <span class="an">anı</span> kiminle paylaşacaksın?</h2>
     </div>
     <div class="packages">
       <a href="#contact" class="pack reveal">
@@ -627,7 +631,7 @@
   <div class="wrap contact-grid">
     <div class="contact-left reveal">
       <span class="eyebrow" data-i18n="contact.eyebrow">İletişim</span>
-      <h2 class="section-title" data-i18n="contact.title">Ultrason görüntünü gönder, o anı ölümsüzleştirelim.</h2>
+      <h2 class="section-title" data-i18n-html="contact.title">Ultrason görüntünü gönder, o <span class="an">anı</span> ölümsüzleştirelim.</h2>
       <p class="lead" data-i18n="contact.text">Hangi paketi düşündüğünü yaz, birlikte planlayalım. Sana en kısa sürede dönüş yapıyoruz.</p>
       <div class="contact-btns">
         <a href="https://wa.me/905317941915" target="_blank" rel="noopener" class="btn wa">
@@ -707,17 +711,17 @@ const i18n = {
     "hero.eyebrow":"Kristal cam içinde 3D ultrason anısı","hero.title":"O ilk an,<br><em>sonsuza dek.</em>",
     "hero.sub":"Bebeğinin ilk görüntüsünü, kristalin içinde sonsuza dek parlayan bir esere dönüştürüyoruz.",
     "hero.cta":"İletişime geç","hero.scroll":"Hikayeyi keşfet","hero.caption":"el yapımı kristal anı",
-    "what.eyebrow":"Kristal Anı","what.title":"Onunla ilk tanışmanı, ölümsüzleştirdik.",
-    "what.body":"Ultrason görüntün, üç boyutlu bir esere dönüşüp kristal camın içine lazerle kazınır. Elinde tutabileceğin, ışıkta parlayan, her açıdan bakılabilen gerçek bir anı.",
-    "how.eyebrow":"Süreç","how.title":"Üç adımda, o an elinde.",
-    "how.s1t":"Ultrason görüntünü paylaş","how.s1d":"Görüntünü bize ilet, gerisini biz düşünelim.",
-    "how.s2t":"3D'ye dönüştürelim","how.s2d":"Görüntünü uzman dokunuşuyla üç boyutlu hâle getiriyoruz.",
-    "how.s3t":"Kristale kazıyıp, adresine ulaştıralım","how.s3d":"Lazerle kristal cama işliyor, özenle paketleyip sana gönderiyoruz.",
-    "why.eyebrow":"Değer","why.title":"Fotoğraf solar. Bu an kalır.",
+    "what.eyebrow":"Kristal Anı","what.title":"Onunla ilk tanışm<span class=\"an\">anı</span>, ölümsüzleştirdik.",
+    "what.body":"Ultrason görüntün, üç boyutlu olarak kristal camın içine lazerle kazınır. Elinde tutabileceğin, ışıkta parlayan, her açıdan bakılabilen gerçek bir anı.",
+    "how.eyebrow":"Süreç","how.title":"Üç adımda, o <span class=\"an\">an</span> elinde.",
+    "how.s1t":"Ultrason görüntünü paylaş.","how.s1n":"Hekiminizden <b>.dcm</b> ya da <b>.stl</b> formatında görüntünüzü talep etmelisiniz.","how.s1d":"Görüntünü bize ilet, gerisini biz düşünelim.",
+    "how.s2t":"3D bir model haline getirelim.","how.s2d":"Görüntünü uzman dokunuşuyla üç boyutlu hâle getiriyoruz.",
+    "how.s3t":"Kristalin içine kazıyıp, adresine ulaştıralım.","how.s3d":"Lazerle kristal cama işliyor, özenle paketleyip sana gönderiyoruz.",
+    "why.eyebrow":"Değer","why.title":"Fotoğraf solar. Bu <span class=\"an\">an</span> kalır.",
     "why.f1t":"Kalıcı","why.f1d":"Yıllar geçse de ilk günkü netlik.",
     "why.f2t":"Estetik","why.f2d":"Evinin en özel köşesinde gururla sergileyebileceğin bir tasarım.",
     "why.f3t":"El işçiliği","why.f3d":"Her parça özenle, tek tek hazırlanır.",
-    "pack.eyebrow":"Paketler","pack.title":"Peki sen bu anı kiminle paylaşacaksın?","pack.imgsoon":"Görsel yakında",
+    "pack.eyebrow":"Paketler","pack.title":"Peki sen bu <span class=\"an\">anı</span> kiminle paylaşacaksın?","pack.imgsoon":"Görsel yakında",
     "pack.c1c":"tek parça","pack.c1who":"Anne için","pack.c1n":"Anneye Özel","pack.c1d":"Bu an, önce senin.","pack.c1long":"Hamileliğinin o en özel anını, yalnızca senin için hazırladığımız imza parçasıyla ölümsüzleştir. En gösterişli kristal, özenli sunumuyla.",
     "pack.c2c":"~5 parça","pack.c2who":"Aile için","pack.c2n":"Büyük Aile","pack.c2d":"Bütün aile bebeğinizle ilk kez tanışıyor.","pack.c2long":"Anneanne, babaanne, dedeler... İlk torun heyecanını tüm aileye aynı anda yaşatın. Her biri ayrı kutusunda, isteğe bağlı isim ve tarih kazımasıyla.",
     "pack.c3c":"mini · ~20–50","pack.c3who":"Misafirler için","pack.c3n":"Sürpriz Parti","pack.c3d":"Herkes o anın bir parçasıyla evine dönsün.","pack.c3long":"Cinsiyet partisi ya da baby shower'da dağıtmak için zarif mini kristaller. Kutlamanın anısı, her davetlinin elinde kalsın.",
@@ -742,7 +746,7 @@ const i18n = {
     "docform.city":"Şehir","docform.cityPh":"Şehir","docform.contact":"İletişim","docform.contactPh":"Telefon veya e-posta",
     "docform.message":"Mesajınız (opsiyonel)","docform.messagePh":"Eklemek istedikleriniz...","docform.kvkk":"Kişisel verilerimin işlenmesini kabul ediyorum.",
     "docform.submit":"Gönder","docform.success":"Teşekkürler! En kısa sürede sizinle iletişime geçeceğiz. 🤍",
-    "contact.eyebrow":"İletişim","contact.title":"Ultrason görüntünü gönder, o anı ölümsüzleştirelim.",
+    "contact.eyebrow":"İletişim","contact.title":"Ultrason görüntünü gönder, o <span class=\"an\">anı</span> ölümsüzleştirelim.",
     "contact.text":"Hangi paketi düşündüğünü yaz, birlikte planlayalım. Sana en kısa sürede dönüş yapıyoruz.",
     "contact.wa":"WhatsApp'tan yaz","contact.call":"Bizi Arayın","contact.or":"veya formu doldur",
     "form.name":"Adın","form.namePh":"Adın soyadın","form.contact":"İletişim","form.contactPh":"E-posta veya telefon",
@@ -757,17 +761,17 @@ const i18n = {
     "hero.eyebrow":"3D ultrasound keepsake in crystal glass","hero.title":"Your first moment,<br><em>forever.</em>",
     "hero.sub":"We turn your baby's first image into a work of art that glows forever inside crystal.",
     "hero.cta":"Get in touch","hero.scroll":"Discover the story","hero.caption":"handcrafted crystal keepsake",
-    "what.eyebrow":"Crystal Keepsake","what.title":"We immortalized your first meeting.",
+    "what.eyebrow":"Crystal Keepsake","what.title":"We immortalized your first <span class=\"an\">moment</span> together.",
     "what.body":"Your ultrasound image becomes a three-dimensional form, laser-engraved inside crystal glass. A real keepsake you can hold, that glows in the light and can be viewed from every angle.",
-    "how.eyebrow":"The Process","how.title":"Three steps to hold the moment.",
-    "how.s1t":"Share your ultrasound image","how.s1d":"Send us your image and leave the rest to us.",
+    "how.eyebrow":"The Process","how.title":"Three steps to hold the <span class=\"an\">moment.</span>",
+    "how.s1t":"Share your ultrasound image","how.s1n":"Ask your doctor for the image in <b>.dcm</b> or <b>.stl</b> format.","how.s1d":"Send us your image and leave the rest to us.",
     "how.s2t":"We craft it in 3D","how.s2d":"We turn your image into a three-dimensional form with an expert touch.",
     "how.s3t":"Engraved & delivered to your door","how.s3d":"We laser-engrave it into crystal, then carefully package and ship it to you.",
-    "why.eyebrow":"The Value","why.title":"Photos fade. This moment stays.",
+    "why.eyebrow":"The Value","why.title":"Photos fade. This <span class=\"an\">moment</span> stays.",
     "why.f1t":"Lasting","why.f1d":"The same clarity, year after year.",
     "why.f2t":"Aesthetic","why.f2d":"A design you'll proudly display in the finest corner of your home.",
     "why.f3t":"Handcrafted","why.f3d":"Each piece is crafted, one by one, with care.",
-    "pack.eyebrow":"Packages","pack.title":"So, who will you share this moment with?","pack.imgsoon":"Image coming soon",
+    "pack.eyebrow":"Packages","pack.title":"So, who will you share this <span class=\"an\">moment</span> with?","pack.imgsoon":"Image coming soon",
     "pack.c1c":"single piece","pack.c1who":"For Mom","pack.c1n":"Just for Mom","pack.c1d":"This moment is yours first.","pack.c1long":"Immortalize the most special moment of your pregnancy with a signature piece made just for you — our most striking crystal, beautifully presented.",
     "pack.c2c":"~5 pieces","pack.c2who":"For the family","pack.c2n":"The Whole Family","pack.c2d":"The whole family meets your baby at once.","pack.c2long":"Grandmothers, grandfathers... let the whole family share the joy of the first grandchild all at once. Each in its own box, with optional name and date engraving.",
     "pack.c3c":"mini · ~20–50","pack.c3who":"For guests","pack.c3n":"The Party","pack.c3d":"Every guest goes home with a piece of the moment.","pack.c3long":"Elegant mini crystals to hand out at your gender reveal or baby shower. Let everyone keep a piece of the celebration.",
@@ -792,7 +796,7 @@ const i18n = {
     "docform.city":"City","docform.cityPh":"City","docform.contact":"Contact","docform.contactPh":"Phone or email",
     "docform.message":"Your message (optional)","docform.messagePh":"Anything you'd like to add...","docform.kvkk":"I consent to the processing of my personal data.",
     "docform.submit":"Send","docform.success":"Thank you! We'll get in touch with you shortly. 🤍",
-    "contact.eyebrow":"Contact","contact.title":"Send your ultrasound, let's immortalize the moment.",
+    "contact.eyebrow":"Contact","contact.title":"Send your ultrasound, let's immortalize the <span class=\"an\">moment.</span>",
     "contact.text":"Tell us which package you have in mind and we'll plan it together. We'll get back to you shortly.",
     "contact.wa":"Message on WhatsApp","contact.call":"Call us","contact.or":"or fill the form",
     "form.name":"Your name","form.namePh":"Your full name","form.contact":"Contact","form.contactPh":"Email or phone",
@@ -804,7 +808,7 @@ const i18n = {
   }
 };
 
-let lang = "tr";
+let lang = "en";
 function applyLang(l){
   lang = l;
   document.documentElement.lang = l;
@@ -821,9 +825,12 @@ function applyLang(l){
     if(i18n[l][k]!==undefined) el.setAttribute("placeholder", i18n[l][k]);
   });
   document.getElementById("langBtn").textContent = l==="tr" ? "EN" : "TR";
+  try{ localStorage.setItem("nm_lang", l); }catch(e){}
 }
 document.getElementById("langBtn").addEventListener("click",()=>applyLang(lang==="tr"?"en":"tr"));
-applyLang("tr");
+let savedLang;
+try{ savedLang = localStorage.getItem("nm_lang"); }catch(e){}
+applyLang(savedLang==="tr"||savedLang==="en" ? savedLang : "en");
 
 // header scroll
 const header = document.getElementById("header");
