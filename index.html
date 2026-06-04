@@ -79,18 +79,21 @@
   .brand{font-family:var(--display);font-weight:700;font-size:1.55rem;letter-spacing:-.3px;color:var(--cream);text-decoration:none;display:flex;align-items:center;gap:.6rem;white-space:nowrap}
   .brand .dot{width:7px;height:7px;border-radius:50%;background:var(--gold);box-shadow:0 0 12px var(--gold)}
   .brand-emblem{width:24px;height:26px;flex:none;fill:var(--gold);filter:drop-shadow(0 0 5px rgba(216,180,134,.45))}
+  .brand-m{color:var(--gold-soft)}
   .nav-links{display:flex;align-items:center;gap:2.5rem;list-style:none}
   .nav-links a{color:var(--cream);text-decoration:none;font-size:1rem;font-weight:500;letter-spacing:.01em;transition:color .3s;position:relative}
   .nav-links a:hover{color:var(--gold-soft)}
   .nav-links a::after{content:"";position:absolute;left:0;bottom:-6px;width:0;height:1px;background:var(--gold);transition:width .3s}
   .nav-links a:hover::after{width:100%}
   .nav-right{display:flex;align-items:center;gap:1.3rem}
-  .lang{background:none;border:1px solid var(--line);color:var(--cream);font-family:var(--body);font-weight:500;
-    font-size:.84rem;letter-spacing:.12em;padding:.55rem .9rem;border-radius:40px;cursor:pointer;transition:.3s}
+  .lang{display:inline-flex;align-items:center;gap:.5rem;background:none;border:1px solid var(--line);color:var(--cream);font-family:var(--body);font-weight:500;
+    font-size:.84rem;letter-spacing:.01em;padding:.45rem .85rem .45rem .55rem;border-radius:40px;cursor:pointer;transition:.3s;white-space:nowrap}
   .lang:hover{border-color:var(--gold);color:var(--gold)}
-  .nav-wa{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:50%;
-    border:1px solid var(--line);color:var(--gold);transition:.3s}
-  .nav-wa:hover{border-color:var(--gold);background:rgba(216,180,134,.10);transform:translateY(-1px)}
+  .lang svg{height:15px;width:auto;border-radius:2px;display:block;flex-shrink:0;box-shadow:0 0 0 1px rgba(255,255,255,.08)}
+  .nav-wa{display:inline-flex;align-items:center;gap:.5rem;height:40px;padding:0 1rem 0 .8rem;border-radius:40px;
+    border:1px solid var(--line);color:var(--cream);text-decoration:none;font-family:var(--body);font-weight:500;font-size:.84rem;letter-spacing:.01em;transition:.3s}
+  .nav-wa svg{color:var(--gold);flex-shrink:0}
+  .nav-wa:hover{border-color:var(--gold);background:rgba(216,180,134,.10);color:var(--gold);transform:translateY(-1px)}
   .burger{display:none;background:none;border:none;cursor:pointer;width:30px;height:22px;position:relative}
   .burger span{position:absolute;left:0;width:100%;height:1.5px;background:var(--cream);transition:.3s}
   .burger span:nth-child(1){top:0}.burger span:nth-child(2){top:10px}.burger span:nth-child(3){top:20px}
@@ -101,7 +104,7 @@
     font-family:var(--body);font-weight:500;font-size:.92rem;letter-spacing:.02em;
     padding:1rem 2rem;border-radius:50px;transition:.35s ease;border:1px solid transparent;background:none;
   }
-  .btn-gold{background:linear-gradient(135deg,var(--gold-soft),var(--gold-deep));color:#241a10;box-shadow:0 10px 34px rgba(216,180,134,.22)}
+  .btn-gold{background:linear-gradient(135deg,var(--gold-soft),var(--gold-deep));color:#1c1306;font-weight:700;letter-spacing:.01em;box-shadow:0 10px 34px rgba(216,180,134,.22)}
   .btn-gold:hover{transform:translateY(-2px);box-shadow:0 16px 44px rgba(216,180,134,.34)}
   .btn-ghost{border-color:var(--line);color:var(--cream)}
   .btn-ghost:hover{border-color:var(--gold);color:var(--gold)}
@@ -129,7 +132,8 @@
   @media (prefers-reduced-motion: reduce){.hero-embryo svg{animation:none}}
   .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:40px;align-items:center;width:100%}
   .hero-eyebrow{margin-bottom:1.6rem}
-  .hero h1{font-size:clamp(3rem,8vw,6rem);color:var(--cream);font-weight:700}
+  .hero h1{font-size:clamp(2.8rem,6.4vw,5rem);color:var(--cream);font-weight:700}
+  .hero h1 .nw{white-space:nowrap}
   .hero h1 em{font-style:normal;font-weight:700;color:var(--gold-soft)}
   .hero-sub{margin:1.8rem 0 2.4rem;color:var(--muted);font-size:1.15rem;max-width:46ch}
   .hero-cta{display:flex;gap:1rem;flex-wrap:wrap;align-items:center}
@@ -169,6 +173,7 @@
 
   /* Generic section spacing */
   .sec{padding:120px 0}
+  section[id],[id].doctors{scroll-margin-top:100px}
   .sec-head{max-width:720px;margin-bottom:64px}
   .sec-head.center{margin-left:auto;margin-right:auto;text-align:center}
   .sec-head.center .eyebrow::before{display:none}
@@ -234,8 +239,8 @@
   .pack-meta{display:flex;align-items:center;gap:.8rem;margin-bottom:1rem}
   .pack .count{font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);font-weight:700}
   .pack .who{font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted-2);font-weight:600;padding-left:.8rem;border-left:1px solid var(--line)}
-  .pack h3{font-size:2.1rem;color:var(--cream);margin:0 0 .7rem;line-height:1.04}
-  .pack .tagline{color:var(--gold-soft);font-family:var(--display);font-weight:600;font-size:1.16rem;margin-bottom:1rem;line-height:1.3}
+  .pack h3{font-size:2.1rem;font-style:italic;color:var(--gold);margin:0 0 .7rem;line-height:1.04}
+  .pack .tagline{color:var(--cream);font-family:var(--display);font-weight:600;font-size:1.16rem;margin-bottom:1rem;line-height:1.3}
   .pack .desc{color:var(--muted);font-size:1rem;line-height:1.65;margin-bottom:1.6rem}
   .pack .more{margin-top:auto;color:var(--gold);font-size:.9rem;font-weight:600;letter-spacing:.02em;display:inline-flex;align-items:center;gap:.5rem;transition:gap .35s}
   .pack:hover .more{gap:.95rem}
@@ -321,12 +326,21 @@
   footer{border-top:1px solid var(--line-soft);padding:72px 0 40px;margin-top:40px;position:relative;z-index:2}
   .foot-grid{display:flex;justify-content:space-between;gap:40px;flex-wrap:wrap;align-items:flex-start}
   .foot-brand .brand{margin-bottom:1rem}
-  .foot-brand p{color:var(--muted);max-width:30ch;font-size:.95rem}
+  .foot-brand p{color:var(--muted);max-width:34ch;font-size:.95rem}
+  .foot-brand p em{font-style:normal;color:var(--gold-soft)}
+  .foot-brand p .nw{white-space:nowrap}
   .foot-cols{display:flex;gap:72px;flex-wrap:wrap}
   .foot-col h4{font-size:.74rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:1.1rem;font-weight:600;font-family:var(--body)}
   .foot-col a{display:block;color:var(--muted);text-decoration:none;font-size:.92rem;margin-bottom:.7rem;transition:.3s}
   .foot-col a:hover{color:var(--cream)}
-  .foot-bottom{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-top:56px;padding-top:28px;border-top:1px solid var(--line-soft);color:var(--muted-2);font-size:.82rem}
+  .foot-bottom{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;margin-top:56px;padding-top:28px;border-top:1px solid var(--line-soft);color:var(--muted-2);font-size:.82rem}
+  .foot-contact{margin-top:20px;display:flex;flex-direction:column;gap:14px;align-items:flex-start}
+  .foot-mail{color:var(--gold-soft);text-decoration:none;font-size:.95rem;border-bottom:1px solid var(--line);transition:.3s}
+  .foot-mail:hover{color:var(--gold)}
+  .foot-btns{display:grid;grid-template-columns:1fr 1fr;gap:10px;width:100%;max-width:390px}
+  .foot-btn{justify-content:center;white-space:nowrap;padding:.74rem .8rem;font-size:.82rem;border-radius:40px}
+  .foot-made{display:inline-flex;align-items:center;gap:.4rem}
+  .foot-heart{fill:var(--gold);flex:none;filter:drop-shadow(0 0 4px rgba(216,180,134,.4))}
 
   .reveal{opacity:0;transform:translateY(34px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1)}
   .reveal.visible{opacity:1;transform:none}
@@ -348,7 +362,8 @@
     .brand{font-size:1.2rem;gap:.45rem}
     .brand-emblem{width:20px;height:22px}
     .nav-right{gap:.7rem}
-    .nav-wa{width:36px;height:36px}
+    .nav-wa{width:36px;height:36px;padding:0;justify-content:center;gap:0}
+    .nav-wa span{display:none}
     .lang{font-size:.78rem;padding:.45rem .7rem}
     input,select,textarea{font-size:16px}
     .nav-links{position:fixed;inset:72px 0 auto 0;background:rgba(12,10,9,.97);backdrop-filter:blur(14px);
@@ -362,7 +377,7 @@
     .packages{grid-template-columns:1fr}
     .doctors-inner{padding:44px 26px}
     form{padding:28px}
-    .hero h1{font-size:clamp(2.6rem,13vw,4rem)}
+    .hero h1{font-size:clamp(2.2rem,10.5vw,3.6rem)}
   }
 </style>
 </head>
@@ -386,7 +401,7 @@
 
 <header id="header">
   <div class="wrap nav">
-    <a href="#" class="brand"><svg class="brand-emblem" viewBox="0 0 86 92" aria-hidden="true"><circle cx="48" cy="24" r="15"/><path d="M37 35 C20 42 16 64 31 74 C44 83 65 78 69 61 C72 49 64 41 53 43 C60 48 60 57 53 61 C44 66 36 59 37 49 Z"/></svg>Nest Moment</a>
+    <a href="#" class="brand"><svg class="brand-emblem" viewBox="0 0 86 92" aria-hidden="true"><circle cx="48" cy="24" r="15"/><path d="M37 35 C20 42 16 64 31 74 C44 83 65 78 69 61 C72 49 64 41 53 43 C60 48 60 57 53 61 C44 66 36 59 37 49 Z"/></svg>Nest <span class="brand-m">Moment</span></a>
     <ul class="nav-links" id="navLinks">
       <li><a href="#how" data-i18n="nav.how">Nasıl Çalışır</a></li>
       <li><a href="#packages" data-i18n="nav.packages">Paketler</a></li>
@@ -396,8 +411,9 @@
     <div class="nav-right">
       <a href="https://wa.me/905317941915" target="_blank" rel="noopener" class="nav-wa" aria-label="WhatsApp'tan yaz">
         <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20" aria-hidden="true"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.945C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 018.413 3.488 11.824 11.824 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 001.51 5.26l-.999 3.648 3.978-1.039zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+        <span>WhatsApp</span>
       </a>
-      <button class="lang" id="langBtn">TR</button>
+      <button class="lang" id="langBtn"><svg viewBox="0 0 60 40" aria-hidden="true"><clipPath id="fl-tr"><rect width="60" height="40" rx="3"/></clipPath><g clip-path="url(#fl-tr)"><rect width="60" height="40" fill="#E30A17"/><circle cx="25" cy="20" r="9" fill="#fff"/><circle cx="29" cy="20" r="7.2" fill="#E30A17"/><polygon fill="#fff" points="45.2,20 41.7,21.23 41.61,24.95 39.35,22 35.79,23.06 37.9,20 35.79,16.94 39.35,18 41.61,15.05 41.7,18.77"/></g></svg><span>Türkçe</span></button>
       <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
     </div>
   </div>
@@ -416,7 +432,7 @@
   <div class="wrap hero-grid">
     <div class="hero-fade">
       <span class="eyebrow hero-eyebrow" data-i18n="hero.eyebrow">Kristal cam içinde 3D ultrason anısı</span>
-      <h1 data-i18n-html="hero.title">O ilk an,<br><em>sonsuza dek.</em></h1>
+      <h1 data-i18n-html="hero.title"><span class="nw">İlk <em>yuva</em>sındaki,</span><br>o ilk <em>an</em>.<br>Sonsuza Dek.</h1>
       <p class="hero-sub" data-i18n="hero.sub">Bebeğinin ilk görüntüsünü, kristalin içinde sonsuza dek parlayan bir esere dönüştürüyoruz.</p>
       <div class="hero-cta">
         <a href="#what" class="btn btn-gold" data-i18n="hero.scroll">Hikayeyi keşfet</a>
@@ -463,7 +479,7 @@
       <div class="step reveal">
         <div class="step-img"><img src="images/step-2.jpeg" alt="Görüntünün 3D'ye dönüştürülmesi"></div>
         <div class="num">02</div>
-        <h3 data-i18n="how.s2t">3D bir model haline getirelim.</h3>
+        <h3 data-i18n="how.s2t">Ultrason görüntüsünden 3D Model çıkartalım.</h3>
       </div>
       <div class="step reveal">
         <div class="step-img"><img src="images/step-3.jpeg" alt="Kutusunda kristal anı"></div>
@@ -509,7 +525,7 @@
       <h2 class="section-title" data-i18n-html="pack.title">Peki sen bu <span class="an">anı</span> kiminle paylaşacaksın?</h2>
     </div>
     <div class="packages">
-      <a href="#contact" class="pack reveal">
+      <a href="paketler/anneye-ozel.html" class="pack reveal">
         <div class="pack-img">
           <img class="pack-photo" src="images/paket-1.jpeg" alt="Anneye Özel paketi">
         </div>
@@ -524,7 +540,7 @@
           <span class="more" data-i18n="pack.more">Paket detaylarını incele →</span>
         </div>
       </a>
-      <a href="#contact" class="pack reveal">
+      <a href="paketler/buyuk-aile.html" class="pack reveal">
         <div class="pack-img">
           <img class="pack-photo" src="images/paket2.jpeg" alt="Büyük Aile paketi">
         </div>
@@ -539,7 +555,7 @@
           <span class="more" data-i18n="pack.more">Paket detaylarını incele →</span>
         </div>
       </a>
-      <a href="#contact" class="pack reveal">
+      <a href="paketler/surpriz-parti.html" class="pack reveal">
         <div class="pack-img">
           <img class="pack-photo" src="images/paket3.jpeg" alt="Sürpriz Parti paketi">
         </div>
@@ -554,7 +570,7 @@
           <span class="more" data-i18n="pack.more">Paket detaylarını incele →</span>
         </div>
       </a>
-      <a href="#contact" class="pack reveal">
+      <a href="paketler/kendi-anini-tasarla.html" class="pack reveal">
         <div class="pack-img">
           <img class="pack-photo" src="images/paket-4.jpeg" alt="Kendi Anını Tasarla paketi">
         </div>
@@ -583,7 +599,7 @@
     <div class="faq reveal">
       <details>
         <summary><span data-i18n="faq.q1">Nasıl bir ultrason görüntüsü göndermeliyim?</span><span class="pm"></span></summary>
-        <div class="faq-a" data-i18n="faq.a1">Hem 2D hem 3D/4D ultrason görüntüleri kullanılabilir. En iyi sonuç, bebeğin yüz hatlarının ya da profilinin net göründüğü görüntülerden çıkar. Elindeki çıktının telefonla çekilmiş net bir fotoğrafını ya da dijital dosyasını gönderebilirsin. Hangisinin en uygun olduğundan emin değilsen birkaç tane gönder; senin için en iyisini birlikte seçelim.</div>
+        <div class="faq-a" data-i18n="faq.a1">3D formatta, ".dcm" ya da ".stl" uzantılı ultrason görüntüleri kullanılabilir. Hekiminizden bu formatlardaki çıktıları rica etmelisiniz. En iyi sonuç, bebeğin yüz hatlarının ya da profilinin net göründüğü görüntülerden çıkar. Hekiminiz en uygun görüntüyü seçecektir.</div>
       </details>
       <details>
         <summary><span data-i18n="faq.q2">Gebeliğin hangi haftası en uygun?</span><span class="pm"></span></summary>
@@ -680,8 +696,15 @@
   <div class="wrap">
     <div class="foot-grid">
       <div class="foot-brand">
-        <a href="#" class="brand"><svg class="brand-emblem" viewBox="0 0 86 92" aria-hidden="true"><circle cx="48" cy="24" r="15"/><path d="M37 35 C20 42 16 64 31 74 C44 83 65 78 69 61 C72 49 64 41 53 43 C60 48 60 57 53 61 C44 66 36 59 37 49 Z"/></svg>Nest Moment</a>
-        <p data-i18n="footer.tagline">O ilk an, sonsuza dek.</p>
+        <a href="#" class="brand"><svg class="brand-emblem" viewBox="0 0 86 92" aria-hidden="true"><circle cx="48" cy="24" r="15"/><path d="M37 35 C20 42 16 64 31 74 C44 83 65 78 69 61 C72 49 64 41 53 43 C60 48 60 57 53 61 C44 66 36 59 37 49 Z"/></svg>Nest <span class="brand-m">Moment</span></a>
+        <p data-i18n-html="footer.tagline"><span class="nw">İlk <em>yuva</em>sındaki,</span> o ilk <em>an</em>. Sonsuza Dek.</p>
+        <div class="foot-contact">
+          <a href="mailto:hello@nestmoment.com" class="foot-mail">hello@nestmoment.com</a>
+          <div class="foot-btns">
+            <a href="https://wa.me/905317941915" target="_blank" rel="noopener" class="btn wa foot-btn"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.945C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 018.413 3.488 11.824 11.824 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 001.51 5.26l-.999 3.648 3.978-1.039zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg><span data-i18n="contact.wa">WhatsApp'tan yaz</span></a>
+            <a href="tel:+905317941915" class="btn btn-call foot-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span data-i18n="contact.call">Bizi Arayın</span></a>
+          </div>
+        </div>
       </div>
       <div class="foot-cols">
         <div class="foot-col">
@@ -699,7 +722,8 @@
     </div>
     <div class="foot-bottom">
       <span data-i18n="footer.rights">© 2026 Nest Moment. Tüm hakları saklıdır.</span>
-      <span data-i18n="footer.made">Sevgiyle hazırlandı.</span>
+      <span class="foot-made"><span data-i18n="footer.made">Sevgiyle hazırlandı</span><svg class="foot-heart" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></span>
+      <button class="lang" id="langBtnFoot" aria-label="Language"></button>
     </div>
   </div>
 </footer>
@@ -708,20 +732,20 @@
 const i18n = {
   tr:{
     "nav.how":"Hikayemiz","nav.packages":"Paketler","nav.contact":"İletişim","nav.doctors":"Kadın Doğum Uzmanları İçin",
-    "hero.eyebrow":"Kristal cam içinde 3D ultrason anısı","hero.title":"O ilk an,<br><em>sonsuza dek.</em>",
+    "hero.eyebrow":"Kristal cam içinde 3D ultrason anısı","hero.title":"<span class=\"nw\">İlk <em>yuva</em>sındaki,</span><br>o ilk <em>an</em>.<br>Sonsuza Dek.",
     "hero.sub":"Bebeğinin ilk görüntüsünü, kristalin içinde sonsuza dek parlayan bir esere dönüştürüyoruz.",
     "hero.cta":"İletişime geç","hero.scroll":"Hikayeyi keşfet","hero.caption":"el yapımı kristal anı",
     "what.eyebrow":"Kristal Anı","what.title":"Onunla ilk tanışm<span class=\"an\">anı</span>, ölümsüzleştirdik.",
     "what.body":"Ultrason görüntün, üç boyutlu olarak kristal camın içine lazerle kazınır. Elinde tutabileceğin, ışıkta parlayan, her açıdan bakılabilen gerçek bir anı.",
     "how.eyebrow":"Süreç","how.title":"Üç adımda, o <span class=\"an\">an</span> elinde.",
     "how.s1t":"Ultrason görüntünü paylaş.","how.s1n":"Hekiminizden <b>.dcm</b> ya da <b>.stl</b> formatında görüntünüzü talep etmelisiniz.","how.s1d":"Görüntünü bize ilet, gerisini biz düşünelim.",
-    "how.s2t":"3D bir model haline getirelim.","how.s2d":"Görüntünü uzman dokunuşuyla üç boyutlu hâle getiriyoruz.",
+    "how.s2t":"Ultrason görüntüsünden 3D Model çıkartalım.","how.s2d":"Görüntünü uzman dokunuşuyla üç boyutlu hâle getiriyoruz.",
     "how.s3t":"Kristalin içine kazıyıp, adresine ulaştıralım.","how.s3d":"Lazerle kristal cama işliyor, özenle paketleyip sana gönderiyoruz.",
     "why.eyebrow":"Değer","why.title":"Fotoğraf solar. Bu <span class=\"an\">an</span> kalır.",
     "why.f1t":"Kalıcı","why.f1d":"Yıllar geçse de ilk günkü netlik.",
     "why.f2t":"Estetik","why.f2d":"Evinin en özel köşesinde gururla sergileyebileceğin bir tasarım.",
     "why.f3t":"El işçiliği","why.f3d":"Her parça özenle, tek tek hazırlanır.",
-    "pack.eyebrow":"Paketler","pack.title":"Peki sen bu <span class=\"an\">anı</span> kiminle paylaşacaksın?","pack.imgsoon":"Görsel yakında",
+    "pack.eyebrow":"Anı Paketleri","pack.title":"Peki sen bu <span class=\"an\">anı</span> kiminle paylaşacaksın?","pack.imgsoon":"Görsel yakında",
     "pack.c1c":"tek parça","pack.c1who":"Anne için","pack.c1n":"Anneye Özel","pack.c1d":"Bu an, önce senin.","pack.c1long":"Hamileliğinin o en özel anını, yalnızca senin için hazırladığımız imza parçasıyla ölümsüzleştir. En gösterişli kristal, özenli sunumuyla.",
     "pack.c2c":"~5 parça","pack.c2who":"Aile için","pack.c2n":"Büyük Aile","pack.c2d":"Bütün aile bebeğinizle ilk kez tanışıyor.","pack.c2long":"Anneanne, babaanne, dedeler... İlk torun heyecanını tüm aileye aynı anda yaşatın. Her biri ayrı kutusunda, isteğe bağlı isim ve tarih kazımasıyla.",
     "pack.c3c":"mini · ~20–50","pack.c3who":"Misafirler için","pack.c3n":"Sürpriz Parti","pack.c3d":"Herkes o anın bir parçasıyla evine dönsün.","pack.c3long":"Cinsiyet partisi ya da baby shower'da dağıtmak için zarif mini kristaller. Kutlamanın anısı, her davetlinin elinde kalsın.",
@@ -732,7 +756,7 @@ const i18n = {
     "trust.p3":"Görüntülerin güvende ve gizli kalır.",
     "trust.quote":"\"Onu ilk elime aldığımda ağladım. Tam da o günkü gibiydi.\"","trust.quoteAuthor":"— Yakında: gerçek anne yorumları",
     "faq.eyebrow":"Sık sorulanlar","faq.title":"Aklındakileri yanıtlayalım.",
-    "faq.q1":"Nasıl bir ultrason görüntüsü göndermeliyim?","faq.a1":"Hem 2D hem 3D/4D ultrason görüntüleri kullanılabilir. En iyi sonuç, bebeğin yüz hatlarının ya da profilinin net göründüğü görüntülerden çıkar. Elindeki çıktının telefonla çekilmiş net bir fotoğrafını ya da dijital dosyasını gönderebilirsin. Hangisinin en uygun olduğundan emin değilsen birkaç tane gönder; senin için en iyisini birlikte seçelim.",
+    "faq.q1":"Nasıl bir ultrason görüntüsü göndermeliyim?","faq.a1":"3D formatta, \".dcm\" ya da \".stl\" uzantılı ultrason görüntüleri kullanılabilir. Hekiminizden bu formatlardaki çıktıları rica etmelisiniz. En iyi sonuç, bebeğin yüz hatlarının ya da profilinin net göründüğü görüntülerden çıkar. Hekiminiz en uygun görüntüyü seçecektir.",
     "faq.q2":"Gebeliğin hangi haftası en uygun?","faq.a2":"Genellikle 24.–32. haftalar arasında çekilen görüntülerde yüz hatları en belirgin olur ve en güzel sonucu verir. Ancak farklı haftalardaki görüntüler de değerlendirilebilir; emin değilsen bize danış, görüntüne bakıp dürüstçe yönlendirelim.",
     "faq.q3":"Görüntüm çok net değil, yine de olur mu?","faq.a3":"Çoğu zaman evet. Görüntünü uzman ekibimiz tek tek işleyip 3D'ye hazırlıyor; bu süreçte birçok detay belirginleşiyor. Yalnızca çok düşük kaliteli görüntülerde önce bir değerlendirme yapıp sana açık bir geri bildirim veriyoruz — beğenmeyeceğin bir sonuçla seni baş başa bırakmayız.",
     "faq.q4":"Kristale isim, tarih ya da özel bir not ekleyebilir miyim?","faq.a4":"Elbette. Bebeğin adı, doğum ya da ultrason tarihi veya sana özel kısa bir not kristale ya da kaideye işlenebilir. Ayrıca farklı boyut ve sunum seçenekleri de mevcut; detayları iletişimde birlikte belirliyoruz.",
@@ -753,25 +777,25 @@ const i18n = {
     "form.package":"İlgilendiğin paket","form.pkg0":"Henüz emin değilim","form.message":"Mesajın","form.messagePh":"Anını bizimle paylaş...",
     "form.kvkk":"Kişisel verilerimin ve görselimin sipariş sürecinde işlenmesini kabul ediyorum.","form.submit":"Gönder",
     "form.success":"Teşekkürler! En kısa sürede sana dönüş yapacağız. 🤍",
-    "footer.tagline":"O ilk an, sonsuza dek.","footer.explore":"Keşfet","footer.more":"Daha fazla","footer.privacy":"Gizlilik / KVKK",
-    "footer.rights":"© 2026 Nest Moment. Tüm hakları saklıdır.","footer.made":"Sevgiyle hazırlandı."
+    "footer.tagline":"<span class=\"nw\">İlk <em>yuva</em>sındaki,</span> o ilk <em>an</em>. Sonsuza Dek.","footer.explore":"Keşfet","footer.more":"Daha fazla","footer.privacy":"Gizlilik / KVKK",
+    "footer.rights":"© 2026 Nest Moment. Tüm hakları saklıdır.","footer.made":"Sevgiyle hazırlandı"
   },
   en:{
-    "nav.how":"Our Story","nav.packages":"Packages","nav.contact":"Contact","nav.doctors":"For OB-GYNs",
-    "hero.eyebrow":"3D ultrasound keepsake in crystal glass","hero.title":"Your first moment,<br><em>forever.</em>",
+    "nav.how":"Our Story","nav.packages":"Packages","nav.contact":"Contact","nav.doctors":"For Obstetricians",
+    "hero.eyebrow":"3D ultrasound keepsake in crystal glass","hero.title":"That first <em>moment</em>,<br>its first <em>nest</em>.<br>Forever.",
     "hero.sub":"We turn your baby's first image into a work of art that glows forever inside crystal.",
     "hero.cta":"Get in touch","hero.scroll":"Discover the story","hero.caption":"handcrafted crystal keepsake",
     "what.eyebrow":"Crystal Keepsake","what.title":"We immortalized your first <span class=\"an\">moment</span> together.",
     "what.body":"Your ultrasound image becomes a three-dimensional form, laser-engraved inside crystal glass. A real keepsake you can hold, that glows in the light and can be viewed from every angle.",
     "how.eyebrow":"The Process","how.title":"Three steps to hold the <span class=\"an\">moment.</span>",
     "how.s1t":"Share your ultrasound image","how.s1n":"Ask your doctor for the image in <b>.dcm</b> or <b>.stl</b> format.","how.s1d":"Send us your image and leave the rest to us.",
-    "how.s2t":"We craft it in 3D","how.s2d":"We turn your image into a three-dimensional form with an expert touch.",
+    "how.s2t":"We extract a 3D model from the ultrasound image.","how.s2d":"We turn your image into a three-dimensional form with an expert touch.",
     "how.s3t":"Engraved & delivered to your door","how.s3d":"We laser-engrave it into crystal, then carefully package and ship it to you.",
     "why.eyebrow":"The Value","why.title":"Photos fade. This <span class=\"an\">moment</span> stays.",
     "why.f1t":"Lasting","why.f1d":"The same clarity, year after year.",
     "why.f2t":"Aesthetic","why.f2d":"A design you'll proudly display in the finest corner of your home.",
     "why.f3t":"Handcrafted","why.f3d":"Each piece is crafted, one by one, with care.",
-    "pack.eyebrow":"Packages","pack.title":"So, who will you share this <span class=\"an\">moment</span> with?","pack.imgsoon":"Image coming soon",
+    "pack.eyebrow":"Keepsake Packages","pack.title":"So, who will you share this <span class=\"an\">moment</span> with?","pack.imgsoon":"Image coming soon",
     "pack.c1c":"single piece","pack.c1who":"For Mom","pack.c1n":"Just for Mom","pack.c1d":"This moment is yours first.","pack.c1long":"Immortalize the most special moment of your pregnancy with a signature piece made just for you — our most striking crystal, beautifully presented.",
     "pack.c2c":"~5 pieces","pack.c2who":"For the family","pack.c2n":"The Whole Family","pack.c2d":"The whole family meets your baby at once.","pack.c2long":"Grandmothers, grandfathers... let the whole family share the joy of the first grandchild all at once. Each in its own box, with optional name and date engraving.",
     "pack.c3c":"mini · ~20–50","pack.c3who":"For guests","pack.c3n":"The Party","pack.c3d":"Every guest goes home with a piece of the moment.","pack.c3long":"Elegant mini crystals to hand out at your gender reveal or baby shower. Let everyone keep a piece of the celebration.",
@@ -782,7 +806,7 @@ const i18n = {
     "trust.p3":"Your images stay private and secure.",
     "trust.quote":"\"I cried the first time I held it. It looked just like that day.\"","trust.quoteAuthor":"— Coming soon: real reviews from moms",
     "faq.eyebrow":"FAQ","faq.title":"Let's answer your questions.",
-    "faq.q1":"What kind of ultrasound image should I send?","faq.a1":"Both 2D and 3D/4D ultrasound images work. The best results come from images where your baby's facial features or profile are clearly visible. You can send a clear phone photo of your printout or a digital file. If you're not sure which works best, send a few and we'll choose the best one together.",
+    "faq.q1":"What kind of ultrasound image should I send?","faq.a1":"We work with 3D-format ultrasound images in \".dcm\" or \".stl\" file types. Please ask your doctor for the output in one of these formats. The best results come from images where your baby's facial features or profile are clearly visible. Your doctor will select the most suitable image.",
     "faq.q2":"Which week of pregnancy is best?","faq.a2":"Images taken between weeks 24 and 32 usually show facial features most clearly and give the most beautiful results. Images from other weeks can also work — if you're unsure, just ask and we'll review yours and guide you honestly.",
     "faq.q3":"My image isn't very clear — can it still work?","faq.a3":"Most of the time, yes. Our expert team processes each image and prepares it for 3D, and many details become clearer in the process. Only for very low-quality images do we review first and give you honest feedback — we won't leave you with a result you won't love.",
     "faq.q4":"Can I add a name, date or special note to the crystal?","faq.a4":"Of course. Your baby's name, the birth or ultrasound date, or a short personal note can be engraved on the crystal or its base. Different sizes and presentation options are also available; we'll decide the details together when we talk.",
@@ -790,7 +814,7 @@ const i18n = {
     "faq.q6":"How long does delivery take and how is it shipped?","faq.a6":"Production time varies with demand and the package you choose; we give you a clear date at the approval stage. We ship anywhere in Türkiye with special, sturdy packaging that protects the crystal.",
     "faq.q7":"Are my images kept private?","faq.a7":"Absolutely. The ultrasound images you send are used only for your order and are never shared with third parties. Once your order is complete, your images are permanently deleted from our system.",
     "faq.q8":"Why can't I see prices on the site?","faq.a8":"Because every order is personal: it depends on the package, quantity, size and the touches you'd like to add. That's why we give you the most accurate price one-to-one, after listening to your needs. Just reach out.",
-    "doc.title":"For OB-GYN Specialists","doc.text":"If you'd like to offer your patients this unique keepsake of their pregnancy, reach out to us for information about tailored packages.","doc.cta":"Call us",
+    "doc.title":"For Obstetricians","doc.text":"If you'd like to offer your patients this unique keepsake of their pregnancy, reach out to us for information about tailored packages.","doc.cta":"Call Us",
     "docform.title":"For OB-GYN Specialists","docform.sub":"Leave your details and we'll get in touch with you shortly.",
     "docform.name":"Full name","docform.namePh":"Your full name","docform.clinic":"Clinic / Hospital","docform.clinicPh":"Where you practice",
     "docform.city":"City","docform.cityPh":"City","docform.contact":"Contact","docform.contactPh":"Phone or email",
@@ -798,13 +822,13 @@ const i18n = {
     "docform.submit":"Send","docform.success":"Thank you! We'll get in touch with you shortly. 🤍",
     "contact.eyebrow":"Contact","contact.title":"Send your ultrasound, let's immortalize the <span class=\"an\">moment.</span>",
     "contact.text":"Tell us which package you have in mind and we'll plan it together. We'll get back to you shortly.",
-    "contact.wa":"Message on WhatsApp","contact.call":"Call us","contact.or":"or fill the form",
+    "contact.wa":"Message on WhatsApp","contact.call":"Call Us","contact.or":"or fill the form",
     "form.name":"Your name","form.namePh":"Your full name","form.contact":"Contact","form.contactPh":"Email or phone",
     "form.package":"Package you're interested in","form.pkg0":"Not sure yet","form.message":"Your message","form.messagePh":"Share your moment with us...",
     "form.kvkk":"I consent to my personal data and image being processed during the order.","form.submit":"Send",
     "form.success":"Thank you! We'll get back to you very soon. 🤍",
-    "footer.tagline":"Your first moment. Forever.","footer.explore":"Explore","footer.more":"More","footer.privacy":"Privacy",
-    "footer.rights":"© 2026 Nest Moment. All rights reserved.","footer.made":"Made with love."
+    "footer.tagline":"That first <em>moment</em>, its first <em>nest</em>. Forever.","footer.explore":"Explore","footer.more":"More","footer.privacy":"Privacy",
+    "footer.rights":"© 2026 Nest Moment. All rights reserved.","footer.made":"Made with love"
   }
 };
 
@@ -824,10 +848,17 @@ function applyLang(l){
     const k = el.getAttribute("data-i18n-ph");
     if(i18n[l][k]!==undefined) el.setAttribute("placeholder", i18n[l][k]);
   });
-  document.getElementById("langBtn").textContent = l==="tr" ? "EN" : "TR";
+  const tgt = l==="tr" ? "en" : "tr";
+  const langHTML = LANG_FLAG[tgt] + "<span>" + LANG_NAME[tgt] + "</span>";
+  document.querySelectorAll(".lang").forEach(b=>b.innerHTML = langHTML);
   try{ localStorage.setItem("nm_lang", l); }catch(e){}
 }
-document.getElementById("langBtn").addEventListener("click",()=>applyLang(lang==="tr"?"en":"tr"));
+const LANG_NAME = { en:"English", tr:"Türkçe" };
+const LANG_FLAG = {
+  en:'<svg viewBox="0 0 60 30" aria-hidden="true"><clipPath id="fl-uk"><rect width="60" height="30" rx="3"/></clipPath><g clip-path="url(#fl-uk)"><rect width="60" height="30" fill="#012169"/><path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6"/><path d="M0,0 L60,30 M60,0 L0,30" stroke="#C8102E" stroke-width="4"/><path d="M30,0 V30 M0,15 H60" stroke="#fff" stroke-width="10"/><path d="M30,0 V30 M0,15 H60" stroke="#C8102E" stroke-width="6"/></g></svg>',
+  tr:'<svg viewBox="0 0 60 40" aria-hidden="true"><clipPath id="fl-tr2"><rect width="60" height="40" rx="3"/></clipPath><g clip-path="url(#fl-tr2)"><rect width="60" height="40" fill="#E30A17"/><circle cx="25" cy="20" r="9" fill="#fff"/><circle cx="29" cy="20" r="7.2" fill="#E30A17"/><polygon fill="#fff" points="45.2,20 41.7,21.23 41.61,24.95 39.35,22 35.79,23.06 37.9,20 35.79,16.94 39.35,18 41.61,15.05 41.7,18.77"/></g></svg>'
+};
+document.querySelectorAll(".lang").forEach(b=>b.addEventListener("click",()=>applyLang(lang==="tr"?"en":"tr")));
 let savedLang;
 try{ savedLang = localStorage.getItem("nm_lang"); }catch(e){}
 applyLang(savedLang==="tr"||savedLang==="en" ? savedLang : "en");

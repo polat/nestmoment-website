@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>The Whole Family — Nest Moment</title>
+<meta name="robots" content="index, follow" />
+<link rel="icon" type="image/svg+xml" href="../images/favicon.svg" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="paket.css">
+</head>
+<body>
+<header id="header">
+  <div class="wrap nav">
+    <a href="../index.html" class="brand"><svg class="brand-emblem" viewBox="0 0 86 92" aria-hidden="true"><circle cx="48" cy="24" r="15"/><path d="M37 35 C20 42 16 64 31 74 C44 83 65 78 69 61 C72 49 64 41 53 43 C60 48 60 57 53 61 C44 66 36 59 37 49 Z"/></svg>Nest <span class="brand-m">Moment</span></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="../index.html#how" data-i18n="nav.how">Nasıl Çalışır</a></li>
+      <li><a href="../index.html#packages" class="active" data-i18n="nav.packages">Paketler</a></li>
+      <li><a href="../index.html#contact" data-i18n="nav.contact">İletişim</a></li>
+      <li><a href="../index.html#doctors" data-i18n="nav.doctors">Kadın Doğum Uzmanları İçin</a></li>
+    </ul>
+    <div class="nav-right">
+      <a href="https://wa.me/905317941915" data-wa target="_blank" rel="noopener" class="nav-wa" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20" aria-hidden="true"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.945C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 018.413 3.488 11.824 11.824 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 001.51 5.26l-.999 3.648 3.978-1.039zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg><span data-i18n="nav.wa">WhatsApp</span></a>
+      <button class="lang" id="langBtn"></button>
+      <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="p-hero">
+    <div class="p-hero-grid">
+      <div class="p-hero-text reveal">
+        <h1 data-i18n-html="p2n">The Whole Family</h1>
+        <p class="p-tagline" data-i18n="p2t">The whole family meets your baby at once.</p>
+        <div class="p-hero-story">
+          <p data-i18n="story1"></p>
+          <p data-i18n="story2"></p>
+          <p data-i18n="story3"></p>
+        </div>
+        <div class="p-hero-cta">
+          <a href="https://wa.me/905317941915" data-wa target="_blank" rel="noopener" class="btn btn-wa">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18" aria-hidden="true"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.945C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 018.413 3.488 11.824 11.824 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 001.51 5.26l-.999 3.648 3.978-1.039zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+            <span data-i18n="cta.wa">Message on WhatsApp</span>
+          </a>
+          <a href="tel:+905317941915" class="btn btn-call"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span data-i18n="cta.call">Call Us</span></a>
+        </div>
+      </div>
+      <div class="p-gallery2 reveal">
+        <div class="p-gmain"><img id="galMain" src="../images/paket2.jpeg" alt=""></div>
+        <div class="p-gthumbs" id="galThumbs"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="p-sec reveal">
+    <div class="p-two">
+      <div class="p-card">
+        <h3 data-i18n="sec.includes">What's included?</h3>
+        <ul class="p-list">
+          <li data-i18n="inc1"></li>
+          <li data-i18n="inc2"></li>
+          <li data-i18n="inc3"></li>
+          <li data-i18n="inc4"></li>
+          <li data-i18n="inc5"></li>
+        </ul>
+      </div>
+      <div class="p-who">
+        <h2 style="font-size:1.5rem" data-i18n="sec.who">Who is it for?</h2>
+        <p data-i18n="whoText"></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="p-sec p-faq reveal">
+    <h2 data-i18n="sec.faq">Frequently asked</h2>
+    <details><summary><span data-i18n="faqQ1"></span><span class="pm"></span></summary><div class="faq-a" data-i18n="faqA1"></div></details>
+    <details><summary><span data-i18n="faqQ2"></span><span class="pm"></span></summary><div class="faq-a" data-i18n="faqA2"></div></details>
+    <details><summary><span data-i18n="faqQ3"></span><span class="pm"></span></summary><div class="faq-a" data-i18n="faqA3"></div></details>
+  </section>
+
+  <section class="p-cta reveal">
+    <h2 data-i18n="cta.title">Get details for this package</h2>
+    <p data-i18n="cta.text">We share pricing and details personally via WhatsApp or phone.</p>
+    <div class="p-cta-btns">
+      <a href="https://wa.me/905317941915" data-wa target="_blank" rel="noopener" class="btn btn-wa">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18" aria-hidden="true"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.945C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 018.413 3.488 11.824 11.824 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 001.51 5.26l-.999 3.648 3.978-1.039zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+        <span data-i18n="cta.wa">Message on WhatsApp</span>
+      </a>
+      <a href="tel:+905317941915" class="btn btn-call"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span data-i18n="cta.call">Call Us</span></a>
+    </div>
+  </section>
+
+  <section class="p-other reveal">
+    <div class="p-other-head" data-i18n="other.title">Other packages</div>
+    <div class="p-other-grid">
+      <a class="p-ocard" href="anneye-ozel.html"><div class="p-ocard-img"><img src="../images/paket-1.jpeg" alt=""></div><div class="p-ocard-body"><div class="on" data-i18n-html="p1n">Just for Mom</div><div class="ot" data-i18n="p1t"></div><span class="om" data-i18n="other.more">View →</span></div></a>
+      <a class="p-ocard" href="surpriz-parti.html"><div class="p-ocard-img"><img src="../images/paket3.jpeg" alt=""></div><div class="p-ocard-body"><div class="on" data-i18n-html="p3n">The Party</div><div class="ot" data-i18n="p3t"></div><span class="om" data-i18n="other.more">View →</span></div></a>
+      <a class="p-ocard" href="kendi-anini-tasarla.html"><div class="p-ocard-img"><img src="../images/paket-4.jpeg" alt=""></div><div class="p-ocard-body"><div class="on" data-i18n-html="p4n">Design Your Own</div><div class="ot" data-i18n="p4t"></div><span class="om" data-i18n="other.more">View →</span></div></a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a href="../index.html" class="brand"><svg viewBox="0 0 86 92" aria-hidden="true"><circle cx="48" cy="24" r="15"/><path d="M37 35 C20 42 16 64 31 74 C44 83 65 78 69 61 C72 49 64 41 53 43 C60 48 60 57 53 61 C44 66 36 59 37 49 Z"/></svg>Nest <span class="brand-m">Moment</span></a>
+        <p data-i18n-html="footer.tagline">Your first moment. Forever.</p>
+        <div class="foot-contact">
+          <a href="mailto:hello@nestmoment.com" class="foot-mail">hello@nestmoment.com</a>
+          <div class="foot-btns">
+            <a href="https://wa.me/905317941915" data-wa target="_blank" rel="noopener" class="btn btn-wa foot-btn"><svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.945C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 018.413 3.488 11.824 11.824 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 001.51 5.26l-.999 3.648 3.978-1.039zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg><span data-i18n="contact.wa">Message on WhatsApp</span></a>
+            <a href="tel:+905317941915" class="btn btn-call foot-btn"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span data-i18n="contact.call">Call Us</span></a>
+          </div>
+        </div>
+      </div>
+      <div class="foot-cols">
+        <div class="foot-col">
+          <h4 data-i18n="footer.explore">Explore</h4>
+          <a href="../index.html#how" data-i18n="nav.how">Our Story</a>
+          <a href="../index.html#packages" data-i18n="nav.packages">Packages</a>
+          <a href="../index.html#contact" data-i18n="nav.contact">Contact</a>
+        </div>
+        <div class="foot-col">
+          <h4 data-i18n="footer.more">More</h4>
+          <a href="../index.html#doctors" data-i18n="nav.doctors">For Obstetricians</a>
+          <a href="../kvkk.html" data-i18n="footer.privacy">Privacy</a>
+        </div>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span data-i18n="footer.rights">© 2026 Nest Moment. All rights reserved.</span>
+      <span class="foot-made"><span data-i18n="footer.made">Made with love</span><svg class="foot-heart" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></span>
+      <button class="lang" id="langBtnFoot" aria-label="Language"></button>
+    </div>
+  </div>
+</footer>
+
+<script>
+window.PKG_GALLERY = ["../images/paket2.jpeg"];
+window.PKG_WA = {
+  tr:"Merhaba, Büyük Aile paketi hakkında bilgi almak istiyorum.",
+  en:"Hello, I'd like information about The Whole Family package."
+};
+window.PAGE_I18N = {
+  tr:{
+    "doctitle":"Büyük Aile — Nest Moment",
+    "meta.count":"~5 parça","meta.who":"Aile için",
+    "story1":"Büyük Aile, ilk torun heyecanını tüm aileye aynı anda yaşatmak için. Anneanne, babaanne, dede... O eşsiz anı, sevdiklerinin her birinin elinde ayrı bir parça olarak ölümsüzleştiriyoruz.",
+    "story2":"Yaklaşık beş kristali, aynı ultrason görüntüsünden ve birbiriyle aynı kalitede hazırlıyoruz. Her biri kendi mat siyah kaidesi ve kutusuyla; istersen üzerlerine isim ve tarih de işliyoruz.",
+    "story3":"Bir doğum, bir bayram ya da ilk tanışma anında; ailenin her ferdine aynı duyguyu armağan eden, paylaşılan bir hatıra.",
+    "inc1":"~5 adet aynı kalitede kristal",
+    "inc2":"Her kristale ayrı mat siyah kaide",
+    "inc3":"Her biri için ayrı hediye kutusu",
+    "inc4":"İsteğe bağlı isim ve tarih kazıması",
+    "inc5":"Adet ihtiyacına göre esnek planlama",
+    "whoText":"İlk torunun ya da yeni bebeğin heyecanını büyük aileyle paylaşmak isteyenler için. Anneanne, babaanne ve dedelere; aynı anı hep birlikte saklamak isteyen ailelere.",
+    "faqQ1":"Kaç parça hazırlanıyor?",
+    "faqA1":"Büyük Aile genelde yaklaşık beş parçadır; ancak adedi aile büyüklüğüne göre birlikte belirleyip artırabilir ya da azaltabiliriz.",
+    "faqQ2":"Her parçaya farklı isim yazılabilir mi?",
+    "faqA2":"Evet. Her kristale o kişiye özel bir isim, sıfat (örneğin 'Anneanne') ya da kısa bir not işleyebiliriz.",
+    "faqQ3":"Hepsi aynı görüntüden mi oluşturuluyor?",
+    "faqA3":"Evet, tüm parçalar gönderdiğin aynı ultrason görüntüsünden, aynı kalite ve pozda hazırlanır."
+  },
+  en:{
+    "doctitle":"The Whole Family — Nest Moment",
+    "meta.count":"~5 pieces","meta.who":"For the family",
+    "story1":"The Whole Family is for sharing the joy of the first grandchild with everyone at once. Grandmothers, grandfathers... we immortalize that unique moment as a separate piece in the hands of each of your loved ones.",
+    "story2":"We prepare around five crystals from the same ultrasound, each to the same quality. Every one comes with its own matte-black base and box; we can engrave a name and date on them too if you wish.",
+    "story3":"At a birth, a holiday, or a first meeting — a shared keepsake that gives every member of the family the very same feeling.",
+    "inc1":"~5 crystals of the same quality",
+    "inc2":"A separate matte-black base for each",
+    "inc3":"A separate gift box for each",
+    "inc4":"Optional name and date engraving",
+    "inc5":"Flexible planning based on the count you need",
+    "whoText":"For families who want to share the excitement of a first grandchild or new baby with everyone. For grandmothers, grandfathers, and families who want to keep the same moment together.",
+    "faqQ1":"How many pieces are made?",
+    "faqA1":"The Whole Family is usually around five pieces; we can set the exact count together based on your family's size — more or fewer.",
+    "faqQ2":"Can each piece have a different name?",
+    "faqA2":"Yes. We can engrave a name, a title (e.g. 'Grandma') or a short note unique to each person on every crystal.",
+    "faqQ3":"Are they all made from the same image?",
+    "faqA3":"Yes, all pieces are made from the same ultrasound you send, in the same quality and pose."
+  }
+};
+</script>
+<script src="paket.js"></script>
+</body>
+</html>
