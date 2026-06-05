@@ -133,7 +133,7 @@
       write(K_USERS,users); return delay();
     },
     createOrder:function(data,files){
-      var me=this.currentUser();
+      var me=DataLayer.currentUser();
       if(!me) return Promise.reject(new Error('Oturum bulunamadı.'));
       if(!files || !files.length) return Promise.reject(new Error('En az bir görsel gerekli.'));
       return Promise.all(Array.prototype.map.call(files, fileToScaledDataUrl)).then(function(urls){
