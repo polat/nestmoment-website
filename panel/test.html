@@ -54,6 +54,34 @@ async function reset(){localStorage.clear();DataLayer._reseed();}
   const after=await DataLayer.signIn('test@ornek.com','x');
   ok('onaylanınca giriş yapabilir', after && after.status==='active');
 
+  // --- Task 4: createOrder + updateOrderStatus ---
+  await reset();
+  await DataLayer.signIn('ayse@ornek.com','doktor123');
+  // küçük gerçek PNG File üret (1x1) — küçültme yolunu tetikler
+  function tinyFile(name){
+    const c=document.createElement('canvas');c.width=4;c.height=4;
+    const b=atob(c.toDataURL('image/png').split(',')[1]);
+    const arr=new Uint8Array(b.length);for(let i=0;i<b.length;i++)arr[i]=b.charCodeAt(i);
+    return new File([arr],name,{type:'image/png'});
+  }
+  const created=await DataLayer.createOrder({anneAdi:'Test Anne',gebelikHaftasi:30},
+                                            [tinyFile('a.png'),tinyFile('b.png')]);
+  ok('createOrder id verir', !!created.id);
+  ok('doctorId/doctorName giriş yapan doktordan gelir', created.doctorName==='Dr. Ayşe Yılmaz');
+  ok('status new', created.status==='new');
+  ok('2 görsel data URL olarak saklandı',
+     created.images.length===2 && created.images.every(im=>/^data:image\//.test(im.dataUrl)));
+  const mine=await DataLayer.listOrders({doctorId:created.doctorId});
+  ok('yeni sipariş listenin başında', mine[0].id===created.id);
+
+  await DataLayer.updateOrderStatus(created.id,'in_production');
+  const upd=await DataLayer.getOrder(created.id);
+  ok('durum güncellendi', upd.status==='in_production');
+
+  let noFileErr=null;
+  try{ await DataLayer.createOrder({anneAdi:'X',gebelikHaftasi:20},[]); }catch(e){ noFileErr=e; }
+  ok('görselsiz sipariş reddedilir', !!noFileErr);
+
   log(pass+fail-pass? '': '', '\n'+pass+' geçti, '+fail+' kaldı');
 })();
 </script></body></html>

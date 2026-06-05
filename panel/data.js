@@ -65,6 +65,28 @@
   function sortNewest(arr){ return arr.slice().sort(function(a,b){
     return a.createdAt<b.createdAt?1:(a.createdAt>b.createdAt?-1:0); }); }
 
+  function fileToScaledDataUrl(file, maxPx, quality){
+    maxPx=maxPx||1000; quality=quality||0.82;
+    return new Promise(function(resolve,reject){
+      var reader=new FileReader();
+      reader.onload=function(){
+        var img=new Image();
+        img.onload=function(){
+          var w=img.width,h=img.height,s=Math.min(1,maxPx/Math.max(w,h));
+          var cw=Math.round(w*s),ch=Math.round(h*s);
+          var c=document.createElement('canvas'); c.width=cw; c.height=ch;
+          c.getContext('2d').drawImage(img,0,0,cw,ch);
+          try{ resolve(c.toDataURL('image/jpeg',quality)); }
+          catch(e){ resolve(reader.result); } // tainted ise orijinali kullan
+        };
+        img.onerror=function(){ resolve(reader.result); };
+        img.src=reader.result;
+      };
+      reader.onerror=function(){ reject(new Error('Görsel okunamadı.')); };
+      reader.readAsDataURL(file);
+    });
+  }
+
   var DataLayer={
     STATUSES:STATUSES,
     PLACEHOLDER:PH,
@@ -109,6 +131,24 @@
       var users=read(K_USERS)||[];
       users.forEach(function(u){ if(u.id===id) u.status=status; });
       write(K_USERS,users); return delay();
+    },
+    createOrder:function(data,files){
+      var me=this.currentUser();
+      if(!me) return Promise.reject(new Error('Oturum bulunamadı.'));
+      if(!files || !files.length) return Promise.reject(new Error('En az bir görsel gerekli.'));
+      return Promise.all(Array.prototype.map.call(files, fileToScaledDataUrl)).then(function(urls){
+        var order={id:uid('o'),doctorId:me.id,doctorName:me.name,
+          anneAdi:data.anneAdi,gebelikHaftasi:Number(data.gebelikHaftasi),
+          status:'new',createdAt:new Date().toISOString(),
+          images:urls.map(function(d,i){return {id:uid('i'),name:files[i].name,dataUrl:d};})};
+        var list=read(K_ORDERS)||[]; list.push(order); write(K_ORDERS,list);
+        return order;
+      });
+    },
+    updateOrderStatus:function(id,status){
+      var list=read(K_ORDERS)||[];
+      list.forEach(function(o){ if(o.id===id) o.status=status; });
+      write(K_ORDERS,list); return delay();
     },
   };
 
