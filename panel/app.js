@@ -119,7 +119,7 @@
       b.onclick=function(){ PanelUI.setView({name:b.getAttribute('data-nav')}); };
     });
     var lo=document.getElementById('logout');
-    if(lo) lo.onclick=function(){ DataLayer.signOut().then(function(){ authMode='login'; render(); }); };
+    if(lo) lo.onclick=function(){ DataLayer.signOut().then(function(){ authMode='login'; view={name:'list'}; render(); }); };
   }
 
   function renderDoctorShell(me){
@@ -210,7 +210,7 @@
       var btn=this; btn.disabled=true; btn.textContent='Gönderiliyor…';
       DataLayer.createOrder({anneAdi:name,gebelikHaftasi:week},
                             picked.map(function(p){return p.file;}))
-        .then(function(){ PanelUI.setView({name:'list'}); })
+        .then(function(){ picked.forEach(function(p){ URL.revokeObjectURL(p.url); }); PanelUI.setView({name:'list'}); })
         .catch(function(e){ err.textContent=e.message; btn.disabled=false; btn.textContent='Siparişi Gönder'; });
     };
   }

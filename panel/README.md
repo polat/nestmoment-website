@@ -32,6 +32,10 @@ Backend (örn. Supabase) gelince **aynı arayüzün** gerçek implementasyonu ya
 Tüm `DataLayer` metodları Promise döner (mock'ta bile), bu yüzden async geçiş sancısız olur.
 Arayüz sözleşmesi: `docs/superpowers/plans/2026-06-05-doktor-paneli.md` → "Dosya Yapısı".
 
+**Backend implementasyonu için önemli notlar:**
+- `getOrder(id)` mock'ta sahiplik kontrolü yapmaz (id ile herhangi bir sipariş döner). Gerçek backend'de **sunucu tarafında yetki kontrolü** şart: doktor yalnızca kendi siparişini görebilmeli (Supabase'de satır-bazlı güvenlik / RLS).
+- Seed doktorlar ortak `doktor123` şifresini kullanır — yalnızca demo içindir; gerçek sistemde şifreler hash'lenmeli.
+
 ## Notlar
 - Görseller localStorage kotası için canvas ile ≤1000px'e küçültülüp data URL olarak saklanır; görsel kaynakları güvenli şemalara (`data:image/*`, http/https) kısıtlanır.
 - Panel `<meta name="robots" content="noindex">` ile işaretli; gerçek dağıtımda arama motorlarından korunmalı.
