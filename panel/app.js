@@ -78,7 +78,7 @@
 
   // ---- doktor/admin kabukları ----
   function statusTag(k){ var m=statusMeta(k);
-    return '<span class="status" data-s="'+k+'">'+esc(m.label)+'</span>'; }
+    return '<span class="status" data-s="'+esc(k)+'">'+esc(m.label)+'</span>'; }
 
   function orderRow(o){
     var thumb=(o.images&&o.images[0])?o.images[0].dataUrl:DataLayer.PLACEHOLDER;
