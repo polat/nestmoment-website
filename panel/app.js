@@ -76,8 +76,85 @@
     };
   }
 
-  // ---- doktor/admin kabukları (Task 6+ doldurur) ----
-  function renderDoctorShell(me){ app.innerHTML='<div class="content">Doktor paneli — Task 6</div>'; }
+  // ---- doktor/admin kabukları ----
+  function statusTag(k){ var m=statusMeta(k);
+    return '<span class="status" data-s="'+k+'">'+esc(m.label)+'</span>'; }
+
+  function orderRow(o){
+    var thumb=(o.images&&o.images[0])?o.images[0].dataUrl:DataLayer.PLACEHOLDER;
+    return '<div class="row" data-id="'+o.id+'">'+
+      '<img class="thumb" src="'+thumb+'" alt="">'+
+      '<div class="meta"><div class="name">'+esc(o.anneAdi)+'</div>'+
+        '<div class="sub">'+esc(o.gebelikHaftasi)+'. hafta · '+(o.images?o.images.length:0)+
+        ' görsel · '+fmtDate(o.createdAt)+'</div></div>'+
+      statusTag(o.status)+'</div>';
+  }
+  function fmtDate(iso){ var d=new Date(iso);
+    return d.toLocaleDateString('tr-TR',{day:'numeric',month:'short'}); }
+
+  function sidebar(me,active,opts){
+    opts=opts||{};
+    function item(key,label,count){
+      return '<button class="nav-item'+(active===key?' active':'')+'" data-nav="'+key+'">'+
+        esc(label)+(count?'<span class="nav-count">'+count+'</span>':'')+'</button>';
+    }
+    var isAdmin=me.role==='admin';
+    return '<div class="sidebar">'+
+      '<div class="brand">🍼 Nest Moment'+(isAdmin?' <span class="badge-admin">ADMIN</span>':'')+'</div>'+
+      (isAdmin
+        ? item('orders','Tüm Siparişler')+item('doctors','Doktorlar',opts.pending)
+        : item('list','Hastalarım')+item('new','+ Yeni Sipariş')+item('profile','Profil'))+
+      '<div class="nav-foot">'+esc(me.name)+' · <a id="logout" style="color:var(--gold);cursor:pointer">Çıkış</a></div>'+
+    '</div>';
+  }
+  function wireSidebar(me){
+    Array.prototype.forEach.call(document.querySelectorAll('[data-nav]'),function(b){
+      b.onclick=function(){ PanelUI.setView({name:b.getAttribute('data-nav')}); };
+    });
+    var lo=document.getElementById('logout');
+    if(lo) lo.onclick=function(){ DataLayer.signOut().then(function(){ authMode='login'; render(); }); };
+  }
+
+  function renderDoctorShell(me){
+    var v=view.name;
+    if(v==='new')    return renderOrderForm(me);
+    if(v==='detail') return renderOrderDetail(me, view.id);
+    if(v==='profile')return renderProfile(me);
+    // varsayılan: liste
+    app.innerHTML='<div class="shell">'+sidebar(me,'list')+
+      '<div class="content"><div class="page-head"><h1>Hastalarım</h1>'+
+        '<button class="btn" id="newBtn">+ Yeni Sipariş</button></div>'+
+      '<input class="search" id="q" placeholder="🔍 Anne adına göre ara…">'+
+      '<div id="rows"><div class="empty">Yükleniyor…</div></div></div></div>';
+    wireSidebar(me);
+    document.getElementById('newBtn').onclick=function(){ PanelUI.setView({name:'new'}); };
+    var rowsEl=document.getElementById('rows');
+    DataLayer.listOrders({doctorId:me.id}).then(function(list){
+      function paint(items){
+        rowsEl.innerHTML = items.length
+          ? items.map(orderRow).join('')
+          : '<div class="empty">Henüz sipariş yok. "+ Yeni Sipariş" ile başlayın.</div>';
+        Array.prototype.forEach.call(rowsEl.querySelectorAll('.row'),function(r){
+          r.onclick=function(){ PanelUI.setView({name:'detail',id:r.getAttribute('data-id')}); };
+        });
+      }
+      paint(list);
+      document.getElementById('q').oninput=function(e){
+        var t=e.target.value.toLocaleLowerCase('tr');
+        paint(list.filter(function(o){return o.anneAdi.toLocaleLowerCase('tr').indexOf(t)>=0;}));
+      };
+    });
+  }
+
+  // yer tutucular (sonraki task'lar)
+  function renderOrderForm(me){ app.innerHTML='<div class="shell">'+sidebar(me,'new')+'<div class="content">Form — Task 7</div></div>'; wireSidebar(me); }
+  function renderOrderDetail(me,id){ app.innerHTML='<div class="shell">'+sidebar(me,'list')+'<div class="content">Detay — Task 8</div></div>'; wireSidebar(me); }
+  function renderProfile(me){ app.innerHTML='<div class="shell">'+sidebar(me,'profile')+
+    '<div class="content"><div class="page-head"><h1>Profil</h1></div>'+
+    '<div class="kv"><span class="k">Ad Soyad</span>'+esc(me.name)+'</div>'+
+    '<div class="kv"><span class="k">E-posta</span>'+esc(me.email)+'</div>'+
+    '<div class="kv"><span class="k">Telefon</span>'+esc(me.phone||'—')+'</div></div></div>'; wireSidebar(me); }
+
   function renderAdminShell(me){ app.innerHTML='<div class="content">Admin paneli — Task 9</div>'; }
 
   // dışarıya aç (sonraki task'lar genişletir)
