@@ -7,6 +7,13 @@
 
   function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){
     return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+  // Görsel kaynaklarını yalnızca güvenli şemalara kısıtla (data:image/* veya http/https) — XSS savunması.
+  function safeImgUrl(u){
+    if(typeof u!=='string') return '';
+    if(/^https?:\/\//i.test(u)) return u;
+    if(/^data:image\/(png|jpe?g|gif|webp|svg\+xml);/i.test(u)) return u;
+    return '';
+  }
   function statusMeta(k){return DataLayer.STATUSES.filter(function(s){return s.key===k;})[0]||{label:k};}
 
   // ---- ana yönlendirici ----
@@ -83,7 +90,7 @@
   function orderRow(o){
     var thumb=(o.images&&o.images[0])?o.images[0].dataUrl:DataLayer.PLACEHOLDER;
     return '<div class="row" data-id="'+o.id+'">'+
-      '<img class="thumb" src="'+thumb+'" alt="">'+
+      '<img class="thumb" src="'+esc(safeImgUrl(thumb))+'" alt="">'+
       '<div class="meta"><div class="name">'+esc(o.anneAdi)+'</div>'+
         '<div class="sub">'+esc(o.gebelikHaftasi)+'. hafta · '+(o.images?o.images.length:0)+
         ' görsel · '+fmtDate(o.createdAt)+'</div></div>'+
@@ -222,7 +229,7 @@
         '<div class="kv"><span class="k">Tarih</span>'+fmtDate(o.createdAt)+'</div>'+
         '<div class="kv"><span class="k">Görsel sayısı</span>'+o.images.length+'</div>'+
         '<div class="detail-imgs">'+o.images.map(function(im){
-            return '<a href="'+im.dataUrl+'" target="_blank"><img src="'+im.dataUrl+'" alt=""></a>';
+            return '<a href="'+esc(safeImgUrl(im.dataUrl))+'" target="_blank" rel="noopener noreferrer"><img src="'+esc(safeImgUrl(im.dataUrl))+'" alt=""></a>';
           }).join('')+'</div>';
       document.getElementById('back').onclick=function(){
         PanelUI.setView({name: me.role==='admin'?'orders':'list'}); };
@@ -283,7 +290,7 @@
       return '<option value="'+s.key+'"'+(s.key===o.status?' selected':'')+'>'+esc(s.label)+'</option>';
     }).join('');
     return '<div class="row" data-id="'+o.id+'">'+
-      '<img class="thumb" src="'+thumb+'" alt="">'+
+      '<img class="thumb" src="'+esc(safeImgUrl(thumb))+'" alt="">'+
       '<div class="meta"><div class="name">'+esc(o.anneAdi)+' <span class="muted" style="font-weight:400">· '+
         o.images.length+' görsel</span></div>'+
         '<div class="sub">'+esc(o.doctorName)+' · '+esc(o.gebelikHaftasi)+'. hafta · '+fmtDate(o.createdAt)+'</div></div>'+
