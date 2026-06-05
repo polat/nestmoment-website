@@ -5,8 +5,8 @@
   var view={name:'list'};          // doktor/admin içi gezinme durumu
   var authMode='login';            // 'login' | 'apply'
 
-  function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){
-    return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+  function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){
+    return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
   function statusMeta(k){return DataLayer.STATUSES.filter(function(s){return s.key===k;})[0]||{label:k};}
 
   // ---- ana yönlendirici ----
@@ -77,8 +77,8 @@
   }
 
   // ---- doktor/admin kabukları (Task 6+ doldurur) ----
-  function renderDoctorShell(me){ app.innerHTML='<div class="content">Doktor paneli — Task 6</div>'; window._me=me; }
-  function renderAdminShell(me){ app.innerHTML='<div class="content">Admin paneli — Task 9</div>'; window._me=me; }
+  function renderDoctorShell(me){ app.innerHTML='<div class="content">Doktor paneli — Task 6</div>'; }
+  function renderAdminShell(me){ app.innerHTML='<div class="content">Admin paneli — Task 9</div>'; }
 
   // dışarıya aç (sonraki task'lar genişletir)
   window.PanelUI={render:render,esc:esc,statusMeta:statusMeta,
