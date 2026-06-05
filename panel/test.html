@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="tr"><head><meta charset="UTF-8"><title>DataLayer Testleri</title>
+<style>body{background:#0c0a09;color:#eee;font:14px monospace;padding:20px}
+.ok{color:#9be8b8}.fail{color:#ff9a9a}</style></head>
+<body><pre id="out"></pre>
+<script src="data.js"></script>
+<script>
+const out=document.getElementById('out'); let pass=0,fail=0;
+function log(c,s){const span=document.createElement('span');span.className=c;span.textContent=s+'\n';out.appendChild(span);}
+function ok(name,cond){cond?(pass++,log('ok','✅ '+name)):(fail++,log('fail','❌ '+name));}
+function eq(name,a,b){ok(name+'  ['+JSON.stringify(a)+' === '+JSON.stringify(b)+']',JSON.stringify(a)===JSON.stringify(b));}
+async function reset(){localStorage.clear();DataLayer._reseed();}
+
+(async function(){
+  // --- Task 2: okuma ---
+  await reset();
+  ok('STATUSES 5 durum', DataLayer.STATUSES.length===5);
+  eq('ilk durum new', DataLayer.STATUSES[0].key, 'new');
+  ok('currentUser başta null', DataLayer.currentUser()===null);
+  const docs=await DataLayer.listDoctors();
+  ok('seed doktorlar var (>=3)', docs.length>=3);
+  ok('bir admin var', docs.some(d=>d.role==='admin'));
+  ok('bir pending doktor var', docs.some(d=>d.status==='pending'));
+  const all=await DataLayer.listOrders({});
+  ok('seed siparişler var (>=3)', all.length>=3);
+  ok('siparişler yeni→eski sıralı',
+     all.every((o,i)=> i===0 || all[i-1].createdAt>=o.createdAt));
+  const one=await DataLayer.getOrder(all[0].id);
+  ok('getOrder görselleri içerir', Array.isArray(one.images));
+  const byDoc=await DataLayer.listOrders({doctorId: all[0].doctorId});
+  ok('doctorId filtresi çalışır', byDoc.every(o=>o.doctorId===all[0].doctorId));
+
+  log(pass+fail-pass? '': '', '\n'+pass+' geçti, '+fail+' kaldı');
+})();
+</script></body></html>
