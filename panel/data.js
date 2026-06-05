@@ -76,7 +76,7 @@
       return u||null;
     },
     listDoctors:function(){
-      return delay((read(K_USERS)||[]).filter(function(u){return u.role==='doctor'||u.role==='admin';}));
+      return delay((read(K_USERS)||[]).filter(function(u){return u.role==='doctor';}));
     },
     listOrders:function(f){
       f=f||{}; var list=read(K_ORDERS)||[];

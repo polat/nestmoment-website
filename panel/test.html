@@ -19,7 +19,7 @@ async function reset(){localStorage.clear();DataLayer._reseed();}
   ok('currentUser başta null', DataLayer.currentUser()===null);
   const docs=await DataLayer.listDoctors();
   ok('seed doktorlar var (>=3)', docs.length>=3);
-  ok('bir admin var', docs.some(d=>d.role==='admin'));
+  ok('listDoctors sadece doktor döner (admin hariç)', docs.every(d=>d.role==='doctor'));
   ok('bir pending doktor var', docs.some(d=>d.status==='pending'));
   const all=await DataLayer.listOrders({});
   ok('seed siparişler var (>=3)', all.length>=3);
