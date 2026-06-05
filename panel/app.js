@@ -146,8 +146,67 @@
     });
   }
 
-  // yer tutucular (sonraki task'lar)
-  function renderOrderForm(me){ app.innerHTML='<div class="shell">'+sidebar(me,'new')+'<div class="content">Form — Task 7</div></div>'; wireSidebar(me); }
+  // ---- yeni sipariş formu ----
+  function renderOrderForm(me){
+    var picked=[]; // {file, url}
+    app.innerHTML='<div class="shell">'+sidebar(me,'new')+
+      '<div class="content"><div class="page-head"><h1>Yeni Sipariş</h1></div>'+
+      '<div style="max-width:460px">'+
+        '<div class="field"><label>Anne adı soyadı</label><input id="f_name"></div>'+
+        '<div class="field"><label>Gebelik haftası</label><input id="f_week" type="number" min="1" max="42" style="max-width:140px"></div>'+
+        '<div class="field"><label>Ultrason görselleri <span class="muted">(birden çok seçebilirsiniz)</span></label>'+
+          '<div class="uploader" id="drop">⬆ Görselleri sürükleyin veya seçin'+
+            '<input id="f_files" type="file" accept="image/*" multiple hidden>'+
+            '<div class="previews" id="pv"></div></div></div>'+
+        '<label class="checkbox"><input type="checkbox" id="f_consent">'+
+          '<span>Hastadan görüntünün işlenmesi için açık rıza alındı (KVKK).</span></label>'+
+        '<div class="err" id="err"></div>'+
+        '<button class="btn" id="submit">Siparişi Gönder</button>'+
+      '</div></div></div>';
+    wireSidebar(me);
+
+    var fileInput=document.getElementById('f_files'), drop=document.getElementById('drop'),
+        pv=document.getElementById('pv');
+    drop.onclick=function(e){ if(e.target.tagName!=='BUTTON') fileInput.click(); };
+    fileInput.onchange=function(){ addFiles(fileInput.files); fileInput.value=''; };
+    drop.ondragover=function(e){ e.preventDefault(); drop.classList.add('drag'); };
+    drop.ondragleave=function(){ drop.classList.remove('drag'); };
+    drop.ondrop=function(e){ e.preventDefault(); drop.classList.remove('drag');
+      addFiles(e.dataTransfer.files); };
+
+    function addFiles(files){
+      Array.prototype.forEach.call(files,function(f){
+        if(f.type.indexOf('image/')!==0) return;
+        var url=URL.createObjectURL(f); picked.push({file:f,url:url});
+      });
+      paintPreviews();
+    }
+    function paintPreviews(){
+      pv.innerHTML=picked.map(function(p,i){
+        return '<div class="pv"><img src="'+p.url+'" alt=""><button data-i="'+i+'">×</button></div>';
+      }).join('');
+      Array.prototype.forEach.call(pv.querySelectorAll('button'),function(b){
+        b.onclick=function(e){ e.stopPropagation();
+          var i=+b.getAttribute('data-i'); URL.revokeObjectURL(picked[i].url);
+          picked.splice(i,1); paintPreviews(); };
+      });
+    }
+
+    document.getElementById('submit').onclick=function(){
+      var err=document.getElementById('err'); err.textContent='';
+      var name=document.getElementById('f_name').value.trim();
+      var week=document.getElementById('f_week').value;
+      if(!name){ err.textContent='Anne adı zorunlu.'; return; }
+      if(!week){ err.textContent='Gebelik haftası zorunlu.'; return; }
+      if(!picked.length){ err.textContent='En az bir ultrason görseli yükleyin.'; return; }
+      if(!document.getElementById('f_consent').checked){ err.textContent='KVKK açık rıza onayı gerekli.'; return; }
+      var btn=this; btn.disabled=true; btn.textContent='Gönderiliyor…';
+      DataLayer.createOrder({anneAdi:name,gebelikHaftasi:week},
+                            picked.map(function(p){return p.file;}))
+        .then(function(){ PanelUI.setView({name:'list'}); })
+        .catch(function(e){ err.textContent=e.message; btn.disabled=false; btn.textContent='Siparişi Gönder'; });
+    };
+  }
   function renderOrderDetail(me,id){ app.innerHTML='<div class="shell">'+sidebar(me,'list')+'<div class="content">Detay — Task 8</div></div>'; wireSidebar(me); }
   function renderProfile(me){ app.innerHTML='<div class="shell">'+sidebar(me,'profile')+
     '<div class="content"><div class="page-head"><h1>Profil</h1></div>'+
