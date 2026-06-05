@@ -30,6 +30,30 @@ async function reset(){localStorage.clear();DataLayer._reseed();}
   const byDoc=await DataLayer.listOrders({doctorId: all[0].doctorId});
   ok('doctorId filtresi çalışır', byDoc.every(o=>o.doctorId===all[0].doctorId));
 
+  // --- Task 3: auth ---
+  await reset();
+  let signedErr=null;
+  try{ await DataLayer.signIn('ayse@ornek.com','yanlis'); }catch(e){ signedErr=e; }
+  ok('yanlış şifre throw eder', !!signedErr);
+  ok('başarısız girişte session yok', DataLayer.currentUser()===null);
+  const u=await DataLayer.signIn('ayse@ornek.com','doktor123');
+  ok('doğru giriş user döner', u && u.role==='doctor');
+  ok('giriş sonrası currentUser dolu', DataLayer.currentUser() && DataLayer.currentUser().id===u.id);
+  await DataLayer.signOut();
+  ok('signOut sonrası null', DataLayer.currentUser()===null);
+
+  let pendErr=null;
+  try{ await DataLayer.signIn('zeynep@ornek.com','doktor123'); }catch(e){ pendErr=e; }
+  ok('pending doktor giriş yapamaz (throw)', !!pendErr);
+
+  const newDoc=await DataLayer.applyAsDoctor({name:'Dr. Test',email:'test@ornek.com',phone:'0500',password:'x'});
+  ok('applyAsDoctor pending döner', newDoc.status==='pending' && newDoc.role==='doctor');
+  const docs2=await DataLayer.listDoctors();
+  ok('başvuran listeye eklendi', docs2.some(d=>d.email==='test@ornek.com'));
+  await DataLayer.setDoctorStatus(newDoc.id,'active');
+  const after=await DataLayer.signIn('test@ornek.com','x');
+  ok('onaylanınca giriş yapabilir', after && after.status==='active');
+
   log(pass+fail-pass? '': '', '\n'+pass+' geçti, '+fail+' kaldı');
 })();
 </script></body></html>

@@ -86,7 +86,30 @@
     },
     getOrder:function(id){
       return delay((read(K_ORDERS)||[]).filter(function(o){return o.id===id;})[0]||null);
-    }
+    },
+    signIn:function(email,password){
+      var users=read(K_USERS)||[];
+      var u=users.filter(function(x){return x.email===email && x.password===password;})[0];
+      if(!u) return Promise.reject(new Error('E-posta veya şifre hatalı.'));
+      if(u.status==='pending')  return Promise.reject(new Error('Hesabınız onay bekliyor.'));
+      if(u.status==='disabled') return Promise.reject(new Error('Hesabınız pasif durumda.'));
+      write(K_SESSION,{userId:u.id});
+      return delay(u);
+    },
+    signOut:function(){ localStorage.removeItem(K_SESSION); return delay(); },
+    applyAsDoctor:function(d){
+      var users=read(K_USERS)||[];
+      if(users.some(function(x){return x.email===d.email;}))
+        return Promise.reject(new Error('Bu e-posta zaten kayıtlı.'));
+      var doc={id:uid('u'),name:d.name,email:d.email,phone:d.phone||'',role:'doctor',
+        status:'pending',password:d.password,createdAt:new Date().toISOString()};
+      users.push(doc); write(K_USERS,users); return delay(doc);
+    },
+    setDoctorStatus:function(id,status){
+      var users=read(K_USERS)||[];
+      users.forEach(function(u){ if(u.id===id) u.status=status; });
+      write(K_USERS,users); return delay();
+    },
   };
 
   // dahili erişim (sonraki task'lar bunları kullanır)
