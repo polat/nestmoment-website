@@ -207,7 +207,27 @@
         .catch(function(e){ err.textContent=e.message; btn.disabled=false; btn.textContent='Siparişi Gönder'; });
     };
   }
-  function renderOrderDetail(me,id){ app.innerHTML='<div class="shell">'+sidebar(me,'list')+'<div class="content">Detay — Task 8</div></div>'; wireSidebar(me); }
+  function renderOrderDetail(me,id){
+    app.innerHTML='<div class="shell">'+sidebar(me,me.role==='admin'?'orders':'list')+
+      '<div class="content"><div id="d">Yükleniyor…</div></div></div>';
+    wireSidebar(me);
+    DataLayer.getOrder(id).then(function(o){
+      var d=document.getElementById('d');
+      if(!o){ d.innerHTML='<div class="empty">Sipariş bulunamadı.</div>'; return; }
+      d.innerHTML=
+        '<div class="page-head"><button class="btn-ghost" id="back" style="padding:6px 12px">← Geri</button>'+
+          '<h1 style="margin-left:10px">'+esc(o.anneAdi)+'</h1>'+statusTag(o.status)+'</div>'+
+        '<div class="kv"><span class="k">Gönderen doktor</span>'+esc(o.doctorName)+'</div>'+
+        '<div class="kv"><span class="k">Gebelik haftası</span>'+esc(o.gebelikHaftasi)+'. hafta</div>'+
+        '<div class="kv"><span class="k">Tarih</span>'+fmtDate(o.createdAt)+'</div>'+
+        '<div class="kv"><span class="k">Görsel sayısı</span>'+o.images.length+'</div>'+
+        '<div class="detail-imgs">'+o.images.map(function(im){
+            return '<a href="'+im.dataUrl+'" target="_blank"><img src="'+im.dataUrl+'" alt=""></a>';
+          }).join('')+'</div>';
+      document.getElementById('back').onclick=function(){
+        PanelUI.setView({name: me.role==='admin'?'orders':'list'}); };
+    });
+  }
   function renderProfile(me){ app.innerHTML='<div class="shell">'+sidebar(me,'profile')+
     '<div class="content"><div class="page-head"><h1>Profil</h1></div>'+
     '<div class="kv"><span class="k">Ad Soyad</span>'+esc(me.name)+'</div>'+
