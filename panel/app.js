@@ -89,7 +89,7 @@
 
   function orderRow(o){
     var thumb=(o.images&&o.images[0])?o.images[0].dataUrl:DataLayer.PLACEHOLDER;
-    return '<div class="row" data-id="'+o.id+'">'+
+    return '<div class="row" data-id="'+esc(o.id)+'">'+
       '<img class="thumb" src="'+esc(safeImgUrl(thumb))+'" alt="">'+
       '<div class="meta"><div class="name">'+esc(o.anneAdi)+'</div>'+
         '<div class="sub">'+esc(o.gebelikHaftasi)+'. hafta · '+(o.images?o.images.length:0)+
@@ -255,7 +255,7 @@
         '<div class="page-head"><h1>Tüm Siparişler</h1>'+
           '<div class="filters">'+
             '<select id="fDoctor"><option value="">Tüm doktorlar</option>'+
-              docs.map(function(d){return '<option value="'+d.id+'">'+esc(d.name)+'</option>';}).join('')+
+              docs.map(function(d){return '<option value="'+esc(d.id)+'">'+esc(d.name)+'</option>';}).join('')+
             '</select>'+
             '<select id="fStatus"><option value="">Durum: Hepsi</option>'+
               DataLayer.STATUSES.map(function(s){return '<option value="'+s.key+'">'+esc(s.label)+'</option>';}).join('')+
@@ -289,12 +289,12 @@
     var opts=DataLayer.STATUSES.map(function(s){
       return '<option value="'+s.key+'"'+(s.key===o.status?' selected':'')+'>'+esc(s.label)+'</option>';
     }).join('');
-    return '<div class="row" data-id="'+o.id+'">'+
+    return '<div class="row" data-id="'+esc(o.id)+'">'+
       '<img class="thumb" src="'+esc(safeImgUrl(thumb))+'" alt="">'+
       '<div class="meta"><div class="name">'+esc(o.anneAdi)+' <span class="muted" style="font-weight:400">· '+
         o.images.length+' görsel</span></div>'+
         '<div class="sub">'+esc(o.doctorName)+' · '+esc(o.gebelikHaftasi)+'. hafta · '+fmtDate(o.createdAt)+'</div></div>'+
-      '<select class="status" data-s="'+o.status+'" data-id="'+o.id+'">'+opts+'</select></div>';
+      '<select class="status" data-s="'+esc(o.status)+'" data-id="'+esc(o.id)+'">'+opts+'</select></div>';
   }
 
   function renderAdminDoctors(me){ app.innerHTML='<div class="shell">'+sidebar(me,'doctors')+'<div class="content">Doktorlar — Task 10</div></div>'; wireSidebar(me); }
