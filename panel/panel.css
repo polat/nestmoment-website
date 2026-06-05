@@ -3,6 +3,7 @@
   --gold:#d8b486; --cream:#f2ebe0; --line:#ffffff15; --soft:#ffffff08;
   --st-new:#9db8ff; --st-rev:#c6a8ff; --st-prod:#ffd98a; --st-done:#9be8b8; --st-cancel:#9a9a9a;
   --radius:10px; --display:'Bricolage Grotesque',sans-serif; --body:'Hanken Grotesk',sans-serif;
+  --content-max:980px;
 }
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--cream);font-family:var(--body);
@@ -40,7 +41,7 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:var(--gold)}
 .sidebar{width:210px;background:var(--sidebar);padding:18px 14px;display:flex;flex-direction:column;
   gap:6px;flex:none;border-right:1px solid var(--line)}
 .sidebar .brand{font-family:var(--display);color:var(--gold);font-weight:700;margin-bottom:14px;
-  display:flex;align-items:center;gap:6px}
+  display:flex;align-items:center;gap:6px;font-size:15px;white-space:nowrap}
 .badge-admin{font-size:9px;background:var(--gold);color:#0c0a09;padding:1px 6px;border-radius:8px}
 .nav-item{padding:9px 11px;border-radius:7px;color:var(--cream);opacity:.7;font-size:14px;
   display:flex;align-items:center;gap:8px;border:none;background:transparent;text-align:left;width:100%}
@@ -48,8 +49,10 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:var(--gold)}
 .nav-count{margin-left:auto;background:#ff7a7a;color:#0c0a09;font-size:10px;font-weight:700;
   padding:0 6px;border-radius:9px}
 .nav-foot{margin-top:auto;border-top:1px solid var(--line);padding-top:10px;font-size:12px;opacity:.7}
-.content{flex:1;padding:22px;max-width:880px}
-.page-head{display:flex;align-items:center;gap:10px;margin-bottom:16px}
+.content{flex:1;min-width:0;padding:22px}
+/* içeriği rahat bir kolonda ortala — geniş ekranda sola yapışmasın */
+.content>*{max-width:var(--content-max);margin-inline:auto}
+.page-head{display:flex;align-items:center;gap:10px;margin-bottom:16px;flex-wrap:wrap}
 .page-head h1{font-family:var(--display);font-size:20px;margin:0}
 .page-head .btn{margin-left:auto}
 
@@ -91,7 +94,7 @@ select.status{background:#ffffff10}
 .kv .k{opacity:.6;min-width:130px}
 
 /* --- Filtreler --- */
-.filters{margin-left:auto;display:flex;gap:8px}
+.filters{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap}
 .filters select{background:var(--soft);border:1px solid var(--line);color:var(--cream);
   border-radius:7px;padding:6px 9px;font-size:13px}
 
@@ -100,9 +103,28 @@ select.status{background:#ffffff10}
   display:flex;align-items:center;gap:10px;margin-bottom:16px}
 .banner .btn{margin-left:auto;padding:6px 13px}
 
-@media(max-width:640px){
-  .shell{flex-direction:column}
-  .sidebar{width:auto;flex-direction:row;flex-wrap:wrap;align-items:center}
+/* --- Tablet: içerik kolonu kenar boşluklarını daralt --- */
+@media(max-width:1024px){
+  .content{padding:20px}
+}
+
+/* --- Tablet & mobil: sidebar üst-bara dönüşür --- */
+@media(max-width:820px){
+  .shell{flex-direction:column;min-height:auto}
+  .sidebar{width:auto;flex-direction:row;flex-wrap:wrap;align-items:center;gap:8px;
+    padding:12px 14px;border-right:none;border-bottom:1px solid var(--line)}
+  .sidebar .brand{margin:0 6px 0 0;white-space:nowrap}
+  .nav-item{width:auto}                 /* yatay barda pill gibi dursun */
   .nav-foot{margin:0 0 0 auto;border:none;padding:0}
   .content{padding:16px}
+  .page-head h1{font-size:18px}
+  .filters{width:100%;margin-left:0}    /* filtreler alt satıra tam genişlik */
+  .filters select{flex:1;min-width:0}
+  .kv{flex-direction:column;gap:2px}
+  .kv .k{min-width:0}
+}
+
+@media(max-width:420px){
+  .row{gap:9px;padding:10px}
+  .status{padding:4px 9px;font-size:11px}
 }
