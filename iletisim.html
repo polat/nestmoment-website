@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Privacy &amp; Data Protection Notice — Nest Moment</title>
+<title>Contact — Nest Moment</title>
 <meta name="robots" content="index, follow" />
 <link rel="icon" type="image/svg+xml" href="images/favicon.svg" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -113,6 +113,27 @@
     .burger{display:block}
     .wa-fab{display:flex}
   }
+  /* contact page */
+  .c-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:34px 0 8px}
+  .c-card{display:flex;flex-direction:column;gap:.45rem;padding:24px;border:1px solid var(--line);border-radius:16px;background:var(--panel);text-decoration:none;transition:.3s}
+  .c-card:hover{border-color:var(--gold);transform:translateY(-3px);background:#1a1410}
+  .c-ico{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;background:rgba(216,180,134,.10);color:var(--gold);margin-bottom:.5rem}
+  .c-card.wa .c-ico{background:rgba(37,211,102,.12);color:#25D366}
+  .c-klabel{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);font-weight:600}
+  .c-kval{font-size:1.04rem;color:var(--cream);font-weight:500}
+  .c-kdesc{font-size:.86rem;color:var(--muted);margin:0}
+  .c-hours{display:flex;align-items:center;gap:.7rem;margin:30px 0 6px;padding:16px 22px;border:1px solid var(--line-soft);border-radius:14px;color:#cfc4b4;font-size:.95rem}
+  .c-hours svg{color:var(--gold);flex:none}
+  .c-form{margin-top:16px;max-width:560px;display:flex;flex-direction:column;gap:14px}
+  .c-form label{font-size:.82rem;color:var(--gold-soft);font-weight:500;margin-bottom:-7px}
+  .c-field{background:#15110e;border:1px solid var(--line);border-radius:12px;color:var(--cream);font-family:var(--body);font-size:.95rem;padding:.85rem 1rem;transition:.3s;width:100%}
+  .c-field::placeholder{color:var(--muted-2)}
+  .c-field:focus{outline:none;border-color:var(--gold)}
+  textarea.c-field{resize:vertical;min-height:120px}
+  .c-submit{align-self:flex-start;background:#1f3d33;border:1px solid #2f5c4c;color:#cfeede;display:inline-flex;align-items:center;gap:.6rem;cursor:pointer;font-family:var(--body);font-weight:600;font-size:.95rem;padding:.95rem 1.8rem;border-radius:50px;transition:.3s}
+  .c-submit:hover{background:#26493c;border-color:var(--gold);transform:translateY(-1px)}
+  .c-note{font-size:.88rem;color:var(--muted);margin-top:4px}
+  @media(max-width:680px){.c-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -135,57 +156,43 @@
 
 <main>
   <div class="wrap">
-    <span class="eyebrow" data-i18n="eyebrow">Privacy</span>
-    <h1 data-i18n="h1">Privacy &amp; Data Protection Notice</h1>
-    <p class="updated" data-i18n="updated">Last updated: June 2026</p>
+    <span class="eyebrow" data-i18n="eyebrow">Contact</span>
+    <h1 data-i18n="h1">Let's talk</h1>
+    <p data-i18n="intro">Reach us however you like — we usually reply the same day. Whether you have a question about a package or are ready to immortalize your moment, we are here to help.</p>
 
-    <p data-i18n="intro">At Nest Moment, while we immortalize your pregnancy inside crystal glass with 3D laser engraving, we value the security of the personal data you share with us — especially your ultrasound images — as much as we value our product itself. This notice explains how your data is processed under Turkey's Personal Data Protection Law No. 6698 ("KVKK").</p>
+    <div class="c-grid">
+      <a class="c-card wa" href="https://wa.me/905317941915" target="_blank" rel="noopener">
+        <span class="c-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.945C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 018.413 3.488 11.824 11.824 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 001.51 5.26l-.999 3.648 3.978-1.039zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg></span>
+        <span class="c-klabel" data-i18n="wa.label">WhatsApp</span>
+        <span class="c-kval">+90 531 794 19 15</span>
+        <span class="c-kdesc" data-i18n="wa.desc">The fastest way to reach us</span>
+      </a>
+      <a class="c-card" href="tel:+908501234567">
+        <span class="c-ico"><svg width="21" height="21" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span>
+        <span class="c-klabel" data-i18n="phone.label">Phone</span>
+        <span class="c-kval">0 (850) 123 45 67</span>
+        <span class="c-kdesc" data-i18n="phone.desc">During working hours</span>
+      </a>
+      <a class="c-card" href="mailto:bilgi@nestmoment.com">
+        <span class="c-ico"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg></span>
+        <span class="c-klabel" data-i18n="mail.label">Email</span>
+        <span class="c-kval">bilgi@nestmoment.com</span>
+        <span class="c-kdesc" data-i18n="mail.desc">We reply within a day</span>
+      </a>
+    </div>
 
-    <h2 data-i18n="s1h">1. Data Controller</h2>
-    <p data-i18n-html="s1p">Your personal data is processed by <strong>Nest Moment</strong> (<strong>[business/company title]</strong>, <strong>[full address]</strong>) acting as the data controller.</p>
-    <ul>
-      <li data-i18n-html="s1mail">Email: <strong>bilgi@nestmoment.com</strong></li>
-    </ul>
+    <div class="c-hours"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span data-i18n="hours">Working hours: Monday–Saturday, 10:00–19:00 (GMT+3)</span></div>
 
-    <h2 data-i18n="s2h">2. Personal Data We Process</h2>
-    <ul>
-      <li data-i18n-html="s2l1"><strong>Identity:</strong> first name, last name</li>
-      <li data-i18n-html="s2l2"><strong>Contact:</strong> phone number, email address, delivery address</li>
-      <li data-i18n-html="s2l3"><strong>Visual records:</strong> the ultrasound images you share with us</li>
-      <li data-i18n-html="s2l4"><strong>Customer transaction:</strong> request/order details, the package you are interested in, the content of your message</li>
-    </ul>
-    <p data-i18n-html="s2p">By their nature, ultrasound images may be sensitive data that can be associated with health. For this reason, these images are processed with special care, solely on the basis of your <strong>explicit consent</strong> and only for the purpose of fulfilling your order.</p>
-
-    <h2 data-i18n="s3h">3. Why We Process Your Data</h2>
-    <ul>
-      <li data-i18n="s3l1">Receiving and evaluating your request and order</li>
-      <li data-i18n="s3l2">Converting your image into three dimensions and engraving it into crystal glass</li>
-      <li data-i18n="s3l3">Communicating with you and keeping you informed about the process</li>
-      <li data-i18n="s3l4">Preparing the product and carrying out shipping/delivery processes</li>
-      <li data-i18n="s3l5">Fulfilling legal obligations arising from applicable legislation</li>
-    </ul>
-
-    <h2 data-i18n="s4h">4. Legal Grounds for Processing</h2>
-    <p data-i18n-html="s4p">Your personal data is processed based on the following legal grounds set out in Articles 5 and 6 of the KVKK: <strong>your explicit consent</strong> (particularly for your ultrasound images), the necessity of processing for the establishment or performance of a contract, the need to fulfill our legal obligations, and our legitimate interests, provided that they do not harm your fundamental rights and freedoms.</p>
-
-    <h2 data-i18n="s5h">5. Transfer of Your Data</h2>
-    <p data-i18n-html="s5p">Your data may be shared — only <strong>to the extent necessary</strong> — with our business partners and suppliers in order to complete the production (engraving) and shipping/delivery processes, and with legally authorized public institutions and organizations. Your data is <strong>never shared</strong> with third parties for marketing purposes, nor sold.</p>
-
-    <h2 data-i18n="s6h">6. Retention and Destruction</h2>
-    <p data-i18n-html="s6p">The <strong>ultrasound images you share are permanently deleted from our systems once your order is completed.</strong> Your other personal data is retained for the periods required by the processing purpose and prescribed by the relevant legislation; at the end of these periods it is deleted, destroyed, or anonymized.</p>
-
-    <h2 data-i18n="s7h">7. Your Rights as a Data Subject (KVKK Art. 11)</h2>
-    <p data-i18n="s7p">As a data subject, you have the right to: learn whether your personal data is being processed; request information if it has been processed; learn the purpose of processing; request rectification if it has been processed incompletely or inaccurately; request its erasure or destruction when the relevant conditions are met; request that third parties to whom the data has been transferred be notified of such actions; object to any adverse outcome arising from the analysis of your data solely through automated systems; and seek compensation for damages arising from the unlawful processing of your data.</p>
-
-    <h2 data-i18n="s8h">8. Applications</h2>
-    <p data-i18n-html="s8p">To exercise the rights above, you may submit your requests by email to <strong>bilgi@nestmoment.com</strong> or in writing to <strong>[full address]</strong>. Your applications will be concluded as soon as possible and within 30 days at the latest.</p>
-
-    <h2 data-i18n="s9h">9. Cookies</h2>
-    <p data-i18n="s9p">Our website uses cookies only at the minimum level required for the site's core functionality (for example, language preference). No third-party cookies are used for marketing or tracking purposes.</p>
-
-    <h2 data-i18n="s10h">10. Explicit Consent</h2>
-    <p data-i18n-html="s10p">By filling out the contact form or sharing your ultrasound image with us via WhatsApp and ticking the relevant consent box, you give your <strong>explicit consent</strong> for your image and personal data to be processed within the scope described in this notice, solely for the purpose of fulfilling your order. You may withdraw this consent at any time.</p>
-
+    <h2 data-i18n="formh">Send us a message</h2>
+    <p data-i18n="formp">Fill in the form below and your message will open, ready to send, on WhatsApp.</p>
+    <form class="c-form" id="cform" novalidate>
+      <label for="cname" data-i18n="f.name">Your name</label>
+      <input class="c-field" id="cname" type="text" autocomplete="name" data-i18n-ph="f.name.ph" placeholder="Your name">
+      <label for="cmsg" data-i18n="f.msg">Your message</label>
+      <textarea class="c-field" id="cmsg" data-i18n-ph="f.msg.ph" placeholder="How can we help?"></textarea>
+      <button class="c-submit" type="submit"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.945C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 018.413 3.488 11.824 11.824 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 001.51 5.26l-.999 3.648 3.978-1.039zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg><span data-i18n="f.send">Send on WhatsApp</span></button>
+      <p class="c-note" data-i18n="f.note">Tip: you can share your ultrasound image (.dcm or .stl) with us directly on WhatsApp.</p>
+    </form>
   </div>
 </main>
 
@@ -235,92 +242,46 @@
 <script>
 const i18n = {
   tr: {
-    "doctitle":"Gizlilik ve KVKK Aydınlatma Metni — Nest Moment",
-    "back":"← Ana sayfa",
-    "eyebrow":"Gizlilik",
-    "h1":"Gizlilik ve KVKK Aydınlatma Metni",
-    "updated":"Son güncelleme: Haziran 2026",
-    "intro":"Nest Moment olarak, hamilelik anınızı kristal cam içine 3 boyutlu lazer kazıma ile ölümsüzleştirirken, bizimle paylaştığınız kişisel verilerinizin — özellikle ultrason görüntülerinizin — güvenliğine en az ürünümüz kadar önem veriyoruz. Bu metin, 6698 sayılı Kişisel Verilerin Korunması Kanunu (\"KVKK\") kapsamında verilerinizin nasıl işlendiğini açıklar.",
-    "s1h":"1. Veri Sorumlusu",
-    "s1p":"Kişisel verileriniz, veri sorumlusu sıfatıyla <strong>Nest Moment</strong> (<strong>[İşletme/şirket ünvanı]</strong>, <strong>[açık adres]</strong>) tarafından işlenmektedir.",
-    "s1mail":"E-posta: <strong>bilgi@nestmoment.com</strong>",
-    "s2h":"2. İşlenen Kişisel Verileriniz",
-    "s2l1":"<strong>Kimlik:</strong> ad, soyad",
-    "s2l2":"<strong>İletişim:</strong> telefon numarası, e-posta adresi, teslimat adresi",
-    "s2l3":"<strong>Görsel kayıtlar:</strong> bizimle paylaştığınız ultrason görüntüleri",
-    "s2l4":"<strong>Müşteri işlem:</strong> talep/sipariş bilgileri, ilgilendiğiniz paket, mesaj içeriğiniz",
-    "s2p":"Ultrason görüntüleri, niteliği gereği sağlıkla ilişkilendirilebilecek hassas bir veri olabilir. Bu nedenle bu görüntüler özel bir özenle, yalnızca <strong>açık rızanıza</strong> dayanarak ve yalnızca siparişinizin gerçekleştirilmesi amacıyla işlenir.",
-    "s3h":"3. Verilerinizi Hangi Amaçlarla İşliyoruz?",
-    "s3l1":"Talebinizin ve siparişinizin alınması ve değerlendirilmesi",
-    "s3l2":"Görüntünüzün üç boyutlu hâle getirilip kristal cama kazınması",
-    "s3l3":"Sizinle iletişim kurulması ve süreç hakkında bilgilendirme",
-    "s3l4":"Ürünün hazırlanması ve kargo/teslimat süreçlerinin yürütülmesi",
-    "s3l5":"İlgili mevzuattan doğan yasal yükümlülüklerin yerine getirilmesi",
-    "s4h":"4. İşlemenin Hukuki Sebepleri",
-    "s4p":"Kişisel verileriniz KVKK'nın 5. ve 6. maddelerinde belirtilen şu hukuki sebeplere dayanılarak işlenir: <strong>açık rızanız</strong> (özellikle ultrason görselleriniz için), bir sözleşmenin kurulması veya ifası için gerekli olması, hukuki yükümlülüğümüzü yerine getirebilmemiz ve temel hak ve özgürlüklerinize zarar vermemek kaydıyla meşru menfaatlerimiz.",
-    "s5h":"5. Verilerinizin Aktarılması",
-    "s5p":"Verileriniz; ürünün üretimi (kazıma) ve kargo/teslimat süreçlerinin tamamlanabilmesi için yalnızca <strong>gerekli olduğu ölçüde</strong> iş ortaklarımız ve tedarikçilerimizle, ayrıca yasal olarak yetkili kamu kurum ve kuruluşlarıyla paylaşılabilir. Verileriniz, pazarlama amacıyla üçüncü kişilerle <strong>paylaşılmaz</strong> ve satılmaz.",
-    "s6h":"6. Saklama ve İmha",
-    "s6p":"Paylaştığınız <strong>ultrason görüntüleriniz, siparişiniz tamamlandıktan sonra sistemlerimizden kalıcı olarak silinir.</strong> Diğer kişisel verileriniz, işleme amacının gerektirdiği ve ilgili mevzuatta öngörülen süreler boyunca saklanır; bu sürelerin sonunda silinir, yok edilir veya anonim hâle getirilir.",
-    "s7h":"7. İlgili Kişi Olarak Haklarınız (KVKK md. 11)",
-    "s7p":"Veri sahibi olarak; kişisel verilerinizin işlenip işlenmediğini öğrenme, işlenmişse buna ilişkin bilgi talep etme, işlenme amacını öğrenme, eksik veya yanlış işlenmişse düzeltilmesini, ilgili şartlar oluştuğunda silinmesini veya yok edilmesini isteme, işlemeye konu verilerin aktarıldığı üçüncü kişilerin bilgilendirilmesini talep etme, otomatik sistemlerle analiz sonucu aleyhinize bir sonuç doğmasına itiraz etme ve verilerinizin hukuka aykırı işlenmesi nedeniyle zarara uğramanız hâlinde zararın giderilmesini talep etme haklarına sahipsiniz.",
-    "s8h":"8. Başvuru",
-    "s8p":"Yukarıdaki haklarınızı kullanmak için taleplerinizi <strong>bilgi@nestmoment.com</strong> adresine e-posta ile veya <strong>[açık adres]</strong> adresine yazılı olarak iletebilirsiniz. Başvurularınız en kısa sürede ve en geç 30 gün içinde sonuçlandırılır.",
-    "s9h":"9. Çerezler",
-    "s9p":"Web sitemiz, yalnızca sitenin temel işlevselliği (örneğin dil tercihi) için gerekli olan asgari düzeyde çerez kullanır. Pazarlama veya takip amaçlı üçüncü taraf çerezleri kullanılmaz.",
-    "s10h":"10. Açık Rıza",
-    "s10p":"İletişim formunu doldurarak veya WhatsApp üzerinden ultrason görüntünüzü bizimle paylaşıp ilgili onay kutusunu işaretlemeniz; görüntünüzün ve kişisel verilerinizin bu metinde açıklanan kapsamda, yalnızca siparişinizin gerçekleştirilmesi amacıyla işlenmesine <strong>açık rıza</strong> verdiğiniz anlamına gelir. Bu rızanızı dilediğiniz zaman geri alabilirsiniz.",
+    "doctitle":"İletişim — Nest Moment",
+    "eyebrow":"İletişim",
+    "h1":"Konuşalım",
+    "intro":"Bize dilediğiniz yoldan ulaşın — genellikle aynı gün yanıt veriyoruz. İster bir paket hakkında sorunuz olsun, ister anınızı ölümsüzleştirmeye hazır olun, yardımcı olmak için buradayız.",
+    "wa.label":"WhatsApp","wa.desc":"Bize ulaşmanın en hızlı yolu",
+    "phone.label":"Telefon","phone.desc":"Çalışma saatleri içinde",
+    "mail.label":"E-posta","mail.desc":"Bir gün içinde yanıtlıyoruz",
+    "hours":"Çalışma saatleri: Pazartesi–Cumartesi, 10:00–19:00 (GMT+3)",
+    "formh":"Bize mesaj gönderin",
+    "formp":"Aşağıdaki formu doldurun; mesajınız WhatsApp üzerinden göndermeye hazır olarak açılsın.",
+    "f.name":"Adınız","f.name.ph":"Adınız",
+    "f.msg":"Mesajınız","f.msg.ph":"Size nasıl yardımcı olabiliriz?",
+    "f.send":"WhatsApp'tan Gönder",
+    "f.note":"İpucu: Ultrason görüntünüzü (.dcm veya .stl) doğrudan WhatsApp üzerinden bizimle paylaşabilirsiniz.",
     "nav.wa":"WhatsApp",
     "nav.how":"Hikayemiz","nav.packages":"Paketler","nav.contact":"İletişim","nav.doctors":"Kadın Doğum Uzmanları İçin",
     "footer.tagline":"<span class=\"nw\">İlk <em>yuva</em>sındaki,</span> o ilk <em>an</em>. Sonsuza Dek.","footer.explore":"Keşfet","footer.more":"Daha fazla","footer.privacy":"Gizlilik / KVKK","footer.cookies":"Çerez Politikası","nav.about":"Hakkımızda","footer.shipping":"Teslimat & İade",
     "contact.wa":"WhatsApp'tan yaz","contact.call":"Bizi Arayın",
-    "footer.rights":"© 2026 Nest Moment. Tüm hakları saklıdır.","footer.made":"Sevgiyle hazırlandı",
-    "foot.copy":"© 2026 Nest Moment. Tüm hakları saklıdır.",
-    "foot.home":"Ana sayfa →"
+    "footer.rights":"© 2026 Nest Moment. Tüm hakları saklıdır.","footer.made":"Sevgiyle hazırlandı"
   },
   en: {
-    "doctitle":"Privacy & Data Protection Notice — Nest Moment",
-    "back":"← Home",
-    "eyebrow":"Privacy",
-    "h1":"Privacy & Data Protection Notice",
-    "updated":"Last updated: June 2026",
-    "intro":"At Nest Moment, while we immortalize your pregnancy inside crystal glass with 3D laser engraving, we value the security of the personal data you share with us — especially your ultrasound images — as much as we value our product itself. This notice explains how your data is processed under Turkey's Personal Data Protection Law No. 6698 (\"KVKK\").",
-    "s1h":"1. Data Controller",
-    "s1p":"Your personal data is processed by <strong>Nest Moment</strong> (<strong>[business/company title]</strong>, <strong>[full address]</strong>) acting as the data controller.",
-    "s1mail":"Email: <strong>bilgi@nestmoment.com</strong>",
-    "s2h":"2. Personal Data We Process",
-    "s2l1":"<strong>Identity:</strong> first name, last name",
-    "s2l2":"<strong>Contact:</strong> phone number, email address, delivery address",
-    "s2l3":"<strong>Visual records:</strong> the ultrasound images you share with us",
-    "s2l4":"<strong>Customer transaction:</strong> request/order details, the package you are interested in, the content of your message",
-    "s2p":"By their nature, ultrasound images may be sensitive data that can be associated with health. For this reason, these images are processed with special care, solely on the basis of your <strong>explicit consent</strong> and only for the purpose of fulfilling your order.",
-    "s3h":"3. Why We Process Your Data",
-    "s3l1":"Receiving and evaluating your request and order",
-    "s3l2":"Converting your image into three dimensions and engraving it into crystal glass",
-    "s3l3":"Communicating with you and keeping you informed about the process",
-    "s3l4":"Preparing the product and carrying out shipping/delivery processes",
-    "s3l5":"Fulfilling legal obligations arising from applicable legislation",
-    "s4h":"4. Legal Grounds for Processing",
-    "s4p":"Your personal data is processed based on the following legal grounds set out in Articles 5 and 6 of the KVKK: <strong>your explicit consent</strong> (particularly for your ultrasound images), the necessity of processing for the establishment or performance of a contract, the need to fulfill our legal obligations, and our legitimate interests, provided that they do not harm your fundamental rights and freedoms.",
-    "s5h":"5. Transfer of Your Data",
-    "s5p":"Your data may be shared — only <strong>to the extent necessary</strong> — with our business partners and suppliers in order to complete the production (engraving) and shipping/delivery processes, and with legally authorized public institutions and organizations. Your data is <strong>never shared</strong> with third parties for marketing purposes, nor sold.",
-    "s6h":"6. Retention and Destruction",
-    "s6p":"The <strong>ultrasound images you share are permanently deleted from our systems once your order is completed.</strong> Your other personal data is retained for the periods required by the processing purpose and prescribed by the relevant legislation; at the end of these periods it is deleted, destroyed, or anonymized.",
-    "s7h":"7. Your Rights as a Data Subject (KVKK Art. 11)",
-    "s7p":"As a data subject, you have the right to: learn whether your personal data is being processed; request information if it has been processed; learn the purpose of processing; request rectification if it has been processed incompletely or inaccurately; request its erasure or destruction when the relevant conditions are met; request that third parties to whom the data has been transferred be notified of such actions; object to any adverse outcome arising from the analysis of your data solely through automated systems; and seek compensation for damages arising from the unlawful processing of your data.",
-    "s8h":"8. Applications",
-    "s8p":"To exercise the rights above, you may submit your requests by email to <strong>bilgi@nestmoment.com</strong> or in writing to <strong>[full address]</strong>. Your applications will be concluded as soon as possible and within 30 days at the latest.",
-    "s9h":"9. Cookies",
-    "s9p":"Our website uses cookies only at the minimum level required for the site's core functionality (for example, language preference). No third-party cookies are used for marketing or tracking purposes.",
-    "s10h":"10. Explicit Consent",
-    "s10p":"By filling out the contact form or sharing your ultrasound image with us via WhatsApp and ticking the relevant consent box, you give your <strong>explicit consent</strong> for your image and personal data to be processed within the scope described in this notice, solely for the purpose of fulfilling your order. You may withdraw this consent at any time.",
+    "doctitle":"Contact — Nest Moment",
+    "eyebrow":"Contact",
+    "h1":"Let's talk",
+    "intro":"Reach us however you like — we usually reply the same day. Whether you have a question about a package or are ready to immortalize your moment, we are here to help.",
+    "wa.label":"WhatsApp","wa.desc":"The fastest way to reach us",
+    "phone.label":"Phone","phone.desc":"During working hours",
+    "mail.label":"Email","mail.desc":"We reply within a day",
+    "hours":"Working hours: Monday–Saturday, 10:00–19:00 (GMT+3)",
+    "formh":"Send us a message",
+    "formp":"Fill in the form below and your message will open, ready to send, on WhatsApp.",
+    "f.name":"Your name","f.name.ph":"Your name",
+    "f.msg":"Your message","f.msg.ph":"How can we help?",
+    "f.send":"Send on WhatsApp",
+    "f.note":"Tip: you can share your ultrasound image (.dcm or .stl) with us directly on WhatsApp.",
     "nav.wa":"WhatsApp",
     "nav.how":"Our Story","nav.packages":"Packages","nav.contact":"Contact","nav.doctors":"For Obstetricians",
     "footer.tagline":"That first <em>moment</em>, its first <em>nest</em>. Forever.","footer.explore":"Explore","footer.more":"More","footer.privacy":"Privacy","footer.cookies":"Cookie Policy","nav.about":"About","footer.shipping":"Shipping & Returns",
     "contact.wa":"Message on WhatsApp","contact.call":"Call Us",
-    "footer.rights":"© 2026 Nest Moment. All rights reserved.","footer.made":"Made with love",
-    "foot.copy":"© 2026 Nest Moment. All rights reserved.",
-    "foot.home":"Home →"
+    "footer.rights":"© 2026 Nest Moment. All rights reserved.","footer.made":"Made with love"
   }
 };
 
@@ -343,6 +304,10 @@ function applyLang(l){
     const k = el.getAttribute("data-i18n-html");
     if(i18n[l][k]!==undefined) el.innerHTML = i18n[l][k];
   });
+  document.querySelectorAll("[data-i18n-ph]").forEach(el=>{
+    const k = el.getAttribute("data-i18n-ph");
+    if(i18n[l][k]!==undefined) el.setAttribute("placeholder", i18n[l][k]);
+  });
   const tgt = l==="tr" ? "en" : "tr";
   const langHTML = LANG_FLAG[tgt] + "<span>" + LANG_NAME[tgt] + "</span>";
   document.querySelectorAll(".lang").forEach(b=>b.innerHTML = langHTML);
@@ -363,6 +328,20 @@ if(burger && navLinks){
 // header background on scroll
 const header = document.getElementById("header");
 if(header) window.addEventListener("scroll",()=>{header.classList.toggle("scrolled", window.scrollY>40)});
+
+// contact form -> WhatsApp
+const cform = document.getElementById("cform");
+if(cform){
+  cform.addEventListener("submit", e=>{
+    e.preventDefault();
+    const name = (document.getElementById("cname").value||"").trim();
+    const msg  = (document.getElementById("cmsg").value||"").trim();
+    const greet = lang==="tr" ? "Merhaba, ben " : "Hello, I'm ";
+    let text = (name ? greet+name+". " : "") + msg;
+    if(!text.trim()) text = lang==="tr" ? "Merhaba, bilgi almak istiyorum." : "Hello, I'd like some information.";
+    window.open("https://wa.me/905317941915?text="+encodeURIComponent(text), "_blank");
+  });
+}
 </script>
   <script src="cookie.js"></script>
 </body>
