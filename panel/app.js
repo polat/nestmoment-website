@@ -234,7 +234,63 @@
     '<div class="kv"><span class="k">E-posta</span>'+esc(me.email)+'</div>'+
     '<div class="kv"><span class="k">Telefon</span>'+esc(me.phone||'—')+'</div></div></div>'; wireSidebar(me); }
 
-  function renderAdminShell(me){ app.innerHTML='<div class="content">Admin paneli — Task 9</div>'; }
+  function renderAdminShell(me){
+    var v=view.name;
+    if(v==='doctors') return renderAdminDoctors(me);
+    if(v==='detail')  return renderOrderDetail(me, view.id);
+    // varsayılan: tüm siparişler
+    DataLayer.listDoctors().then(function(docs){
+      var pending=docs.filter(function(d){return d.status==='pending';}).length;
+      app.innerHTML='<div class="shell">'+sidebar(me,'orders',{pending:pending})+
+        '<div class="content">'+
+        (pending?'<div class="banner">👩‍⚕️ <b>'+pending+' doktor başvurusu</b> onay bekliyor'+
+          '<button class="btn" id="toDoctors">İncele</button></div>':'')+
+        '<div class="page-head"><h1>Tüm Siparişler</h1>'+
+          '<div class="filters">'+
+            '<select id="fDoctor"><option value="">Tüm doktorlar</option>'+
+              docs.map(function(d){return '<option value="'+d.id+'">'+esc(d.name)+'</option>';}).join('')+
+            '</select>'+
+            '<select id="fStatus"><option value="">Durum: Hepsi</option>'+
+              DataLayer.STATUSES.map(function(s){return '<option value="'+s.key+'">'+esc(s.label)+'</option>';}).join('')+
+            '</select>'+
+          '</div></div>'+
+        '<div id="rows"><div class="empty">Yükleniyor…</div></div></div></div>';
+      wireSidebar(me);
+      var tb=document.getElementById('toDoctors'); if(tb) tb.onclick=function(){ PanelUI.setView({name:'doctors'}); };
+      var fDoc=document.getElementById('fDoctor'), fSt=document.getElementById('fStatus'),
+          rowsEl=document.getElementById('rows');
+      function load(){
+        DataLayer.listOrders({doctorId:fDoc.value||undefined,status:fSt.value||undefined}).then(function(list){
+          rowsEl.innerHTML = list.length ? list.map(adminRow).join('')
+            : '<div class="empty">Bu filtreye uygun sipariş yok.</div>';
+          Array.prototype.forEach.call(rowsEl.querySelectorAll('.row'),function(r){
+            r.onclick=function(e){ if(e.target.tagName==='SELECT') return;
+              PanelUI.setView({name:'detail',id:r.getAttribute('data-id')}); };
+          });
+          Array.prototype.forEach.call(rowsEl.querySelectorAll('select.status'),function(sel){
+            sel.onchange=function(){
+              DataLayer.updateOrderStatus(sel.getAttribute('data-id'),sel.value).then(load); };
+          });
+        });
+      }
+      fDoc.onchange=load; fSt.onchange=load; load();
+    });
+  }
+
+  function adminRow(o){
+    var thumb=(o.images&&o.images[0])?o.images[0].dataUrl:DataLayer.PLACEHOLDER;
+    var opts=DataLayer.STATUSES.map(function(s){
+      return '<option value="'+s.key+'"'+(s.key===o.status?' selected':'')+'>'+esc(s.label)+'</option>';
+    }).join('');
+    return '<div class="row" data-id="'+o.id+'">'+
+      '<img class="thumb" src="'+thumb+'" alt="">'+
+      '<div class="meta"><div class="name">'+esc(o.anneAdi)+' <span class="muted" style="font-weight:400">· '+
+        o.images.length+' görsel</span></div>'+
+        '<div class="sub">'+esc(o.doctorName)+' · '+esc(o.gebelikHaftasi)+'. hafta · '+fmtDate(o.createdAt)+'</div></div>'+
+      '<select class="status" data-s="'+o.status+'" data-id="'+o.id+'">'+opts+'</select></div>';
+  }
+
+  function renderAdminDoctors(me){ app.innerHTML='<div class="shell">'+sidebar(me,'doctors')+'<div class="content">Doktorlar — Task 10</div></div>'; wireSidebar(me); }
 
   // dışarıya aç (sonraki task'lar genişletir)
   window.PanelUI={render:render,esc:esc,statusMeta:statusMeta,
