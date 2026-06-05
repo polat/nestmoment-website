@@ -297,7 +297,63 @@
       '<select class="status" data-s="'+esc(o.status)+'" data-id="'+esc(o.id)+'">'+opts+'</select></div>';
   }
 
-  function renderAdminDoctors(me){ app.innerHTML='<div class="shell">'+sidebar(me,'doctors')+'<div class="content">Doktorlar — Task 10</div></div>'; wireSidebar(me); }
+  function renderAdminDoctors(me){
+    app.innerHTML='<div class="shell">'+sidebar(me,'doctors')+
+      '<div class="content"><div class="page-head"><h1>Doktorlar</h1>'+
+        '<button class="btn" id="invite">+ Doktor Davet Et</button></div>'+
+      '<div id="inviteBox"></div>'+
+      '<div id="docs"><div class="empty">Yükleniyor…</div></div></div></div>';
+    wireSidebar(me);
+    document.getElementById('invite').onclick=function(){
+      var box=document.getElementById('inviteBox');
+      if(box.innerHTML){ box.innerHTML=''; return; }
+      box.innerHTML='<div class="row" style="cursor:default;flex-wrap:wrap;gap:8px">'+
+        '<input class="search" id="i_name" style="margin:0;flex:1;min-width:120px" placeholder="Ad Soyad">'+
+        '<input class="search" id="i_email" style="margin:0;flex:1;min-width:150px" placeholder="E-posta">'+
+        '<input class="search" id="i_pass" style="margin:0;flex:1;min-width:120px" placeholder="Geçici şifre">'+
+        '<button class="btn" id="i_go" style="padding:8px 14px">Ekle</button>'+
+        '<div class="err" id="i_err" style="flex-basis:100%"></div></div>';
+      document.getElementById('i_go').onclick=function(){
+        var er=document.getElementById('i_err'); er.textContent='';
+        var d={name:document.getElementById('i_name').value.trim(),
+               email:document.getElementById('i_email').value.trim(),
+               phone:'', password:document.getElementById('i_pass').value};
+        if(!d.name||!d.email||!d.password){ er.textContent='Ad, e-posta ve şifre zorunlu.'; return; }
+        // davet = doğrudan aktif doktor (apply pending üretir, sonra aktifleştir)
+        DataLayer.applyAsDoctor(d).then(function(doc){
+          return DataLayer.setDoctorStatus(doc.id,'active'); })
+          .then(function(){ box.innerHTML=''; load(); })
+          .catch(function(e){ er.textContent=e.message; });
+      };
+    };
+    function load(){
+      DataLayer.listDoctors().then(function(docs){
+        var order={pending:0,active:1,disabled:2};
+        docs.sort(function(a,b){ return (order[a.status]-order[b.status]); });
+        var box=document.getElementById('docs');
+        box.innerHTML = docs.length ? docs.map(docRow).join('') : '<div class="empty">Doktor yok.</div>';
+        Array.prototype.forEach.call(box.querySelectorAll('[data-act]'),function(b){
+          b.onclick=function(){
+            DataLayer.setDoctorStatus(b.getAttribute('data-id'),b.getAttribute('data-act')).then(load); };
+        });
+      });
+    }
+    function docRow(d){
+      var tag = d.status==='pending'?'<span class="status" data-s="reviewing">Onay bekliyor</span>'
+              : d.status==='active'?'<span class="status" data-s="completed">Aktif</span>'
+              : '<span class="status" data-s="cancelled">Pasif</span>';
+      var actions = d.status==='pending'
+          ? '<button class="btn" data-id="'+esc(d.id)+'" data-act="active" style="padding:6px 12px">Onayla</button>'
+          : d.status==='active'
+          ? '<button class="btn-ghost" data-id="'+esc(d.id)+'" data-act="disabled" style="padding:6px 12px">Pasifleştir</button>'
+          : '<button class="btn" data-id="'+esc(d.id)+'" data-act="active" style="padding:6px 12px">Yeniden aktifleştir</button>';
+      return '<div class="row" style="cursor:default">'+
+        '<div class="meta"><div class="name">'+esc(d.name)+'</div>'+
+          '<div class="sub">'+esc(d.email)+(d.phone?' · '+esc(d.phone):'')+'</div></div>'+
+        tag+'<span style="margin-left:10px">'+actions+'</span></div>';
+    }
+    load();
+  }
 
   // dışarıya aç (sonraki task'lar genişletir)
   window.PanelUI={render:render,esc:esc,statusMeta:statusMeta,
