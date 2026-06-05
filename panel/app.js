@@ -4,6 +4,8 @@
   var app=document.getElementById('app');
   var view={name:'list'};          // doktor/admin içi gezinme durumu
   var authMode='login';            // 'login' | 'apply'
+  // Marka amblemi (kıvrılmış bebek) — siteyle aynı SVG, biberon emojisi yerine
+  var EMBLEM='<svg class="emblem" viewBox="0 0 86 92" aria-hidden="true"><circle cx="48" cy="24" r="15"/><path d="M37 35 C20 42 16 64 31 74 C44 83 65 78 69 61 C72 49 64 41 53 43 C60 48 60 57 53 61 C44 66 36 59 37 49 Z"/></svg>';
 
   function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){
     return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
@@ -28,7 +30,7 @@
   function renderLogin(){
     app.innerHTML=
     '<div class="auth-wrap"><div class="auth-card">'+
-      '<div class="auth-logo">🍼</div><div class="auth-brand">Nest Moment</div>'+
+      '<div class="auth-logo">'+EMBLEM+'</div><div class="auth-brand">Nest Moment</div>'+
       '<div class="auth-sub">Doktor Paneli</div>'+
       '<div class="field"><label>E-posta</label><input id="email" type="email" autocomplete="username"></div>'+
       '<div class="field"><label>Şifre</label><input id="pass" type="password" autocomplete="current-password"></div>'+
@@ -55,7 +57,7 @@
   function renderApply(){
     app.innerHTML=
     '<div class="auth-wrap"><div class="auth-card">'+
-      '<div class="auth-logo">🍼</div><div class="auth-brand">Nest Moment</div>'+
+      '<div class="auth-logo">'+EMBLEM+'</div><div class="auth-brand">Nest Moment</div>'+
       '<div class="auth-sub">Doktor Başvurusu</div>'+
       '<div class="field"><label>Ad Soyad</label><input id="a_name"></div>'+
       '<div class="field"><label>E-posta</label><input id="a_email" type="email"></div>'+
@@ -107,7 +109,7 @@
     }
     var isAdmin=me.role==='admin';
     return '<div class="sidebar">'+
-      '<div class="brand">🍼 Nest Moment'+(isAdmin?' <span class="badge-admin">ADMIN</span>':'')+'</div>'+
+      '<div class="brand">'+EMBLEM+' Nest Moment'+(isAdmin?' <span class="badge-admin">ADMIN</span>':'')+'</div>'+
       (isAdmin
         ? item('orders','Tüm Siparişler')+item('doctors','Doktorlar',opts.pending)
         : item('list','Hastalarım')+item('new','+ Yeni Sipariş')+item('profile','Profil'))+

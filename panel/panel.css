@@ -24,7 +24,10 @@ input:focus,select:focus,textarea:focus{outline:none;border-color:var(--gold)}
 /* --- Giriş ekranı --- */
 .auth-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px}
 .auth-card{width:100%;max-width:340px;text-align:center}
-.auth-logo{font-size:34px}
+.auth-logo{font-size:34px;line-height:0}
+.emblem{fill:var(--gold)}
+.auth-logo .emblem{width:46px;height:auto;display:inline-block}
+.brand .emblem{width:22px;height:auto;flex:none}
 .auth-brand{font-family:var(--display);color:var(--gold);font-weight:700;font-size:20px;margin-top:4px}
 .auth-sub{opacity:.6;font-size:12px;margin-bottom:24px}
 .auth-card .field{text-align:left}

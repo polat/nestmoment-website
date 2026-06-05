@@ -19,9 +19,10 @@
 
   // küçük SVG placeholder (seed görselleri) — gerçek yüklemede data URL fotoğraf olur
   var PH='data:image/svg+xml;utf8,'+encodeURIComponent(
-    '<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200">'+
-    '<rect width="200" height="200" fill="#241c17"/>'+
-    '<text x="100" y="108" font-size="48" text-anchor="middle" fill="#d8b486">🍼</text></svg>');
+    '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 86 92" width="200" height="200">'+
+    '<rect width="86" height="92" fill="#241c17"/>'+
+    '<g fill="#d8b486"><circle cx="48" cy="24" r="15"/>'+
+    '<path d="M37 35 C20 42 16 64 31 74 C44 83 65 78 69 61 C72 49 64 41 53 43 C60 48 60 57 53 61 C44 66 36 59 37 49 Z"/></g></svg>');
 
   function read(k){ try{return JSON.parse(localStorage.getItem(k))||null;}catch(e){return null;} }
   function write(k,v){ localStorage.setItem(k, JSON.stringify(v)); }
