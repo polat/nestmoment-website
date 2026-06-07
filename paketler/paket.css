@@ -191,8 +191,18 @@ footer{border-top:1px solid var(--line-soft);padding:72px 0 40px;margin-top:40px
 .cfg-img{width:100%;height:100%;object-fit:cover;display:block}
 .cfg-glow{position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .5s ease;background:radial-gradient(60% 55% at 50% 42%,rgba(216,180,134,.38),transparent 70%);mix-blend-mode:screen}
 .cfg-glow.on{opacity:1}
-.cfg-engrave-overlay{position:absolute;left:0;right:0;bottom:9%;text-align:center;font-family:var(--display);font-size:clamp(.7rem,1.6vw,.95rem);letter-spacing:1px;color:var(--gold-soft);text-shadow:0 1px 6px rgba(0,0,0,.6);pointer-events:none;padding:0 10%}
-.cfg-cap{margin-top:20px;font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);min-height:1em}
+/* kaide plaketi — kazıma yazısı görselin altında, seçilen kaideye uyumlu, hep hizalı */
+.cfg-plate{margin-top:18px;width:100%;max-width:340px;min-height:48px;border-radius:9px;display:flex;align-items:center;justify-content:center;padding:.4rem 1rem;text-align:center;border:1px solid var(--line-soft);background:linear-gradient(180deg,#2a1f15,#160f0a);box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 10px 24px rgba(0,0,0,.45);transition:background .45s ease}
+.cfg-plate-text{font-family:var(--display);letter-spacing:1.5px;font-size:.95rem;color:var(--gold-soft);text-shadow:0 1px 2px rgba(0,0,0,.5);word-break:break-word}
+.cfg-plate-text.is-empty{opacity:.45;font-style:italic;letter-spacing:.4px;font-size:.78rem;text-shadow:none}
+.cfg-plate[data-base="dogal-ahsap"]{background:linear-gradient(180deg,#8a6840,#5a3f24)}
+.cfg-plate[data-base="siyah-metal"]{background:linear-gradient(180deg,#26262a,#121214)}
+.cfg-plate[data-base="gumus-metal"]{background:linear-gradient(180deg,#b8b8be,#76767c)}
+.cfg-plate[data-base="dogal-ahsap"] .cfg-plate-text,.cfg-plate[data-base="gumus-metal"] .cfg-plate-text{color:#1c1306;text-shadow:0 1px 1px rgba(255,255,255,.25)}
+.cfg-cap{margin-top:16px;font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);min-height:1em}
+/* geri linki (konfigüratör sayfası) */
+.cfg-back{display:inline-block;margin-bottom:18px;color:var(--muted);text-decoration:none;font-size:.85rem;letter-spacing:.02em;transition:color .25s}
+.cfg-back:hover{color:var(--gold-soft)}
 /* adımlar */
 .cfg-steps{padding:30px 34px}
 .cfg-step{border-bottom:1px solid var(--line-soft);padding:18px 0;transition:opacity .4s ease}
@@ -235,6 +245,16 @@ footer{border-top:1px solid var(--line-soft);padding:72px 0 40px;margin-top:40px
   font-size:1rem;border:none;border-radius:40px;padding:.85rem 2rem;box-shadow:0 10px 34px rgba(216,180,134,.22);transition:.25s}
 .cfg-order:hover{transform:translateY(-2px);box-shadow:0 14px 40px rgba(216,180,134,.3)}
 .cfg-order:focus-visible{outline:2px solid #1c1306;outline-offset:2px}
+/* ferah yerleşim — konfigüratörün kendi sayfası (anneye-ozel-tasarla.html) */
+.cfg-section--page{padding-top:36px}
+.cfg-section--page .cfg-head{margin-bottom:34px}
+.cfg--page .cfg-prev{min-height:560px;padding:52px}
+.cfg--page .cfg-stage{max-width:400px}
+.cfg--page .cfg-plate{max-width:400px}
+.cfg--page .cfg-steps{padding:52px 48px;display:flex;flex-direction:column;justify-content:center}
+.cfg--page .cfg-step{padding:22px 0}
+.cfg--page .cfg-opts{margin-top:18px;gap:14px}
+.cfg--page .cfg-bar{padding:28px 48px}
 
 /* RESPONSIVE */
 @media(max-width:880px){
@@ -247,6 +267,11 @@ footer{border-top:1px solid var(--line-soft);padding:72px 0 40px;margin-top:40px
   .cfg-stage{max-width:260px}
   .cfg-steps{padding:24px}
   .cfg-bar{padding:18px 24px}
+  .cfg--page .cfg-prev{min-height:0;padding:26px}
+  .cfg--page .cfg-stage{max-width:300px}
+  .cfg--page .cfg-plate{max-width:300px}
+  .cfg--page .cfg-steps{padding:24px}
+  .cfg--page .cfg-bar{padding:18px 24px}
 }
 @media(max-width:680px){
   body{padding-top:74px}

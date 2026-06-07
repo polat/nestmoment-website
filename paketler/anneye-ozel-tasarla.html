@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Just for Mom · Build Your Order — Nest Moment</title>
+<meta name="robots" content="index, follow" />
+<link rel="icon" type="image/svg+xml" href="../images/favicon.svg" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="paket.css">
+</head>
+<body>
+<header id="header">
+  <div class="wrap nav">
+    <button class="burger" id="burger" aria-label="Menu"><span></span><span></span><span></span></button>
+    <a href="../index.html" class="brand"><svg class="brand-emblem" viewBox="0 0 86 92" aria-hidden="true"><circle cx="48" cy="24" r="15"/><path d="M37 35 C20 42 16 64 31 74 C44 83 65 78 69 61 C72 49 64 41 53 43 C60 48 60 57 53 61 C44 66 36 59 37 49 Z"/></svg>Nest <span class="brand-m">Moment</span></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="../index.html#how" data-i18n="nav.how">Nasıl Çalışır</a></li>
+      <li><a href="../index.html#packages" class="active" data-i18n="nav.packages">Paketler</a></li>
+      <li><a href="../index.html#contact" data-i18n="nav.contact">İletişim</a></li>
+      <li><a href="../index.html#doctors" data-i18n="nav.doctors">Kadın Doğum Uzmanları İçin</a></li>
+    </ul>
+    <div class="nav-right">
+      <a href="https://wa.me/905317941915" data-wa target="_blank" rel="noopener" class="nav-wa" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20" aria-hidden="true"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.945C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 018.413 3.488 11.824 11.824 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 001.51 5.26l-.999 3.648 3.978-1.039zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg><span data-i18n="nav.wa">WhatsApp</span></a>
+      <button class="lang" id="langBtn"></button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="cfg-section cfg-section--page reveal" aria-labelledby="cfgHeading">
+    <a href="anneye-ozel.html" class="cfg-back" data-i18n="cfg.back">← Anneye Özel</a>
+    <div class="cfg-head">
+      <h2 id="cfgHeading" data-i18n="cfg.title">Kendi anını kur</h2>
+      <p data-i18n="cfg.subtitle">Birkaç adımda, tamamen sana ait bir esere dönüştür.</p>
+    </div>
+    <div class="cfg cfg--page">
+      <div class="cfg-grid">
+
+        <div class="cfg-prev">
+          <div class="cfg-stage">
+            <img id="cfgImg" class="cfg-img" src="../images/paket-1.jpeg" alt="">
+            <div class="cfg-glow" id="cfgGlow"></div>
+          </div>
+          <div class="cfg-plate" id="cfgPlate" data-base="siyah-ahsap"><span class="cfg-plate-text" id="cfgPlateText"></span></div>
+          <div class="cfg-cap" id="cfgCaption"></div>
+        </div>
+
+        <div class="cfg-steps">
+          <div class="cfg-step" data-step="size">
+            <div class="cfg-snum"><span data-i18n="cfg.step1">Adım 01</span></div>
+            <div class="cfg-stitle"><span data-i18n="cfg.size">Boyut</span><span class="cfg-done" data-done-for="size"></span></div>
+            <div class="cfg-opts">
+              <button class="cfg-pill" data-attr="size" data-value="m"><span data-i18n="cfg.size.m">M</span><small>8×12 cm</small></button>
+              <button class="cfg-pill" data-attr="size" data-value="l"><span data-i18n="cfg.size.l">L</span><small>10×15 cm</small></button>
+              <button class="cfg-pill" data-attr="size" data-value="xl"><span data-i18n="cfg.size.xl">XL</span><small>15×20 cm</small></button>
+            </div>
+          </div>
+
+          <div class="cfg-step is-locked" data-step="base">
+            <div class="cfg-snum"><span data-i18n="cfg.step2">Adım 02</span></div>
+            <div class="cfg-stitle"><span data-i18n="cfg.base">Kaiden</span><span class="cfg-done" data-done-for="base"></span></div>
+            <div class="cfg-opts">
+              <button class="cfg-sw" data-attr="base" data-value="siyah-ahsap" data-price="0"><i style="background:linear-gradient(135deg,#2a1f15,#160f0a)"></i><span data-i18n="cfg.base.siyah-ahsap">Siyah Ahşap</span><em class="cfg-hint"></em></button>
+              <button class="cfg-sw" data-attr="base" data-value="dogal-ahsap" data-price="0"><i style="background:linear-gradient(135deg,#8a6840,#5a3f24)"></i><span data-i18n="cfg.base.dogal-ahsap">Doğal Ahşap</span><em class="cfg-hint"></em></button>
+              <button class="cfg-sw" data-attr="base" data-value="siyah-metal" data-price="350"><i style="background:linear-gradient(135deg,#26262a,#121214)"></i><span data-i18n="cfg.base.siyah-metal">Siyah Metal</span><em class="cfg-hint"></em></button>
+              <button class="cfg-sw" data-attr="base" data-value="gumus-metal" data-price="350"><i style="background:linear-gradient(135deg,#b8b8be,#76767c)"></i><span data-i18n="cfg.base.gumus-metal">Gümüş Metal</span><em class="cfg-hint"></em></button>
+            </div>
+          </div>
+
+          <div class="cfg-step is-locked" data-step="light">
+            <div class="cfg-snum"><span data-i18n="cfg.step3">Adım 03</span></div>
+            <div class="cfg-stitle"><span data-i18n="cfg.light">Işık</span><span class="cfg-done" data-done-for="light"></span></div>
+            <div class="cfg-opts">
+              <button class="cfg-sw" data-attr="light" data-value="isikli" data-price="250"><i style="background:radial-gradient(circle at 50% 40%,rgba(216,180,134,.7),#1a140d)"></i><span data-i18n="cfg.light.isikli">Işıklı</span><em class="cfg-hint"></em></button>
+              <button class="cfg-sw" data-attr="light" data-value="isiksiz" data-price="0"><i style="background:linear-gradient(135deg,#1a140d,#0c0a09)"></i><span data-i18n="cfg.light.isiksiz">Işıksız</span><em class="cfg-hint"></em></button>
+            </div>
+          </div>
+
+          <div class="cfg-step is-locked" data-step="engraving">
+            <div class="cfg-snum"><span data-i18n="cfg.step4">Adım 04</span></div>
+            <div class="cfg-stitle"><span data-i18n="cfg.engraving">Kaide üzerine yazı</span></div>
+            <div class="cfg-eng-wrap">
+              <input id="cfgEngraving" class="cfg-input" type="text" data-attr="engraving" maxlength="30" placeholder="Defne · 12.05.2026">
+              <div class="cfg-count"><span id="cfgCount">0</span>/30</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="cfg-bar">
+          <div class="cfg-totline"><span data-i18n="cfg.total">TOPLAM:</span> <b id="cfgTotal">—</b></div>
+          <a class="cfg-order" href="#" data-order><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg><span data-i18n="cfg.order">Sipariş Ver</span></a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a href="../index.html" class="brand"><svg viewBox="0 0 86 92" aria-hidden="true"><circle cx="48" cy="24" r="15"/><path d="M37 35 C20 42 16 64 31 74 C44 83 65 78 69 61 C72 49 64 41 53 43 C60 48 60 57 53 61 C44 66 36 59 37 49 Z"/></svg>Nest <span class="brand-m">Moment</span></a>
+        <p data-i18n-html="footer.tagline">Your first moment. Forever.</p>
+        <div class="foot-contact">
+          <a href="mailto:hello@nestmoment.com" class="foot-mail">hello@nestmoment.com</a>
+          <a href="tel:+908501234567" class="foot-phone">0 (850) 123 45 67</a>
+          <div class="foot-social">
+            <a href="https://www.facebook.com/nestmoment" target="_blank" rel="noopener" class="foot-soc" aria-label="Facebook"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06c0 5.02 3.66 9.18 8.44 9.94v-7.03H7.9v-2.91h2.54V9.85c0-2.51 1.49-3.9 3.78-3.9 1.09 0 2.24.2 2.24.2v2.46h-1.26c-1.24 0-1.63.77-1.63 1.56v1.88h2.78l-.44 2.91h-2.34V22c4.78-.76 8.44-4.92 8.44-9.94z"/></svg></a>
+            <a href="https://instagram.com/nestmoment" target="_blank" rel="noopener" class="foot-soc" aria-label="Instagram"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="5.5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.1" fill="currentColor" stroke="none"/></svg></a>
+            <a href="https://www.tiktok.com/@nestmoment" target="_blank" rel="noopener" class="foot-soc" aria-label="TikTok"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.53 1.5h3.4c.19 1.78 1.18 3.35 2.66 4.3a6.83 6.83 0 0 0 3.41 1.08v3.39a10.18 10.18 0 0 1-5.6-1.7v6.86a6.45 6.45 0 1 1-6.45-6.45c.33 0 .65.03.97.08v3.49a3.02 3.02 0 1 0 2.21 2.9V1.5z"/></svg></a>
+            <a href="https://www.pinterest.com/nestmoment" target="_blank" rel="noopener" class="foot-soc" aria-label="Pinterest"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.48 2 2 6.48 2 12c0 4.24 2.64 7.86 6.36 9.32-.09-.79-.17-2 .03-2.86.18-.78 1.17-4.97 1.17-4.97s-.3-.6-.3-1.48c0-1.39.81-2.43 1.81-2.43.85 0 1.27.64 1.27 1.41 0 .86-.55 2.14-.83 3.33-.24 1 .5 1.81 1.48 1.81 1.78 0 3.14-1.88 3.14-4.58 0-2.39-1.72-4.07-4.18-4.07-2.85 0-4.52 2.13-4.52 4.34 0 .86.33 1.78.74 2.28.08.1.09.19.07.29-.08.32-.24.98-.27 1.11-.04.18-.14.22-.33.13-1.24-.58-2.01-2.38-2.01-3.83 0-3.12 2.27-5.99 6.54-5.99 3.43 0 6.1 2.45 6.1 5.72 0 3.41-2.15 6.16-5.13 6.16-1 0-1.95-.52-2.27-1.14l-.62 2.35c-.22.86-.83 1.94-1.24 2.6.93.29 1.92.44 2.95.44 5.52 0 10-4.48 10-10S17.52 2 12 2z"/></svg></a>
+          </div>
+        </div>
+      </div>
+      <div class="foot-cols">
+                <div class="foot-col">
+          <h4 data-i18n="footer.explore">Explore</h4>
+          <a href="../index.html#how" data-i18n="nav.how">Our Story</a>
+          <a href="../hakkimizda.html" data-i18n="nav.about">About</a>
+          <a href="../index.html#packages" data-i18n="nav.packages">Packages</a>
+          <a href="../iletisim.html" data-i18n="nav.contact">Contact</a>
+        </div>
+        <div class="foot-col">
+          <h4 data-i18n="footer.more">More</h4>
+          <a href="../index.html#doctors" data-i18n="nav.doctors">For Obstetricians</a>
+          <a href="../teslimat-iade.html" data-i18n="footer.shipping">Shipping &amp; Returns</a>
+          <a href="../kvkk.html" data-i18n="footer.privacy">Privacy</a>
+          <a href="../cerez-politikasi.html" data-i18n="footer.cookies">Cookie Policy</a>
+          <a href="../panel.html" data-i18n="nav.doctor_login">Doctor Login</a>
+        </div>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span data-i18n="footer.rights">© 2026 Nest Moment. All rights reserved.</span>
+      <span class="foot-made"><span data-i18n="footer.made">Made with love</span><svg class="foot-heart" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></span>
+      <button class="lang" id="langBtnFoot" aria-label="Language"></button>
+    </div>
+  </div>
+</footer>
+
+<script>
+window.PKG_WA = {
+  tr:"Merhaba, Anneye Özel paketi hakkında bilgi almak istiyorum.",
+  en:"Hello, I'd like information about the Just for Mom package."
+};
+window.PAGE_I18N = {
+  tr:{
+    "doctitle":"Anneye Özel · Siparişini Oluştur — Nest Moment",
+    "cfg.back":"← Anneye Özel",
+    "cfg.title":"Kendi anını kur",
+    "cfg.subtitle":"Boyutu, kaideyi, ışığı ve kaide yazısını seçerek tamamen sana ait bir esere dönüştür.",
+    "cfg.step1":"Adım 01","cfg.step2":"Adım 02","cfg.step3":"Adım 03","cfg.step4":"Adım 04",
+    "cfg.size":"Boyut","cfg.size.m":"M","cfg.size.l":"L","cfg.size.xl":"XL",
+    "cfg.base":"Kaiden",
+    "cfg.base.siyah-ahsap":"Siyah Ahşap","cfg.base.dogal-ahsap":"Doğal Ahşap",
+    "cfg.base.siyah-metal":"Siyah Metal","cfg.base.gumus-metal":"Gümüş Metal",
+    "cfg.light":"Işık","cfg.light.isikli":"Işıklı","cfg.light.isiksiz":"Işıksız",
+    "cfg.engraving":"Kaide üzerine yazı",
+    "cfg.plate.empty":"Kaideye işlenecek yazı burada görünür",
+    "cfg.included":"dahil","cfg.total":"TOPLAM:","cfg.order":"Sipariş Ver"
+  },
+  en:{
+    "doctitle":"Just for Mom · Build Your Order — Nest Moment",
+    "cfg.back":"← Just for Mom",
+    "cfg.title":"Build your moment",
+    "cfg.subtitle":"Choose the size, base, light and engraving to turn it into a piece that is entirely yours.",
+    "cfg.step1":"Step 01","cfg.step2":"Step 02","cfg.step3":"Step 03","cfg.step4":"Step 04",
+    "cfg.size":"Size","cfg.size.m":"M","cfg.size.l":"L","cfg.size.xl":"XL",
+    "cfg.base":"Your base",
+    "cfg.base.siyah-ahsap":"Black Wood","cfg.base.dogal-ahsap":"Natural Wood",
+    "cfg.base.siyah-metal":"Black Metal","cfg.base.gumus-metal":"Silver Metal",
+    "cfg.light":"Light","cfg.light.isikli":"Lit","cfg.light.isiksiz":"Unlit",
+    "cfg.engraving":"Engraving on the base",
+    "cfg.plate.empty":"Your base engraving appears here",
+    "cfg.included":"included","cfg.total":"TOTAL:","cfg.order":"Order Now"
+  }
+};
+</script>
+<script src="paket.js"></script>
+<script src="configurator.js"></script>
+<script src="../cookie.js"></script>
+</body>
+</html>

@@ -1,5 +1,5 @@
 /* Nest Moment — Anneye Özel kişiselleştirme konfigüratörü.
-   Yalnızca anneye-ozel.html'e özeldir; paket.js'ten SONRA yüklenir.
+   anneye-ozel-tasarla.html sayfasına özeldir; paket.js'ten SONRA yüklenir.
    WooCommerce'e geçişte data-attr/data-value/data-price doğrudan varyasyonlara map edilir. */
 (function () {
   // FİYATLAR — PLACEHOLDER. Gerçek rakamlar yalnızca buradan değiştirilir.
@@ -43,6 +43,14 @@
       if (d && d["cfg.included"]) return d["cfg.included"];
     }
     return curLang() === "tr" ? "dahil" : "included";
+  }
+
+  function platePlaceholder() {
+    if (typeof dict === "function") {
+      var d = dict(curLang());
+      if (d && d["cfg.plate.empty"]) return d["cfg.plate.empty"];
+    }
+    return curLang() === "tr" ? "Kaideye işlenecek yazı burada görünür" : "Your base engraving appears here";
   }
 
   // Seçili butonun görünen etiketi (applyLang çevirdiği için dile uyumlu)
@@ -102,9 +110,19 @@
     var glow = document.getElementById("cfgGlow");
     if (glow) glow.classList.toggle("on", state.light === "isikli");
 
-    // 6) kaide kazıma önizleme
-    var eng = document.getElementById("cfgEngraveOverlay");
-    if (eng) eng.textContent = state.engraving;
+    // 6) kaide kazıma plaketi (görselin altında, seçilen kaideye uyumlu, hep hizalı)
+    var plate = document.getElementById("cfgPlate");
+    if (plate) plate.setAttribute("data-base", state.base || "siyah-ahsap");
+    var plateText = document.getElementById("cfgPlateText");
+    if (plateText) {
+      if (state.engraving) {
+        plateText.textContent = state.engraving;
+        plateText.classList.remove("is-empty");
+      } else {
+        plateText.textContent = platePlaceholder();
+        plateText.classList.add("is-empty");
+      }
+    }
 
     // 7) yapılandırma etiketi
     var cap = document.getElementById("cfgCaption");
