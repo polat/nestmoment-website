@@ -33,7 +33,7 @@
   <section class="cfg-section cfg-section--page reveal" aria-labelledby="cfgHeading">
     <a href="anneye-ozel.html" class="cfg-back" data-i18n="cfg.back">← Anneye Özel</a>
     <div class="cfg-head">
-      <h2 id="cfgHeading" data-i18n="cfg.title">Kendi anını kur</h2>
+      <h2 id="cfgHeading" data-i18n="cfg.title">İlk anını oluştur</h2>
       <p data-i18n="cfg.subtitle">Birkaç adımda, tamamen sana ait bir esere dönüştür.</p>
     </div>
     <div class="cfg cfg--page">
@@ -50,18 +50,16 @@
 
         <div class="cfg-steps">
           <div class="cfg-step" data-step="size">
-            <div class="cfg-snum"><span data-i18n="cfg.step1">Adım 01</span></div>
             <div class="cfg-stitle"><span data-i18n="cfg.size">Boyut</span><span class="cfg-done" data-done-for="size"></span></div>
             <div class="cfg-opts">
-              <button class="cfg-pill" data-attr="size" data-value="m"><span data-i18n="cfg.size.m">M</span><small>8×12 cm</small></button>
-              <button class="cfg-pill" data-attr="size" data-value="l"><span data-i18n="cfg.size.l">L</span><small>10×15 cm</small></button>
-              <button class="cfg-pill" data-attr="size" data-value="xl"><span data-i18n="cfg.size.xl">XL</span><small>15×20 cm</small></button>
+              <button class="cfg-pill" data-attr="size" data-value="m"><span data-i18n="cfg.size.m">M</span><small>8×12 cm</small><em class="cfg-hint"></em></button>
+              <button class="cfg-pill" data-attr="size" data-value="l"><span data-i18n="cfg.size.l">L</span><small>10×15 cm</small><em class="cfg-hint"></em></button>
+              <button class="cfg-pill" data-attr="size" data-value="xl"><span data-i18n="cfg.size.xl">XL</span><small>15×20 cm</small><em class="cfg-hint"></em></button>
             </div>
           </div>
 
           <div class="cfg-step is-locked" data-step="base">
-            <div class="cfg-snum"><span data-i18n="cfg.step2">Adım 02</span></div>
-            <div class="cfg-stitle"><span data-i18n="cfg.base">Kaiden</span><span class="cfg-done" data-done-for="base"></span></div>
+            <div class="cfg-stitle"><span data-i18n="cfg.base">Kaide</span><span class="cfg-done" data-done-for="base"></span></div>
             <div class="cfg-opts">
               <button class="cfg-sw" data-attr="base" data-value="siyah-ahsap" data-price="0"><i style="background:linear-gradient(135deg,#2a1f15,#160f0a)"></i><span data-i18n="cfg.base.siyah-ahsap">Siyah Ahşap</span><em class="cfg-hint"></em></button>
               <button class="cfg-sw" data-attr="base" data-value="dogal-ahsap" data-price="0"><i style="background:linear-gradient(135deg,#8a6840,#5a3f24)"></i><span data-i18n="cfg.base.dogal-ahsap">Doğal Ahşap</span><em class="cfg-hint"></em></button>
@@ -71,7 +69,6 @@
           </div>
 
           <div class="cfg-step is-locked" data-step="light">
-            <div class="cfg-snum"><span data-i18n="cfg.step3">Adım 03</span></div>
             <div class="cfg-stitle"><span data-i18n="cfg.light">Işık</span><span class="cfg-done" data-done-for="light"></span></div>
             <div class="cfg-opts">
               <button class="cfg-sw" data-attr="light" data-value="isikli" data-price="250"><i style="background:radial-gradient(circle at 50% 40%,rgba(216,180,134,.7),#1a140d)"></i><span data-i18n="cfg.light.isikli">Işıklı</span><em class="cfg-hint"></em></button>
@@ -80,7 +77,6 @@
           </div>
 
           <div class="cfg-step is-locked" data-step="engraving">
-            <div class="cfg-snum"><span data-i18n="cfg.step4">Adım 04</span></div>
             <div class="cfg-stitle"><span data-i18n="cfg.engraving">Kaide üzerine yazı</span></div>
             <div class="cfg-eng-wrap">
               <input id="cfgEngraving" class="cfg-input" type="text" data-attr="engraving" maxlength="30" placeholder="Defne · 12.05.2026">
@@ -90,8 +86,11 @@
         </div>
 
         <div class="cfg-bar">
-          <div class="cfg-totline"><span data-i18n="cfg.total">TOPLAM:</span> <b id="cfgTotal">—</b></div>
-          <a class="cfg-order" href="#" data-order><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg><span data-i18n="cfg.order">Sipariş Ver</span></a>
+          <div class="cfg-summary" id="cfgSummary"></div>
+          <div class="cfg-bar-right">
+            <div class="cfg-totline"><span data-i18n="cfg.total">TOPLAM:</span> <b id="cfgTotal">—</b></div>
+            <a class="cfg-order" href="#" data-order><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg><span data-i18n="cfg.order">Sipariş Ver</span></a>
+          </div>
         </div>
 
       </div>
@@ -151,16 +150,17 @@ window.PAGE_I18N = {
   tr:{
     "doctitle":"Anneye Özel · Siparişini Oluştur — Nest Moment",
     "cfg.back":"← Anneye Özel",
-    "cfg.title":"Kendi anını kur",
+    "cfg.title":"İlk anını oluştur",
     "cfg.subtitle":"Boyutu, kaideyi, ışığı ve kaide yazısını seçerek tamamen sana ait bir esere dönüştür.",
     "cfg.step1":"Adım 01","cfg.step2":"Adım 02","cfg.step3":"Adım 03","cfg.step4":"Adım 04",
     "cfg.size":"Boyut","cfg.size.m":"M","cfg.size.l":"L","cfg.size.xl":"XL",
-    "cfg.base":"Kaiden",
+    "cfg.base":"Kaide",
     "cfg.base.siyah-ahsap":"Siyah Ahşap","cfg.base.dogal-ahsap":"Doğal Ahşap",
     "cfg.base.siyah-metal":"Siyah Metal","cfg.base.gumus-metal":"Gümüş Metal",
     "cfg.light":"Işık","cfg.light.isikli":"Işıklı","cfg.light.isiksiz":"Işıksız",
     "cfg.engraving":"Kaide üzerine yazı",
     "cfg.plate.empty":"Kaideye işlenecek yazı burada görünür",
+    "cfg.none":"Seçim Yapılmadı","cfg.empty":"Boş",
     "cfg.included":"dahil","cfg.total":"TOPLAM:","cfg.order":"Sipariş Ver"
   },
   en:{
@@ -176,6 +176,7 @@ window.PAGE_I18N = {
     "cfg.light":"Light","cfg.light.isikli":"Lit","cfg.light.isiksiz":"Unlit",
     "cfg.engraving":"Engraving on the base",
     "cfg.plate.empty":"Your base engraving appears here",
+    "cfg.none":"Not selected","cfg.empty":"Empty",
     "cfg.included":"included","cfg.total":"TOTAL:","cfg.order":"Order Now"
   }
 };

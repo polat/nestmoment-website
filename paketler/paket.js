@@ -12,7 +12,7 @@ const COMMON_I18N = {
     "sec.gallery":"Galeri",
     "gallery.soon":"görsel yakında",
     "sec.faq":"Sıkça sorulanlar",
-    "cta.title":"Bu paket için bilgi al",
+    "cta.title":"Bu paket ile ilgili bilgi al",
     "cta.text":"Paket hakkında tüm sorularınızı, WhatsApp, Telefon ya da E-posta üzerinden bize iletebilirsiniz.",
     "cta.wa":"Hemen Sipariş Ver",
     "cta.call":"Bizi Arayın",
