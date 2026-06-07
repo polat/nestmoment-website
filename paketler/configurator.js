@@ -14,6 +14,7 @@
   var STEP_ORDER = ["size", "base", "light", "engraving"];
   var state = { size: "l", base: null, light: null, engraving: "" }; // sadece boyut ön-seçili
   var MAXLEN = 30;
+  var lastDesiredSrc = null; // en son istenen önizleme görseli (eksik varyantı tekrar tekrar istememek için)
 
   function formatTRY(n) { return n.toLocaleString("tr-TR") + " ₺"; }
 
@@ -86,11 +87,12 @@
     var activeEl = document.querySelector('.cfg-step[data-step="' + firstUnsat + '"]');
     if (activeEl && !activeEl.classList.contains("is-locked")) activeEl.classList.add("is-active");
 
-    // 4) önizleme görseli (+fallback)
+    // 4) önizleme görseli (+fallback) — aynı (eksik olabilen) varyant tekrar istenmesin
     var img = document.getElementById("cfgImg");
     if (img) {
       var src = variantSrc(state);
-      if (img.getAttribute("src") !== src) {
+      if (src !== lastDesiredSrc) {
+        lastDesiredSrc = src;
         img.onerror = function () { this.onerror = null; this.src = "../images/paket-1.jpeg"; };
         img.src = src;
       }
