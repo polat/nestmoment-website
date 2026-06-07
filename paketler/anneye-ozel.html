@@ -81,15 +81,70 @@
     <details><summary><span data-i18n="faqQ3"></span><span class="pm"></span></summary><div class="faq-a" data-i18n="faqA3"></div></details>
   </section>
 
-  <section class="p-cta reveal">
-    <h2 data-i18n="cta.title">Get details for this package</h2>
-    <p data-i18n="cta.text">We share pricing and details personally via WhatsApp or phone.</p>
-    <div class="p-cta-btns">
-      <a href="https://wa.me/905317941915" data-wa target="_blank" rel="noopener" class="btn btn-wa">
-        <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18" aria-hidden="true"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.945C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 018.413 3.488 11.824 11.824 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 001.51 5.26l-.999 3.648 3.978-1.039zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
-        <span data-i18n="cta.wa">Message on WhatsApp</span>
-      </a>
-      <a href="tel:+905317941915" class="btn btn-call"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg><span data-i18n="cta.call">Call Us</span></a>
+  <section class="cfg-section reveal" id="configurator" aria-labelledby="cfgHeading">
+    <div class="cfg-head">
+      <h2 id="cfgHeading" data-i18n="cfg.title">Kendi anını kur</h2>
+      <p data-i18n="cfg.subtitle">Birkaç adımda, tamamen sana ait.</p>
+    </div>
+    <div class="cfg">
+      <div class="cfg-grid">
+
+        <div class="cfg-prev">
+          <div class="cfg-stage">
+            <img id="cfgImg" class="cfg-img" src="../images/paket-1.jpeg" alt="">
+            <div class="cfg-glow" id="cfgGlow"></div>
+            <div class="cfg-engrave-overlay" id="cfgEngraveOverlay"></div>
+          </div>
+          <div class="cfg-cap" id="cfgCaption"></div>
+        </div>
+
+        <div class="cfg-steps">
+          <div class="cfg-step" data-step="size">
+            <div class="cfg-snum"><span data-i18n="cfg.step1">Adım 01</span></div>
+            <div class="cfg-stitle"><span data-i18n="cfg.size">Boyut</span><span class="cfg-done" data-done-for="size"></span></div>
+            <div class="cfg-opts">
+              <button class="cfg-pill" data-attr="size" data-value="m"><span data-i18n="cfg.size.m">M</span><small>8×12 cm</small></button>
+              <button class="cfg-pill" data-attr="size" data-value="l"><span data-i18n="cfg.size.l">L</span><small>10×15 cm</small></button>
+              <button class="cfg-pill" data-attr="size" data-value="xl"><span data-i18n="cfg.size.xl">XL</span><small>15×20 cm</small></button>
+            </div>
+          </div>
+
+          <div class="cfg-step is-locked" data-step="base">
+            <div class="cfg-snum"><span data-i18n="cfg.step2">Adım 02</span></div>
+            <div class="cfg-stitle"><span data-i18n="cfg.base">Kaiden</span><span class="cfg-done" data-done-for="base"></span></div>
+            <div class="cfg-opts">
+              <button class="cfg-sw" data-attr="base" data-value="siyah-ahsap" data-price="0"><i style="background:linear-gradient(135deg,#2a1f15,#160f0a)"></i><span data-i18n="cfg.base.siyah-ahsap">Siyah Ahşap</span><em class="cfg-hint"></em></button>
+              <button class="cfg-sw" data-attr="base" data-value="dogal-ahsap" data-price="0"><i style="background:linear-gradient(135deg,#8a6840,#5a3f24)"></i><span data-i18n="cfg.base.dogal-ahsap">Doğal Ahşap</span><em class="cfg-hint"></em></button>
+              <button class="cfg-sw" data-attr="base" data-value="siyah-metal" data-price="350"><i style="background:linear-gradient(135deg,#26262a,#121214)"></i><span data-i18n="cfg.base.siyah-metal">Siyah Metal</span><em class="cfg-hint"></em></button>
+              <button class="cfg-sw" data-attr="base" data-value="gumus-metal" data-price="350"><i style="background:linear-gradient(135deg,#b8b8be,#76767c)"></i><span data-i18n="cfg.base.gumus-metal">Gümüş Metal</span><em class="cfg-hint"></em></button>
+            </div>
+          </div>
+
+          <div class="cfg-step is-locked" data-step="light">
+            <div class="cfg-snum"><span data-i18n="cfg.step3">Adım 03</span></div>
+            <div class="cfg-stitle"><span data-i18n="cfg.light">Işık</span><span class="cfg-done" data-done-for="light"></span></div>
+            <div class="cfg-opts">
+              <button class="cfg-sw" data-attr="light" data-value="isikli" data-price="250"><i style="background:radial-gradient(circle at 50% 40%,rgba(216,180,134,.7),#1a140d)"></i><span data-i18n="cfg.light.isikli">Işıklı</span><em class="cfg-hint"></em></button>
+              <button class="cfg-sw" data-attr="light" data-value="isiksiz" data-price="0"><i style="background:linear-gradient(135deg,#1a140d,#0c0a09)"></i><span data-i18n="cfg.light.isiksiz">Işıksız</span><em class="cfg-hint"></em></button>
+            </div>
+          </div>
+
+          <div class="cfg-step is-locked" data-step="engraving">
+            <div class="cfg-snum"><span data-i18n="cfg.step4">Adım 04</span></div>
+            <div class="cfg-stitle"><span data-i18n="cfg.engraving">Kaide üzerine yazı</span></div>
+            <div class="cfg-eng-wrap">
+              <input id="cfgEngraving" class="cfg-input" type="text" data-attr="engraving" maxlength="30" placeholder="Defne · 12.05.2026">
+              <div class="cfg-count"><span id="cfgCount">0</span>/30</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="cfg-bar">
+          <div class="cfg-totline"><span data-i18n="cfg.total">TOPLAM:</span> <b id="cfgTotal">—</b></div>
+          <a class="cfg-order" href="#" data-order><span data-i18n="cfg.order">Sipariş Ver</span> →</a>
+        </div>
+
+      </div>
     </div>
   </section>
 
@@ -170,7 +225,17 @@ window.PAGE_I18N = {
     "faqQ2":"İsim ve tarih kazınabilir mi?",
     "faqA2":"Evet. Bebeğinin ismi, doğum tarihi ya da kısa bir not, isteğe bağlı olarak kristale ya da kaideye işlenebilir.",
     "faqQ3":"Hediye olarak gönderebilir miyim?",
-    "faqA3":"Elbette. Özel kutusunda, dilersen kısa bir notla birlikte, doğrudan hediye edeceğin adrese gönderebiliriz."
+    "faqA3":"Elbette. Özel kutusunda, dilersen kısa bir notla birlikte, doğrudan hediye edeceğin adrese gönderebiliriz.",
+    "cfg.title":"Kendi anını kur",
+    "cfg.subtitle":"Birkaç adımda, tamamen sana ait bir esere dönüştür.",
+    "cfg.step1":"Adım 01","cfg.step2":"Adım 02","cfg.step3":"Adım 03","cfg.step4":"Adım 04",
+    "cfg.size":"Boyut","cfg.size.m":"M","cfg.size.l":"L","cfg.size.xl":"XL",
+    "cfg.base":"Kaiden",
+    "cfg.base.siyah-ahsap":"Siyah Ahşap","cfg.base.dogal-ahsap":"Doğal Ahşap",
+    "cfg.base.siyah-metal":"Siyah Metal","cfg.base.gumus-metal":"Gümüş Metal",
+    "cfg.light":"Işık","cfg.light.isikli":"Işıklı","cfg.light.isiksiz":"Işıksız",
+    "cfg.engraving":"Kaide üzerine yazı",
+    "cfg.included":"dahil","cfg.total":"TOPLAM:","cfg.order":"Sipariş Ver"
   },
   en:{
     "doctitle":"Just for Mom — Nest Moment",
@@ -189,11 +254,22 @@ window.PAGE_I18N = {
     "faqQ2":"Can a name and date be engraved?",
     "faqA2":"Yes. Your baby's name, due date or a short note can optionally be engraved on the crystal or the base.",
     "faqQ3":"Can I send it as a gift?",
-    "faqA3":"Of course. In its dedicated box — with a short note if you like — we can ship it straight to the recipient's address."
+    "faqA3":"Of course. In its dedicated box — with a short note if you like — we can ship it straight to the recipient's address.",
+    "cfg.title":"Build your moment",
+    "cfg.subtitle":"In a few steps, turn it into a piece that is entirely yours.",
+    "cfg.step1":"Step 01","cfg.step2":"Step 02","cfg.step3":"Step 03","cfg.step4":"Step 04",
+    "cfg.size":"Size","cfg.size.m":"M","cfg.size.l":"L","cfg.size.xl":"XL",
+    "cfg.base":"Your base",
+    "cfg.base.siyah-ahsap":"Black Wood","cfg.base.dogal-ahsap":"Natural Wood",
+    "cfg.base.siyah-metal":"Black Metal","cfg.base.gumus-metal":"Silver Metal",
+    "cfg.light":"Light","cfg.light.isikli":"Lit","cfg.light.isiksiz":"Unlit",
+    "cfg.engraving":"Engraving on the base",
+    "cfg.included":"included","cfg.total":"TOTAL:","cfg.order":"Order Now"
   }
 };
 </script>
 <script src="paket.js"></script>
+<script src="configurator.js"></script>
   <script src="../cookie.js"></script>
 </body>
 </html>
