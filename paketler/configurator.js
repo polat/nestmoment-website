@@ -1,5 +1,5 @@
 /* Nest Moment — Anneye Özel kişiselleştirme konfigüratörü.
-   Yalnızca anneye-ozel.html'e özeldir; paket.js'ten SONRA yüklenir.
+   anneye-ozel-tasarla.html sayfasına özeldir; paket.js'ten SONRA yüklenir.
    WooCommerce'e geçişte data-attr/data-value/data-price doğrudan varyasyonlara map edilir. */
 (function () {
   // FİYATLAR — PLACEHOLDER. Gerçek rakamlar yalnızca buradan değiştirilir.
@@ -12,7 +12,7 @@
   };
 
   var STEP_ORDER = ["size", "base", "light", "engraving"];
-  var state = { size: "l", base: null, light: null, engraving: "" }; // sadece boyut ön-seçili
+  var state = { size: "m", base: null, light: null, engraving: "" }; // sadece boyut ön-seçili (M)
   var MAXLEN = 30;
   var lastDesiredSrc = null; // en son istenen önizleme görseli (eksik varyantı tekrar tekrar istememek için)
 
@@ -45,12 +45,51 @@
     return curLang() === "tr" ? "dahil" : "included";
   }
 
+  function platePlaceholder() {
+    if (typeof dict === "function") {
+      var d = dict(curLang());
+      if (d && d["cfg.plate.empty"]) return d["cfg.plate.empty"];
+    }
+    return curLang() === "tr" ? "Kaideye işlenecek yazı burada görünür" : "Your base engraving appears here";
+  }
+
+  function dictLabel(key, trFallback, enFallback) {
+    if (typeof dict === "function") {
+      var d = dict(curLang());
+      if (d && d[key]) return d[key];
+    }
+    return curLang() === "tr" ? trFallback : enFallback;
+  }
+  function noneLabel()  { return dictLabel("cfg.none",  "Seçim Yapılmadı", "Not selected"); }
+  function emptyLabel() { return dictLabel("cfg.empty", "Boş", "Empty"); }
+
   // Seçili butonun görünen etiketi (applyLang çevirdiği için dile uyumlu)
   function selectedLabel(attr) {
     var btn = document.querySelector('[data-attr="' + attr + '"].is-on');
     if (!btn) return "";
     var span = btn.querySelector("[data-i18n]");
     return (span ? span.textContent : btn.textContent).trim();
+  }
+
+  // Adım başlığının dile uyumlu etiketi (ör. "Boyut", "Kaide", "Işık", "Kaide üzerine yazı")
+  function fieldLabel(step) {
+    var el = document.querySelector('.cfg-step[data-step="' + step + '"] .cfg-stitle [data-i18n]');
+    return el ? el.textContent.trim() : step;
+  }
+
+  // Özete tek satır ekler: "Etiket: Değer" (placeholder ise değer soluk gösterilir)
+  function addSummaryRow(container, label, value, placeholder) {
+    var row = document.createElement("span");
+    row.className = "s-row";
+    var lab = document.createElement("span");
+    lab.className = "s-lab";
+    lab.textContent = label + ": ";
+    row.appendChild(lab);
+    var val = document.createElement("span");
+    val.className = placeholder ? "s-val s-none" : "s-val";
+    val.textContent = value;
+    row.appendChild(val);
+    container.appendChild(row);
   }
 
   function render() {
@@ -71,6 +110,16 @@
       hint.textContent = p > 0 ? ("+" + formatTRY(p)) : inc;
     }
 
+    // 2b) boyut fiyat ipuçları — en küçük boyuta göre fark
+    var minBase = Math.min(PRICING.base.m, PRICING.base.l, PRICING.base.xl);
+    var sizeBtns = document.querySelectorAll('button[data-attr="size"]');
+    for (var s = 0; s < sizeBtns.length; s++) {
+      var sHint = sizeBtns[s].querySelector(".cfg-hint");
+      if (!sHint) continue;
+      var sd = (PRICING.base[sizeBtns[s].getAttribute("data-value")] || 0) - minBase;
+      sHint.textContent = sd > 0 ? ("+" + formatTRY(sd)) : inc;
+    }
+
     // 3) adım kilit/aktif/tamamlandı (yumuşak rehberli)
     for (var k = 0; k < STEP_ORDER.length; k++) {
       var step = STEP_ORDER[k];
@@ -87,14 +136,21 @@
     var activeEl = document.querySelector('.cfg-step[data-step="' + firstUnsat + '"]');
     if (activeEl && !activeEl.classList.contains("is-locked")) activeEl.classList.add("is-active");
 
-    // 4) önizleme görseli (+fallback) — aynı (eksik olabilen) varyant tekrar istenmesin
+    // 4) önizleme görseli — varyantı önce arka planda yükle; başarısızsa görünen
+    //    görseli HİÇ kırma (fallback'te kal), böylece 'kırık görsel' çerçevesi oluşmaz
     var img = document.getElementById("cfgImg");
     if (img) {
       var src = variantSrc(state);
       if (src !== lastDesiredSrc) {
         lastDesiredSrc = src;
-        img.onerror = function () { this.onerror = null; this.src = "../images/paket-1.jpeg"; };
-        img.src = src;
+        if (src.indexOf("/variants/") === -1) {
+          img.src = src; // temel / fallback görsel doğrudan
+        } else {
+          var probe = new Image();
+          probe.onload = function () { if (lastDesiredSrc === src) img.src = src; };
+          probe.onerror = function () { if (lastDesiredSrc === src) img.src = "../images/paket-1.jpeg"; };
+          probe.src = src;
+        }
       }
     }
 
@@ -102,17 +158,46 @@
     var glow = document.getElementById("cfgGlow");
     if (glow) glow.classList.toggle("on", state.light === "isikli");
 
-    // 6) kaide kazıma önizleme
-    var eng = document.getElementById("cfgEngraveOverlay");
-    if (eng) eng.textContent = state.engraving;
+    // 6) kaide kazıma plaketi (görselin altında, seçilen kaideye uyumlu, hep hizalı)
+    var plate = document.getElementById("cfgPlate");
+    if (plate) plate.setAttribute("data-base", state.base || "siyah-ahsap");
+    var plateText = document.getElementById("cfgPlateText");
+    if (plateText) {
+      if (state.engraving) {
+        plateText.textContent = state.engraving;
+        plateText.classList.remove("is-empty");
+      } else {
+        plateText.textContent = platePlaceholder();
+        plateText.classList.add("is-empty");
+      }
+    }
 
-    // 7) yapılandırma etiketi
+    // 7) yapılandırma etiketi (önizleme altı)
     var cap = document.getElementById("cfgCaption");
     if (cap) cap.textContent = [selectedLabel("size"), selectedLabel("base"), selectedLabel("light")].filter(Boolean).join(" · ");
+
+    // 7b) seçim özeti (bar sol) — 4 satır sabit; seçilmeyenler placeholder ile
+    var sum = document.getElementById("cfgSummary");
+    if (sum) {
+      sum.textContent = "";
+      var vSize = selectedLabel("size"), vBase = selectedLabel("base"), vLight = selectedLabel("light");
+      addSummaryRow(sum, fieldLabel("size"),  vSize || noneLabel(),  !vSize);
+      addSummaryRow(sum, fieldLabel("base"),  vBase || noneLabel(),  !vBase);
+      addSummaryRow(sum, fieldLabel("light"), vLight || noneLabel(), !vLight);
+      addSummaryRow(sum, fieldLabel("engraving"), state.engraving || emptyLabel(), !state.engraving);
+    }
 
     // 8) toplam
     var tot = document.getElementById("cfgTotal");
     if (tot) tot.textContent = formatTRY(computeTotal(state));
+
+    // 9) sipariş butonu — kaide ve ışık seçilmeden pasif
+    var orderBtn = document.querySelector("[data-order]");
+    if (orderBtn) {
+      var ready = !!(state.base && state.light);
+      orderBtn.classList.toggle("is-disabled", !ready);
+      orderBtn.setAttribute("aria-disabled", ready ? "false" : "true");
+    }
   }
 
   document.addEventListener("DOMContentLoaded", function () {

@@ -231,7 +231,10 @@
   .feature p{color:var(--muted);font-size:.98rem}
 
   /* PACKAGES */
-  .packages{display:grid;grid-template-columns:repeat(2,1fr);gap:30px}
+  .packages{display:grid;grid-template-columns:repeat(3,1fr);gap:30px;width:min(1480px,calc(100vw - 56px));margin-left:50%;transform:translateX(-50%)}
+  .pack.pack--featured{border-color:var(--gold);box-shadow:0 18px 60px rgba(216,180,134,.20);overflow:visible}
+  .pack.pack--featured .pack-img{border-radius:21px 21px 0 0}
+  .pack-badge{position:absolute;top:0;left:50%;transform:translate(-50%,-50%);z-index:3;white-space:nowrap;background:linear-gradient(135deg,var(--gold-soft),var(--gold-deep));color:#1c1306;font-family:var(--display);font-weight:700;font-size:.64rem;letter-spacing:.12em;text-transform:uppercase;padding:.42rem .8rem;border-radius:999px;box-shadow:0 6px 18px rgba(216,180,134,.35)}
   .pack{display:flex;flex-direction:column;text-decoration:none;border:1px solid var(--line);border-radius:22px;overflow:hidden;position:relative;
     background:linear-gradient(180deg,rgba(24,19,15,.9),rgba(13,11,9,.55));transition:transform .5s cubic-bezier(.2,.7,.2,1),border-color .5s,box-shadow .5s}
   .pack::before{content:"";position:absolute;top:0;left:0;right:0;height:2px;z-index:3;opacity:0;transition:.5s;
@@ -308,6 +311,7 @@
   .wa:hover{background:#26493c;border-color:var(--gold)}
   .btn-call{border:1px solid var(--gold-deep);color:var(--gold-soft)}
   .btn-call:hover{background:rgba(216,180,134,.10);border-color:var(--gold);transform:translateY(-2px)}
+  .doc-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
   .or{display:flex;align-items:center;gap:1rem;color:var(--muted-2);font-size:.8rem;letter-spacing:.2em;text-transform:uppercase;margin:2rem 0 0}
   .or::before,.or::after{content:"";flex:1;height:1px;background:var(--line-soft)}
   form{display:flex;flex-direction:column;gap:1.2rem;border:1px solid var(--line-soft);border-radius:20px;padding:40px;background:linear-gradient(180deg,rgba(21,17,14,.5),rgba(12,10,9,.2))}
@@ -320,6 +324,8 @@
   textarea{resize:vertical;min-height:110px}
   .kvkk{display:flex;gap:.7rem;align-items:flex-start;text-transform:none;letter-spacing:0;font-size:.86rem;color:var(--muted);line-height:1.5}
   .kvkk input{width:auto;margin-top:3px;accent-color:var(--gold)}
+  .kvkk a{color:var(--gold-soft);text-decoration:underline;text-underline-offset:2px}
+  .kvkk a:hover{color:var(--gold)}
   .form-success{display:none;color:var(--gold-soft);font-family:var(--display);font-size:1.3rem;font-style:italic;text-align:center;padding:1rem 0}
   .form-success.show{display:block}
 
@@ -375,7 +381,7 @@
     .trust-points{grid-template-columns:1fr}
     .steps{grid-template-columns:1fr}
     .features{grid-template-columns:1fr}
-    .packages{grid-template-columns:1fr 1fr}
+    .packages{grid-template-columns:1fr 1fr;width:auto;margin-left:0;transform:none}
   }
   @media(max-width:680px){
     .wrap{padding:0 20px}
@@ -455,7 +461,7 @@
     <div class="hero-fade">
       <span class="eyebrow hero-eyebrow" data-i18n="hero.eyebrow">Kristal cam içinde 3D ultrason anısı</span>
       <h1 data-i18n-html="hero.title"><span class="nw">İlk <em>yuva</em>sındaki,</span><br>o ilk <em>an</em>.<br>Sonsuza Dek.</h1>
-      <p class="hero-sub" data-i18n="hero.sub">Bebeğinin ilk görüntüsünü, kristalin içinde sonsuza dek parlayan bir esere dönüştürüyoruz.</p>
+      <p class="hero-sub" data-i18n="hero.sub">Bebeğinin ilk görüntüsünü, kristalin içinde sonsuza dek parlayan bir anıya dönüştürüyoruz.</p>
       <div class="hero-cta">
         <a href="#what" class="btn btn-gold" data-i18n="hero.scroll">Hikayeyi keşfet</a>
       </div>
@@ -496,7 +502,7 @@
         <div class="step-img"><img src="images/step-1.jpeg" alt="Ultrason görüntüsü paylaşımı"></div>
         <div class="num">01</div>
         <h3 data-i18n="how.s1t">Ultrason görüntünü paylaş.</h3>
-        <p class="step-note" data-i18n-html="how.s1n">Hekiminizden <b>.dcm</b> ya da <b>.stl</b> formatında görüntünüzü talep etmelisiniz.</p>
+        <p class="step-note" data-i18n-html="how.s1n">Hekiminizin, <b>.dcm</b> formatında ultrason görüntüsünü sisteme yüklemesi gerekir.</p>
       </div>
       <div class="step reveal">
         <div class="step-img"><img src="images/step-2.jpeg" alt="Görüntünün 3D'ye dönüştürülmesi"></div>
@@ -523,17 +529,17 @@
       <div class="feature reveal">
         <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M12 2v20M2 12h20" stroke-linecap="round"/><circle cx="12" cy="12" r="9"/></svg>
         <h3 data-i18n="why.f1t">Kalıcı</h3>
-        <p data-i18n="why.f1d">Yıllar geçse de ilk günkü netlik.</p>
+        <p data-i18n="why.f1d">Yıllar geçse de ilk andaki netlik.</p>
       </div>
       <div class="feature reveal">
         <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"><path d="M6 3h12l4 6-10 13L2 9z"/><path d="M11 3 8 9l4 13 4-13-3-6M2 9h20"/></svg>
         <h3 data-i18n="why.f2t">Estetik</h3>
-        <p data-i18n="why.f2d">Evinin en özel köşesinde gururla sergileyebileceğin bir tasarım.</p>
+        <p data-i18n="why.f2d">Evinin en özel köşesinde gururla sergileyebileceğin bir parça.</p>
       </div>
       <div class="feature reveal">
         <svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M12 3l2.5 5 5.5.8-4 3.9.9 5.5L12 21l-4.9 2.6.9-5.5-4-3.9 5.5-.8z" stroke-linejoin="round"/></svg>
         <h3 data-i18n="why.f3t">El işçiliği</h3>
-        <p data-i18n="why.f3d">Her parça özenle, tek tek hazırlanır.</p>
+        <p data-i18n="why.f3d">Her parça tek tek ve özenle, size özel hazırlanır.</p>
       </div>
     </div>
   </div>
@@ -562,13 +568,14 @@
           <span class="more" data-i18n="pack.more">Paket detaylarını incele →</span>
         </div>
       </a>
-      <a href="paketler/buyuk-aile.html" class="pack reveal">
+      <a href="paketler/buyuk-aile.html" class="pack pack--featured reveal">
+        <span class="pack-badge" data-i18n="pack.popular">EN ÇOK TERCİH EDİLEN</span>
         <div class="pack-img">
           <img class="pack-photo" src="images/paket2.jpeg" alt="Büyük Aile paketi">
         </div>
         <div class="pack-body">
           <div class="pack-meta">
-            <span class="count" data-i18n="pack.c2c">~5 parça</span>
+            <span class="count" data-i18n="pack.c2c">3 parça</span>
             <span class="who" data-i18n="pack.c2who">Aile için</span>
           </div>
           <h3 data-i18n="pack.c2n">Büyük Aile</h3>
@@ -592,21 +599,6 @@
           <span class="more" data-i18n="pack.more">Paket detaylarını incele →</span>
         </div>
       </a>
-      <a href="paketler/kendi-anini-tasarla.html" class="pack reveal">
-        <div class="pack-img">
-          <img class="pack-photo" src="images/paket-4.jpeg" alt="Kendi Anını Tasarla paketi">
-        </div>
-        <div class="pack-body">
-          <div class="pack-meta">
-            <span class="count" data-i18n="pack.c4c">sana özel</span>
-            <span class="who" data-i18n="pack.c4who">Esnek</span>
-          </div>
-          <h3 data-i18n="pack.c4n">Kendi Anını Tasarla</h3>
-          <p class="tagline" data-i18n="pack.c4d">Senin anın, senin kuralların.</p>
-          <p class="desc" data-i18n="pack.c4long">Aklında farklı bir fikir mi var? Adet, boyut ve sunumu birlikte planlayıp sana ve anına özel bir paket oluşturalım.</p>
-          <span class="more" data-i18n="pack.more">Paket detaylarını incele →</span>
-        </div>
-      </a>
     </div>
   </div>
 </section>
@@ -621,7 +613,7 @@
     <div class="faq reveal">
       <details>
         <summary><span data-i18n="faq.q1">Nasıl bir ultrason görüntüsü göndermeliyim?</span><span class="pm"></span></summary>
-        <div class="faq-a" data-i18n="faq.a1">3D formatta, ".dcm" ya da ".stl" uzantılı ultrason görüntüleri kullanılabilir. Hekiminizden bu formatlardaki çıktıları rica etmelisiniz. En iyi sonuç, bebeğin yüz hatlarının ya da profilinin net göründüğü görüntülerden çıkar. Hekiminiz en uygun görüntüyü seçecektir.</div>
+        <div class="faq-a" data-i18n="faq.a1">3D formatta, ".dcm" uzantılı ultrason görüntüleri kullanılabilir. Hekiminiz bu formattaki görüntüyü sisteme yükler. En iyi sonuç, bebeğin yüz hatlarının ya da profilinin net göründüğü görüntülerden çıkar. Hekiminiz en uygun görüntüyü seçecektir.</div>
       </details>
       <details>
         <summary><span data-i18n="faq.q2">Gebeliğin hangi haftası en uygun?</span><span class="pm"></span></summary>
@@ -655,11 +647,17 @@
         </svg>
       </div>
       <h2 data-i18n="doc.title">Kadın Doğum Uzmanları İçin</h2>
-      <p data-i18n="doc.text">Siz de danışanlarınıza hamileliklerinin bu eşsiz anısını armağan etmek isterseniz, size özel paketler hakkında bilgi almak için bize ulaşabilirsiniz.</p>
-      <a href="tel:+905317941915" class="btn btn-call">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-        <span data-i18n="doc.cta">Bizi Arayın</span>
-      </a>
+      <p data-i18n="doc.text">Siz de danışanlarınıza hamileliklerinin bu eşsiz anısını armağan etmek isterseniz, bilgi almak için bize ulaşabilirsiniz.</p>
+      <div class="doc-actions">
+        <a href="tel:+905317941915" class="btn btn-call">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          <span data-i18n="doc.cta">Bizi Arayın</span>
+        </a>
+        <a href="panel.html" class="btn btn-call">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+          <span data-i18n="nav.doctor_login">Doktor Girişi</span>
+        </a>
+      </div>
     </div>
   </div>
 </section>
@@ -669,16 +667,16 @@
   <div class="wrap contact-grid">
     <div class="contact-left reveal">
       <span class="eyebrow" data-i18n="contact.eyebrow">İletişim</span>
-      <h2 class="section-title" data-i18n-html="contact.title">Ultrason görüntünü gönder, o <span class="an">anı</span> ölümsüzleştirelim.</h2>
-      <p class="lead" data-i18n="contact.text">Hangi paketi düşündüğünü yaz, birlikte planlayalım. Sana en kısa sürede dönüş yapıyoruz.</p>
+      <h2 class="section-title" data-i18n-html="contact.title">Hadi, o <span class="an">anı</span> ölümsüzleştirelim.</h2>
+      <p class="lead" data-i18n="contact.text">Yardımcı olmamızı istediğin herhangi bir şey varsa bize WhatsApp'dan yazabilir, ya da hemen siparişini oluşturabilirsin.</p>
       <div class="contact-btns">
         <a href="https://wa.me/905317941915" target="_blank" rel="noopener" class="btn wa">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.945C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 018.413 3.488 11.824 11.824 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 001.51 5.26l-.999 3.648 3.978-1.039zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
           <span data-i18n="contact.wa">WhatsApp'tan yaz</span>
         </a>
-        <a href="tel:+905317941915" class="btn btn-call">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-          <span data-i18n="contact.call">Bizi Arayın</span>
+        <a href="paketler/anneye-ozel-tasarla.html" class="btn btn-gold">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+          <span data-i18n="cta.create">Siparişini Oluştur</span>
         </a>
       </div>
       <div class="or" data-i18n="contact.or">veya formu doldur</div>
@@ -706,7 +704,7 @@
         <label data-i18n="form.message">Mesajın</label>
         <textarea data-i18n-ph="form.messagePh" placeholder="Anını bizimle paylaş..."></textarea>
       </div>
-      <label class="kvkk"><input type="checkbox" required><span data-i18n="form.kvkk">Kişisel verilerimin ve görselimin sipariş sürecinde işlenmesini kabul ediyorum.</span></label>
+      <label class="kvkk"><input type="checkbox" required><span data-i18n-html="form.kvkk"><a href="kvkk.html" target="_blank" rel="noopener">Kişisel verilerimin ve görselimin sipariş sürecinde işlenmesini</a> kabul ediyorum.</span></label>
       <button type="submit" class="btn btn-gold" style="justify-content:center" data-i18n="form.submit">Gönder</button>
       <div class="form-success" id="formSuccess" data-i18n="form.success">Teşekkürler! En kısa sürede sana dönüş yapacağız. 🤍</div>
     </form>
@@ -762,21 +760,21 @@ const i18n = {
   tr:{
     "nav.how":"Hikayemiz","nav.packages":"Paketler","nav.contact":"İletişim","nav.doctors":"Kadın Doğum Uzmanları İçin",
     "hero.eyebrow":"Kristal cam içinde 3D ultrason anısı","hero.title":"<span class=\"nw\">İlk <em>yuva</em>sındaki,</span><br>o ilk <em>an</em>.<br>Sonsuza Dek.",
-    "hero.sub":"Bebeğinin ilk görüntüsünü, kristalin içinde sonsuza dek parlayan bir esere dönüştürüyoruz.",
+    "hero.sub":"Bebeğinin ilk görüntüsünü, kristalin içinde sonsuza dek parlayan bir anıya dönüştürüyoruz.",
     "hero.cta":"İletişime geç","hero.scroll":"Hikayeyi keşfet","hero.caption":"el yapımı kristal anı",
     "what.eyebrow":"Kristal Anı","what.title":"Onunla ilk tanışm<span class=\"an\">anı</span>, ölümsüzleştirdik.",
     "what.body":"Ultrason görüntün, üç boyutlu olarak kristal camın içine lazerle kazınır. Elinde tutabileceğin, ışıkta parlayan, her açıdan bakılabilen gerçek bir anı.",
     "how.eyebrow":"Süreç","how.title":"Üç adımda, o <span class=\"an\">an</span> elinde.",
-    "how.s1t":"Ultrason görüntünü paylaş.","how.s1n":"Hekiminizden <b>.dcm</b> ya da <b>.stl</b> formatında görüntünüzü talep etmelisiniz.","how.s1d":"Görüntünü bize ilet, gerisini biz düşünelim.",
+    "how.s1t":"Ultrason görüntünü paylaş.","how.s1n":"Hekiminizin, <b>.dcm</b> formatında ultrason görüntüsünü sisteme yüklemesi gerekir.","how.s1d":"Görüntünü bize ilet, gerisini biz düşünelim.",
     "how.s2t":"Ultrason görüntüsünden 3D Model çıkartalım.","how.s2d":"Görüntünü uzman dokunuşuyla üç boyutlu hâle getiriyoruz.",
     "how.s3t":"Kristalin içine kazıyıp, adresine ulaştıralım.","how.s3d":"Lazerle kristal cama işliyor, özenle paketleyip sana gönderiyoruz.",
     "why.eyebrow":"Değer","why.title":"Fotoğraf solar. Bu <span class=\"an\">an</span> kalır.",
-    "why.f1t":"Kalıcı","why.f1d":"Yıllar geçse de ilk günkü netlik.",
-    "why.f2t":"Estetik","why.f2d":"Evinin en özel köşesinde gururla sergileyebileceğin bir tasarım.",
-    "why.f3t":"El işçiliği","why.f3d":"Her parça özenle, tek tek hazırlanır.",
+    "why.f1t":"Kalıcı","why.f1d":"Yıllar geçse de ilk andaki netlik.",
+    "why.f2t":"Estetik","why.f2d":"Evinin en özel köşesinde gururla sergileyebileceğin bir parça.",
+    "why.f3t":"El işçiliği","why.f3d":"Her parça tek tek ve özenle, size özel hazırlanır.",
     "pack.eyebrow":"Anı Paketleri","pack.title":"Peki sen bu <span class=\"an\">anı</span> kiminle paylaşacaksın?","pack.imgsoon":"Görsel yakında",
     "pack.c1c":"tek parça","pack.c1who":"Anne için","pack.c1n":"Anneye Özel","pack.c1d":"Bu an, önce senin.","pack.c1long":"Hamileliğinin o en özel anını, yalnızca senin için hazırladığımız imza parçasıyla ölümsüzleştir. En gösterişli kristal, özenli sunumuyla.",
-    "pack.c2c":"~5 parça","pack.c2who":"Aile için","pack.c2n":"Büyük Aile","pack.c2d":"Bütün aile bebeğinizle ilk kez tanışıyor.","pack.c2long":"Anneanne, babaanne, dedeler... İlk torun heyecanını tüm aileye aynı anda yaşatın. Her biri ayrı kutusunda, isteğe bağlı isim ve tarih kazımasıyla.",
+    "pack.c2c":"3 parça","pack.c2who":"Aile için","pack.c2n":"Büyük Aile","pack.popular":"EN ÇOK TERCİH EDİLEN","pack.c2d":"Bütün aile bebeğinizle ilk kez tanışıyor.","pack.c2long":"Anneanne, babaanne, dedeler... İlk torun heyecanını tüm aileye aynı anda yaşatın. Her biri ayrı kutusunda, isteğe bağlı isim ve tarih kazımasıyla.",
     "pack.c3c":"mini · ~20–50","pack.c3who":"Misafirler için","pack.c3n":"Sürpriz Parti","pack.c3d":"Herkes o anın bir parçasıyla evine dönsün.","pack.c3long":"Cinsiyet partisi ya da baby shower'da dağıtmak için zarif mini kristaller. Kutlamanın anısı, her davetlinin elinde kalsın.",
     "pack.c4c":"sana özel","pack.c4who":"Esnek","pack.c4n":"Kendi Anını Tasarla","pack.c4d":"Senin anın, senin kuralların.","pack.c4long":"Aklında farklı bir fikir mi var? Adet, boyut ve sunumu birlikte planlayıp sana ve anına özel bir paket oluşturalım.",
     "pack.more":"Paket detaylarını incele →","pack.note":"Her paketin detaylı anlatımı yakında.",
@@ -785,7 +783,7 @@ const i18n = {
     "trust.p3":"Görüntülerin güvende ve gizli kalır.",
     "trust.quote":"\"Onu ilk elime aldığımda ağladım. Tam da o günkü gibiydi.\"","trust.quoteAuthor":"— Yakında: gerçek anne yorumları",
     "faq.eyebrow":"Sık sorulanlar","faq.title":"Aklındakileri yanıtlayalım.",
-    "faq.q1":"Nasıl bir ultrason görüntüsü göndermeliyim?","faq.a1":"3D formatta, \".dcm\" ya da \".stl\" uzantılı ultrason görüntüleri kullanılabilir. Hekiminizden bu formatlardaki çıktıları rica etmelisiniz. En iyi sonuç, bebeğin yüz hatlarının ya da profilinin net göründüğü görüntülerden çıkar. Hekiminiz en uygun görüntüyü seçecektir.",
+    "faq.q1":"Nasıl bir ultrason görüntüsü göndermeliyim?","faq.a1":"3D formatta, \".dcm\" uzantılı ultrason görüntüleri kullanılabilir. Hekiminiz bu formattaki görüntüyü sisteme yükler. En iyi sonuç, bebeğin yüz hatlarının ya da profilinin net göründüğü görüntülerden çıkar. Hekiminiz en uygun görüntüyü seçecektir.",
     "faq.q2":"Gebeliğin hangi haftası en uygun?","faq.a2":"Genellikle 24.–32. haftalar arasında çekilen görüntülerde yüz hatları en belirgin olur ve en güzel sonucu verir. Ancak farklı haftalardaki görüntüler de değerlendirilebilir; emin değilsen bize danış, görüntüne bakıp dürüstçe yönlendirelim.",
     "faq.q3":"Görüntüm çok net değil, yine de olur mu?","faq.a3":"Çoğu zaman evet. Görüntünü uzman ekibimiz tek tek işleyip 3D'ye hazırlıyor; bu süreçte birçok detay belirginleşiyor. Yalnızca çok düşük kaliteli görüntülerde önce bir değerlendirme yapıp sana açık bir geri bildirim veriyoruz — beğenmeyeceğin bir sonuçla seni baş başa bırakmayız.",
     "faq.q4":"Kristale isim, tarih ya da özel bir not ekleyebilir miyim?","faq.a4":"Elbette. Bebeğin adı, doğum ya da ultrason tarihi veya sana özel kısa bir not kristale ya da kaideye işlenebilir. Ayrıca farklı boyut ve sunum seçenekleri de mevcut; detayları iletişimde birlikte belirliyoruz.",
@@ -793,18 +791,18 @@ const i18n = {
     "faq.q6":"Teslim süresi ne kadar ve kargo nasıl?","faq.a6":"Üretim süresi sipariş yoğunluğuna ve seçtiğin pakete göre değişir; onay aşamasında sana net bir tarih veriyoruz. Türkiye'nin her yerine, kristali koruyan özel ve sağlam bir paketlemeyle gönderim yapıyoruz.",
     "faq.q7":"Görüntülerim gizli kalıyor mu?","faq.a7":"Kesinlikle. Gönderdiğin ultrason görüntüleri yalnızca senin siparişin için kullanılır, üçüncü kişilerle paylaşılmaz. Siparişin tamamlandıktan sonra görüntülerin sistemimizden kalıcı olarak silinir.",
     "faq.q8":"Fiyatları neden sitede göremiyorum?","faq.a8":"Çünkü her sipariş kişiye özel: seçtiğin paket, adet, boyut ve eklemek istediğin dokunuşlara göre değişiyor. Bu yüzden sana en doğru fiyatı, ihtiyacını dinledikten sonra birebir veriyoruz. Bize ulaşman yeterli.",
-    "doc.title":"Kadın Doğum Uzmanları İçin","doc.text":"Siz de danışanlarınıza hamileliklerinin bu eşsiz anısını armağan etmek isterseniz, size özel paketler hakkında bilgi almak için bize ulaşabilirsiniz.","doc.cta":"Bizi Arayın",
+    "doc.title":"Kadın Doğum Uzmanları İçin","doc.text":"Siz de danışanlarınıza hamileliklerinin bu eşsiz anısını armağan etmek isterseniz, bilgi almak için bize ulaşabilirsiniz.","doc.cta":"Bizi Arayın",
     "docform.title":"Kadın Doğum Uzmanları İçin","docform.sub":"Bilgilerinizi bırakın, en kısa sürede sizinle iletişime geçelim.",
     "docform.name":"Ad Soyad","docform.namePh":"Adınız soyadınız","docform.clinic":"Klinik / Hastane","docform.clinicPh":"Çalıştığınız kurum",
     "docform.city":"Şehir","docform.cityPh":"Şehir","docform.contact":"İletişim","docform.contactPh":"Telefon veya e-posta",
     "docform.message":"Mesajınız (opsiyonel)","docform.messagePh":"Eklemek istedikleriniz...","docform.kvkk":"Kişisel verilerimin işlenmesini kabul ediyorum.",
     "docform.submit":"Gönder","docform.success":"Teşekkürler! En kısa sürede sizinle iletişime geçeceğiz. 🤍",
-    "contact.eyebrow":"İletişim","contact.title":"Ultrason görüntünü gönder, o <span class=\"an\">anı</span> ölümsüzleştirelim.",
-    "contact.text":"Hangi paketi düşündüğünü yaz, birlikte planlayalım. Sana en kısa sürede dönüş yapıyoruz.",
-    "contact.wa":"WhatsApp'tan yaz","contact.call":"Bizi Arayın","contact.or":"veya formu doldur",
+    "contact.eyebrow":"İletişim","contact.title":"Hadi, o <span class=\"an\">anı</span> ölümsüzleştirelim.",
+    "contact.text":"Yardımcı olmamızı istediğin herhangi bir şey varsa bize WhatsApp'dan yazabilir, ya da hemen siparişini oluşturabilirsin.",
+    "contact.wa":"WhatsApp'tan yaz","contact.call":"Bizi Arayın","cta.create":"Siparişini Oluştur","contact.or":"veya formu doldur",
     "form.name":"Adın","form.namePh":"Adın soyadın","form.contact":"İletişim","form.contactPh":"E-posta veya telefon",
     "form.package":"İlgilendiğin paket","form.pkg0":"Henüz emin değilim","form.message":"Mesajın","form.messagePh":"Anını bizimle paylaş...",
-    "form.kvkk":"Kişisel verilerimin ve görselimin sipariş sürecinde işlenmesini kabul ediyorum.","form.submit":"Gönder",
+    "form.kvkk":"<a href=\"kvkk.html\" target=\"_blank\" rel=\"noopener\">Kişisel verilerimin ve görselimin sipariş sürecinde işlenmesini</a> kabul ediyorum.","form.submit":"Gönder",
     "form.success":"Teşekkürler! En kısa sürede sana dönüş yapacağız. 🤍",
     "footer.tagline":"<span class=\"nw\">İlk <em>yuva</em>sındaki,</span> o ilk <em>an</em>. Sonsuza Dek.","footer.explore":"Keşfet","footer.more":"Daha fazla","footer.privacy":"Gizlilik / KVKK","footer.cookies":"Çerez Politikası","nav.doctor_login":"Doktor Girişi","nav.about":"Hakkımızda","footer.shipping":"Teslimat & İade",
     "footer.rights":"© 2026 Nest Moment. Tüm hakları saklıdır.","footer.made":"Sevgiyle hazırlandı"
@@ -812,21 +810,21 @@ const i18n = {
   en:{
     "nav.how":"Our Story","nav.packages":"Packages","nav.contact":"Contact","nav.doctors":"For Obstetricians",
     "hero.eyebrow":"3D ultrasound keepsake in crystal glass","hero.title":"That first <em>moment</em>,<br>its first <em>nest</em>.<br>Forever.",
-    "hero.sub":"We turn your baby's first image into a work of art that glows forever inside crystal.",
+    "hero.sub":"We turn your baby's first image into a keepsake that glows forever inside crystal.",
     "hero.cta":"Get in touch","hero.scroll":"Discover the story","hero.caption":"handcrafted crystal keepsake",
     "what.eyebrow":"Crystal Keepsake","what.title":"We immortalized your first <span class=\"an\">moment</span> together.",
     "what.body":"Your ultrasound image becomes a three-dimensional form, laser-engraved inside crystal glass. A real keepsake you can hold, that glows in the light and can be viewed from every angle.",
     "how.eyebrow":"The Process","how.title":"Three steps to hold the <span class=\"an\">moment.</span>",
-    "how.s1t":"Share your ultrasound image","how.s1n":"Ask your doctor for the image in <b>.dcm</b> or <b>.stl</b> format.","how.s1d":"Send us your image and leave the rest to us.",
+    "how.s1t":"Share your ultrasound image","how.s1n":"Your doctor uploads your <b>.dcm</b>-format ultrasound image to the system.","how.s1d":"Send us your image and leave the rest to us.",
     "how.s2t":"We extract a 3D model from the ultrasound image.","how.s2d":"We turn your image into a three-dimensional form with an expert touch.",
     "how.s3t":"Engraved & delivered to your door","how.s3d":"We laser-engrave it into crystal, then carefully package and ship it to you.",
     "why.eyebrow":"The Value","why.title":"Photos fade. This <span class=\"an\">moment</span> stays.",
     "why.f1t":"Lasting","why.f1d":"The same clarity, year after year.",
-    "why.f2t":"Aesthetic","why.f2d":"A design you'll proudly display in the finest corner of your home.",
-    "why.f3t":"Handcrafted","why.f3d":"Each piece is crafted, one by one, with care.",
+    "why.f2t":"Aesthetic","why.f2d":"A piece you'll proudly display in the finest corner of your home.",
+    "why.f3t":"Handcrafted","why.f3d":"Each piece is crafted one by one, with care, just for you.",
     "pack.eyebrow":"Keepsake Packages","pack.title":"So, who will you share this <span class=\"an\">moment</span> with?","pack.imgsoon":"Image coming soon",
     "pack.c1c":"single piece","pack.c1who":"For Mom","pack.c1n":"Just for Mom","pack.c1d":"This moment is yours first.","pack.c1long":"Immortalize the most special moment of your pregnancy with a signature piece made just for you — our most striking crystal, beautifully presented.",
-    "pack.c2c":"~5 pieces","pack.c2who":"For the family","pack.c2n":"The Whole Family","pack.c2d":"The whole family meets your baby at once.","pack.c2long":"Grandmothers, grandfathers... let the whole family share the joy of the first grandchild all at once. Each in its own box, with optional name and date engraving.",
+    "pack.c2c":"3 pieces","pack.c2who":"For the family","pack.c2n":"The Whole Family","pack.popular":"MOST POPULAR","pack.c2d":"The whole family meets your baby at once.","pack.c2long":"Grandmothers, grandfathers... let the whole family share the joy of the first grandchild all at once. Each in its own box, with optional name and date engraving.",
     "pack.c3c":"mini · ~20–50","pack.c3who":"For guests","pack.c3n":"The Party","pack.c3d":"Every guest goes home with a piece of the moment.","pack.c3long":"Elegant mini crystals to hand out at your gender reveal or baby shower. Let everyone keep a piece of the celebration.",
     "pack.c4c":"tailored to you","pack.c4who":"Flexible","pack.c4n":"Design Your Own","pack.c4d":"Your moment, your rules.","pack.c4long":"Have something different in mind? Let's plan the count, size and presentation together and craft a package made just for you and your moment.",
     "pack.more":"View package details →","pack.note":"Detailed package pages coming soon.",
@@ -835,7 +833,7 @@ const i18n = {
     "trust.p3":"Your images stay private and secure.",
     "trust.quote":"\"I cried the first time I held it. It looked just like that day.\"","trust.quoteAuthor":"— Coming soon: real reviews from moms",
     "faq.eyebrow":"FAQ","faq.title":"Let's answer your questions.",
-    "faq.q1":"What kind of ultrasound image should I send?","faq.a1":"We work with 3D-format ultrasound images in \".dcm\" or \".stl\" file types. Please ask your doctor for the output in one of these formats. The best results come from images where your baby's facial features or profile are clearly visible. Your doctor will select the most suitable image.",
+    "faq.q1":"What kind of ultrasound image should I send?","faq.a1":"We work with 3D-format ultrasound images in the \".dcm\" file type. Your doctor uploads the image to the system. The best results come from images where your baby's facial features or profile are clearly visible. Your doctor will select the most suitable image.",
     "faq.q2":"Which week of pregnancy is best?","faq.a2":"Images taken between weeks 24 and 32 usually show facial features most clearly and give the most beautiful results. Images from other weeks can also work — if you're unsure, just ask and we'll review yours and guide you honestly.",
     "faq.q3":"My image isn't very clear — can it still work?","faq.a3":"Most of the time, yes. Our expert team processes each image and prepares it for 3D, and many details become clearer in the process. Only for very low-quality images do we review first and give you honest feedback — we won't leave you with a result you won't love.",
     "faq.q4":"Can I add a name, date or special note to the crystal?","faq.a4":"Of course. Your baby's name, the birth or ultrasound date, or a short personal note can be engraved on the crystal or its base. Different sizes and presentation options are also available; we'll decide the details together when we talk.",
@@ -843,18 +841,18 @@ const i18n = {
     "faq.q6":"How long does delivery take and how is it shipped?","faq.a6":"Production time varies with demand and the package you choose; we give you a clear date at the approval stage. We ship anywhere in Türkiye with special, sturdy packaging that protects the crystal.",
     "faq.q7":"Are my images kept private?","faq.a7":"Absolutely. The ultrasound images you send are used only for your order and are never shared with third parties. Once your order is complete, your images are permanently deleted from our system.",
     "faq.q8":"Why can't I see prices on the site?","faq.a8":"Because every order is personal: it depends on the package, quantity, size and the touches you'd like to add. That's why we give you the most accurate price one-to-one, after listening to your needs. Just reach out.",
-    "doc.title":"For Obstetricians","doc.text":"If you'd like to offer your patients this unique keepsake of their pregnancy, reach out to us for information about tailored packages.","doc.cta":"Call Us",
+    "doc.title":"For Obstetricians","doc.text":"If you'd like to offer your patients this unique keepsake of their pregnancy, reach out to us for information.","doc.cta":"Call Us",
     "docform.title":"For OB-GYN Specialists","docform.sub":"Leave your details and we'll get in touch with you shortly.",
     "docform.name":"Full name","docform.namePh":"Your full name","docform.clinic":"Clinic / Hospital","docform.clinicPh":"Where you practice",
     "docform.city":"City","docform.cityPh":"City","docform.contact":"Contact","docform.contactPh":"Phone or email",
     "docform.message":"Your message (optional)","docform.messagePh":"Anything you'd like to add...","docform.kvkk":"I consent to the processing of my personal data.",
     "docform.submit":"Send","docform.success":"Thank you! We'll get in touch with you shortly. 🤍",
-    "contact.eyebrow":"Contact","contact.title":"Send your ultrasound, let's immortalize the <span class=\"an\">moment.</span>",
-    "contact.text":"Tell us which package you have in mind and we'll plan it together. We'll get back to you shortly.",
-    "contact.wa":"Message on WhatsApp","contact.call":"Call Us","contact.or":"or fill the form",
+    "contact.eyebrow":"Contact","contact.title":"Come, let's immortalize the <span class=\"an\">moment.</span>",
+    "contact.text":"If there's anything we can help with, message us on WhatsApp — or create your order right away.",
+    "contact.wa":"Message on WhatsApp","contact.call":"Call Us","cta.create":"Create Your Order","contact.or":"or fill the form",
     "form.name":"Your name","form.namePh":"Your full name","form.contact":"Contact","form.contactPh":"Email or phone",
     "form.package":"Package you're interested in","form.pkg0":"Not sure yet","form.message":"Your message","form.messagePh":"Share your moment with us...",
-    "form.kvkk":"I consent to my personal data and image being processed during the order.","form.submit":"Send",
+    "form.kvkk":"I consent to <a href=\"kvkk.html\" target=\"_blank\" rel=\"noopener\">my personal data and image being processed during the order</a>.","form.submit":"Send",
     "form.success":"Thank you! We'll get back to you very soon. 🤍",
     "footer.tagline":"That first <em>moment</em>, its first <em>nest</em>. Forever.","footer.explore":"Explore","footer.more":"More","footer.privacy":"Privacy","footer.cookies":"Cookie Policy","nav.doctor_login":"Doctor Login","nav.about":"About","footer.shipping":"Shipping & Returns",
     "footer.rights":"© 2026 Nest Moment. All rights reserved.","footer.made":"Made with love"

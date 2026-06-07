@@ -141,7 +141,7 @@ header.scrolled{background:rgba(12,10,9,.82);backdrop-filter:blur(14px);border-b
 /* OTHER PACKAGES */
 .p-other{padding:64px 0 20px}
 .p-other-head{font-family:var(--display);font-weight:600;font-size:clamp(1.6rem,3.5vw,2.2rem);color:var(--cream);margin-bottom:1.4rem}
-.p-other-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.p-other-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}
 .p-ocard{display:block;text-decoration:none;border:1px solid var(--line-soft);border-radius:16px;overflow:hidden;
   background:linear-gradient(180deg,rgba(21,17,14,.5),rgba(12,10,9,.15));transition:.35s}
 .p-ocard:hover{border-color:var(--line);transform:translateY(-5px)}
@@ -191,25 +191,36 @@ footer{border-top:1px solid var(--line-soft);padding:72px 0 40px;margin-top:40px
 .cfg-img{width:100%;height:100%;object-fit:cover;display:block}
 .cfg-glow{position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .5s ease;background:radial-gradient(60% 55% at 50% 42%,rgba(216,180,134,.38),transparent 70%);mix-blend-mode:screen}
 .cfg-glow.on{opacity:1}
-.cfg-engrave-overlay{position:absolute;left:0;right:0;bottom:9%;text-align:center;font-family:var(--display);font-size:clamp(.7rem,1.6vw,.95rem);letter-spacing:1px;color:var(--gold-soft);text-shadow:0 1px 6px rgba(0,0,0,.6);pointer-events:none;padding:0 10%}
-.cfg-cap{margin-top:20px;font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);min-height:1em}
+/* kaide plaketi — kazıma yazısı görselin altında, seçilen kaideye uyumlu, hep hizalı */
+.cfg-plate{margin-top:18px;width:100%;max-width:340px;min-height:48px;border-radius:9px;display:flex;align-items:center;justify-content:center;padding:.4rem 1rem;text-align:center;border:1px solid var(--line-soft);background:linear-gradient(180deg,#2a1f15,#160f0a);box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 10px 24px rgba(0,0,0,.45);transition:background .45s ease}
+.cfg-plate-text{font-family:var(--display);letter-spacing:1.5px;font-size:.95rem;color:var(--gold-soft);text-shadow:0 1px 2px rgba(0,0,0,.5);word-break:break-word}
+.cfg-plate-text.is-empty{opacity:.72;font-style:italic;letter-spacing:.4px;font-size:.78rem;text-shadow:none}
+.cfg-plate[data-base="dogal-ahsap"]{background:linear-gradient(180deg,#8a6840,#5a3f24)}
+.cfg-plate[data-base="siyah-metal"]{background:linear-gradient(180deg,#26262a,#121214)}
+.cfg-plate[data-base="gumus-metal"]{background:linear-gradient(180deg,#b8b8be,#76767c)}
+.cfg-plate[data-base="dogal-ahsap"] .cfg-plate-text,.cfg-plate[data-base="gumus-metal"] .cfg-plate-text{color:#1c1306;text-shadow:0 1px 1px rgba(255,255,255,.25)}
+.cfg-cap{margin-top:16px;font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);min-height:1em}
+/* geri linki (konfigüratör sayfası) */
+.cfg-back{display:inline-block;margin-bottom:18px;color:var(--muted);text-decoration:none;font-size:.85rem;letter-spacing:.02em;transition:color .25s}
+.cfg-back:hover{color:var(--gold-soft)}
 /* adımlar */
 .cfg-steps{padding:30px 34px}
 .cfg-step{border-bottom:1px solid var(--line-soft);padding:18px 0;transition:opacity .4s ease}
 .cfg-step:last-child{border-bottom:none}
 .cfg-step.is-locked{opacity:.42}
-.cfg-step.is-active .cfg-snum{color:var(--gold)}
-.cfg-snum{font-size:.66rem;letter-spacing:.22em;text-transform:uppercase;color:var(--muted-2)}
-.cfg-stitle{font-family:var(--display);font-weight:500;font-size:1.1rem;color:var(--cream);margin-top:.25rem;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.cfg-step.is-active .cfg-stitle{color:var(--gold-soft)}
+.cfg-stitle{font-family:var(--display);font-weight:500;font-size:1.1rem;color:var(--cream);display:flex;justify-content:space-between;align-items:center;gap:10px;transition:color .3s}
 .cfg-done{font-size:.8rem;font-family:var(--body);color:var(--gold-soft);white-space:nowrap}
 .cfg-opts{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
 /* boyut pill */
-.cfg-pill{display:flex;flex-direction:column;align-items:center;gap:1px;background:none;cursor:pointer;font-family:var(--body);
-  border:1px solid var(--line);border-radius:999px;padding:.5rem .95rem;color:var(--cream);transition:.25s}
-.cfg-pill small{font-size:.66rem;color:var(--muted-2)}
+.cfg-pill{display:flex;flex-direction:column;align-items:center;gap:2px;background:none;cursor:pointer;font-family:var(--body);
+  border:1px solid var(--line);border-radius:16px;padding:.6rem 1.15rem;color:var(--cream);transition:.25s;min-width:88px}
+.cfg-pill small{font-size:.85rem;color:var(--cream)}
+.cfg-pill .cfg-hint{margin-top:2px}
 .cfg-pill:hover{border-color:var(--gold-deep)}
 .cfg-pill.is-on{background:var(--gold);border-color:var(--gold);color:#1c1306}
 .cfg-pill.is-on small{color:#5a4628}
+.cfg-pill.is-on .cfg-hint{color:#5a4628}
 .cfg-pill:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
 /* kaide/ışık swatch */
 .cfg-sw{display:flex;flex-direction:column;align-items:center;gap:6px;width:78px;background:none;border:none;cursor:pointer;
@@ -227,7 +238,14 @@ footer{border-top:1px solid var(--line-soft);padding:72px 0 40px;margin-top:40px
 .cfg-count{margin-top:.4rem;font-size:.7rem;color:var(--muted-2);text-align:right}
 /* fiyat + sipariş */
 .cfg-bar{grid-column:1/-1;border-top:1px solid var(--line);background:rgba(10,8,7,.6);
-  display:flex;flex-direction:column;align-items:flex-end;gap:.7rem;padding:22px 34px}
+  display:flex;flex-direction:row;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;padding:22px 34px}
+.cfg-bar-right{display:flex;flex-direction:column;align-items:flex-end;gap:.7rem;margin-left:auto}
+/* seçim özeti (bar sol) — etiketli, satır satır */
+.cfg-summary{display:flex;flex-direction:column;gap:4px;font-size:.86rem;line-height:1.4;align-self:center}
+.cfg-summary .s-row{color:var(--cream);letter-spacing:.01em}
+.cfg-summary .s-lab{color:var(--muted)}
+.cfg-summary .s-none{color:var(--muted-2);font-style:italic}
+.cfg-summary:empty{display:none}
 .cfg-totline{font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
 .cfg-totline b{font-weight:600;color:var(--gold-soft)}
 .cfg-order{display:inline-flex;align-items:center;gap:.5rem;cursor:pointer;text-decoration:none;
@@ -235,6 +253,17 @@ footer{border-top:1px solid var(--line-soft);padding:72px 0 40px;margin-top:40px
   font-size:1rem;border:none;border-radius:40px;padding:.85rem 2rem;box-shadow:0 10px 34px rgba(216,180,134,.22);transition:.25s}
 .cfg-order:hover{transform:translateY(-2px);box-shadow:0 14px 40px rgba(216,180,134,.3)}
 .cfg-order:focus-visible{outline:2px solid #1c1306;outline-offset:2px}
+.cfg-order.is-disabled{background:rgba(216,180,134,.16);color:var(--muted-2);box-shadow:none;cursor:not-allowed;pointer-events:none;transform:none}
+/* ferah yerleşim — konfigüratörün kendi sayfası (anneye-ozel-tasarla.html) */
+.cfg-section--page{padding-top:36px}
+.cfg-section--page .cfg-head{margin-bottom:34px}
+.cfg--page .cfg-prev{min-height:560px;padding:52px}
+.cfg--page .cfg-stage{max-width:400px}
+.cfg--page .cfg-plate{max-width:400px}
+.cfg--page .cfg-steps{padding:52px 48px;display:flex;flex-direction:column;justify-content:center}
+.cfg--page .cfg-step{padding:22px 0}
+.cfg--page .cfg-opts{margin-top:18px;gap:14px}
+.cfg--page .cfg-bar{padding:28px 48px}
 
 /* RESPONSIVE */
 @media(max-width:880px){
@@ -247,6 +276,11 @@ footer{border-top:1px solid var(--line-soft);padding:72px 0 40px;margin-top:40px
   .cfg-stage{max-width:260px}
   .cfg-steps{padding:24px}
   .cfg-bar{padding:18px 24px}
+  .cfg--page .cfg-prev{min-height:0;padding:26px}
+  .cfg--page .cfg-stage{max-width:300px}
+  .cfg--page .cfg-plate{max-width:300px}
+  .cfg--page .cfg-steps{padding:24px}
+  .cfg--page .cfg-bar{padding:18px 24px}
 }
 @media(max-width:680px){
   body{padding-top:74px}
@@ -270,7 +304,9 @@ footer{border-top:1px solid var(--line-soft);padding:72px 0 40px;margin-top:40px
   .p-other-grid{grid-template-columns:1fr}
   .p-cta{padding:42px 24px}
   .cfg-steps{padding:18px}
-  .cfg-bar{padding:14px 18px}
+  .cfg-bar{padding:14px 18px;flex-direction:column;align-items:stretch;gap:14px}
+  .cfg-bar-right{align-items:flex-end;margin-left:0}
+  .cfg-summary{align-self:flex-start}
   .cfg-sw{width:68px}
   .cfg-sw i{width:40px;height:40px}
 }
